@@ -5,10 +5,12 @@
 ## 环境准备
 
 ```sh
-# Node >= 22.19，pnpm 11.7.0（Corepack）
-pnpm install
+nvm use          # .nvmrc 固定了 CI 与发布所用的 Node 版本
+pnpm install     # pnpm 11.7.0 由 packageManager 经 Corepack 提供
 pnpm typecheck   # 首次类型检查通过即搭建完成
 ```
+
+`pnpm install` 同时会同步 Git 钩子：提交时自动修复并格式化暂存文件，推送前运行 `pnpm typecheck`。
 
 ## 工作流
 

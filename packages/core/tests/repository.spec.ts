@@ -259,3 +259,60 @@ describe("continuous integration hardening", () => {
     }
   });
 });
+
+describe("community health files", () => {
+  function readText(path: string): string {
+    return readFileSync(new URL(path, repositoryRoot), "utf8");
+  }
+
+  it("routes vulnerability reports through GitHub without exposing an address", () => {
+    const security = readText("SECURITY.md");
+
+    expect(security).toContain("/security/advisories/new");
+    expect(security).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.]+/);
+  });
+
+  it("adopts a code of conduct with a real enforcement contact", () => {
+    const conduct = readText("CODE_OF_CONDUCT.md");
+
+    expect(conduct).toContain("Contributor Covenant");
+    expect(conduct).not.toContain("[INSERT CONTACT METHOD]");
+  });
+
+  it("directs new issues into the maintained templates", () => {
+    const config = readYaml(".github/ISSUE_TEMPLATE/config.yml") as {
+      blank_issues_enabled?: boolean;
+      contact_links?: Array<{ about?: string; name?: string; url?: string }>;
+    };
+
+    expect(config.blank_issues_enabled).toBe(false);
+    expect(config.contact_links?.length ?? 0).toBeGreaterThan(0);
+    for (const link of config.contact_links ?? []) {
+      expect(link.url).toMatch(/^https:\/\//);
+      expect(link.about).toBeTypeOf("string");
+    }
+  });
+
+  it("shows gate and published versions in both readmes", () => {
+    for (const readme of ["README.md", "README.zh.md"]) {
+      const content = readText(readme);
+
+      expect(content, readme).toContain("workflows/ci.yml/badge.svg");
+      expect(content, readme).toContain(
+        "npm/v/%40deepseek-harness-themes%2Fcore",
+      );
+      expect(content, readme).toContain(
+        "npm/v/%40deepseek-harness-themes%2Fui",
+      );
+    }
+  });
+
+  it("documents the pinned toolchain in both contributor guides", () => {
+    for (const guide of ["CONTRIBUTING.md", "CONTRIBUTING.zh.md"]) {
+      const content = readText(guide);
+
+      expect(content, guide).toContain(".nvmrc");
+      expect(content, guide).toContain("pnpm gate");
+    }
+  });
+});

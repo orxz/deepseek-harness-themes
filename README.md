@@ -1,5 +1,9 @@
 # deepseek-harness-themes
 
+[![ci](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml/badge.svg)](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml)
+[![core](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fcore?label=core)](https://www.npmjs.com/package/@deepseek-harness-themes/core)
+[![ui](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fui?label=ui)](https://www.npmjs.com/package/@deepseek-harness-themes/ui)
+
 A collection of UI themes for [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness).
 
 > One harness. Multiple styles.
@@ -51,6 +55,8 @@ Themes change how deepseek-harness looks, not how it behaves. A theme is easy to
 ## Contributing
 
 Community themes are welcome — [docs/creating-a-theme.md](docs/creating-a-theme.md) is the ordered guide. Standing orders live in [AGENTS.md](AGENTS.md).
+
+Participation follows the [Code of Conduct](CODE_OF_CONDUCT.md). Report vulnerabilities privately through the [security policy](SECURITY.md).
 
 ## License
 

@@ -1,0 +1,18 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Token contract
+    url: https://github.com/orxz/deepseek-harness-themes/blob/main/docs/theme-spec.md
+    about: The required and recommended token sets every theme must cover.
+
+  - name: Installation and local development
+    url: https://github.com/orxz/deepseek-harness-themes/blob/main/docs/installation.md
+    about: Install shapes, the hand-written patch alternative, and local setup.
+
+  - name: deepseek-harness itself
+    url: https://github.com/deepseek-ai/deepseek-harness/issues
+    about: Harness, agent, or protocol behavior belongs upstream, not here.
+
+  - name: Report a vulnerability
+    url: https://github.com/orxz/deepseek-harness-themes/security/advisories/new
+    about: Disclose a security issue privately instead of opening an issue.
