@@ -1,0 +1,25 @@
+name: Debug Typecheck
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Typecheck with full output
+        run: npx tsc -p tsconfig.json --noEmit --pretty false 2>&1 || true
+      - name: Node/pnpm/tsc versions
+        run: |
+          echo "node: $(node --version)"
+          echo "pnpm: $(pnpm --version)"
+          echo "tsc: $(npx tsc --version)"
+          echo "=== installed types ==="
+          ls node_modules/typescript/package.json 2>/dev/null && cat node_modules/typescript/package.json | grep '"version"'
