@@ -239,6 +239,15 @@ describe("continuous integration hardening", () => {
     }
   });
 
+  it("leaves the generated lockfile to the package manager", () => {
+    const ignore = readFileSync(
+      new URL(".prettierignore", repositoryRoot),
+      "utf8",
+    );
+
+    expect(ignore).toContain("pnpm-lock.yaml");
+  });
+
   it("keeps actions and npm dependencies under weekly review", () => {
     const dependabot = readYaml(".github/dependabot.yml") as {
       updates?: Array<{
@@ -314,5 +323,40 @@ describe("community health files", () => {
       expect(content, guide).toContain(".nvmrc");
       expect(content, guide).toContain("pnpm gate");
     }
+  });
+});
+
+describe("type-checking boundaries", () => {
+  interface TsConfig {
+    compilerOptions?: { types?: string[] };
+  }
+
+  it("gives the repository type-check the Node platform types", () => {
+    const root = readJson("tsconfig.json") as TsConfig;
+
+    expect(root.compilerOptions?.types).toContain("node");
+  });
+
+  it("keeps Node types out of every browser declaration build", () => {
+    for (const packageName of ["core", "ui"]) {
+      const client = readJson(
+        `packages/${packageName}/tsconfig.client.json`,
+      ) as TsConfig;
+
+      expect(client.compilerOptions?.types, packageName).toEqual([]);
+    }
+  });
+
+  it("type-checks against the Node major the toolchain pins", () => {
+    const nodeMajor = readFileSync(new URL(".nvmrc", repositoryRoot), "utf8")
+      .trim()
+      .split(".")[0];
+    const manifest = readJson("package.json") as {
+      devDependencies?: Record<string, string>;
+    };
+
+    expect(manifest.devDependencies?.["@types/node"]).toMatch(
+      new RegExp(`^\\D*${nodeMajor}\\.`),
+    );
   });
 });

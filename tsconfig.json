@@ -1,6 +1,10 @@
 {
   "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
   "include": [
+    "build/**/*",
     "packages/*/src/**/*",
     "packages/*/tests/**/*",
     "vitest.config.ts"

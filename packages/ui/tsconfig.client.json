@@ -6,6 +6,7 @@
     "emitDeclarationOnly": true,
     "outDir": "lib",
     "rootDir": "src",
+    "types": [],
     "paths": {
       "@deepseek-harness-themes/core": ["../../build/dsh-types/core.d.ts"],
       "@deepseek-ai/dsh-client-runtime/client": [
