@@ -29,9 +29,10 @@ jobs:
           cache: pnpm
 
       # Trusted publishing needs npm >= 11.5.1; the npm bundled with Node is older.
+      # npm@12 requires node >= 22.22.2, newer than the .nvmrc pin, so stay on 11.
       - name: Use an npm that speaks OIDC
         run: |
-          npm install -g npm@latest
+          npm install -g npm@11
           echo "npm $(npm --version), node $(node --version)"
 
       - run: pnpm install --frozen-lockfile
