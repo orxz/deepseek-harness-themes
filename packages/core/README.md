@@ -1,5 +1,7 @@
 # `@dshthemes/core`
 
+[English](README.md) | [简体中文](README.zh.md)
+
 Theme definitions and registration helpers for [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) themes. This package carries no UI and no runtime dependency on the dsh application tree: it targets the official theme extension point (`ctx.theme` from `@deepseek-ai/dsh-client-ui-theme`) structurally.
 
 ## What it ships

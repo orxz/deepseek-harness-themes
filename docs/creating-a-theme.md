@@ -1,5 +1,7 @@
 # Creating a Theme
 
+[English](creating-a-theme.md) | [简体中文](creating-a-theme.zh.md)
+
 A theme is one frozen `ThemeDefinition` file plus a catalog entry. Follow these steps and the test suite enforces the contract.
 
 ## 1. Read the spec

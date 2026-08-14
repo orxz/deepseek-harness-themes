@@ -1,5 +1,7 @@
 # Contributing
 
+[English](CONTRIBUTING.md) | [简体中文](CONTRIBUTING.zh.md)
+
 Community themes and fixes are welcome. This repository follows the deepseek-harness plugin conventions — read [AGENTS.md](AGENTS.md) first.
 
 ## Setup

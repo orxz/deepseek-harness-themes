@@ -1,4 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
+import { dirname, join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
 
@@ -10,6 +12,10 @@ function readJson(path: string): unknown {
 
 function readYaml(path: string): unknown {
   return parse(readFileSync(new URL(path, repositoryRoot), "utf8"));
+}
+
+function readText(path: string): string {
+  return readFileSync(new URL(path, repositoryRoot), "utf8");
 }
 
 function workflowSteps(workflow: {
@@ -354,10 +360,6 @@ describe("continuous integration hardening", () => {
 });
 
 describe("community health files", () => {
-  function readText(path: string): string {
-    return readFileSync(new URL(path, repositoryRoot), "utf8");
-  }
-
   it("routes vulnerability reports through GitHub without exposing an address", () => {
     const security = readText("SECURITY.md");
 
@@ -402,6 +404,114 @@ describe("community health files", () => {
 
       expect(content, guide).toContain(".nvmrc");
       expect(content, guide).toContain("pnpm gate");
+    }
+  });
+});
+
+describe("documentation language parity", () => {
+  const bilingualDocuments = [
+    "README.md",
+    "CONTRIBUTING.md",
+    "packages/core/README.md",
+    "packages/ui/README.md",
+    "docs/installation.md",
+    "docs/creating-a-theme.md",
+    "docs/theme-spec.md",
+  ] as const;
+
+  function zhTwin(path: string): string {
+    return path.replace(/\.md$/, ".zh.md");
+  }
+
+  /** The link to `target` as written inside `document` (relative to its directory). */
+  function linkFrom(document: string, target: string): string {
+    const root = fileURLToPath(repositoryRoot);
+    return `(${relative(join(root, dirname(document)), join(root, target))})`;
+  }
+
+  it("ships a Chinese twin for every English document", () => {
+    for (const document of bilingualDocuments) {
+      expect(
+        existsSync(new URL(zhTwin(document), repositoryRoot)),
+        `${zhTwin(document)} is missing`,
+      ).toBe(true);
+    }
+  });
+
+  it("switches languages from both halves of every bilingual pair", () => {
+    for (const document of bilingualDocuments) {
+      const english = readText(document);
+      const chinese = readText(zhTwin(document));
+
+      expect(
+        english.includes(linkFrom(document, zhTwin(document))),
+        `${document} must link ${zhTwin(document)}`,
+      ).toBe(true);
+      expect(
+        chinese.includes(linkFrom(zhTwin(document), document)),
+        `${zhTwin(document)} must link ${document}`,
+      ).toBe(true);
+    }
+  });
+
+  it("points Chinese documents at the Chinese guides", () => {
+    const chineseLinks: Record<string, string> = {
+      "README.zh.md": "docs/installation.zh.md",
+      "CONTRIBUTING.zh.md": "docs/creating-a-theme.zh.md",
+      "packages/core/README.zh.md": "docs/theme-spec.zh.md",
+      "packages/ui/README.zh.md": "docs/installation.zh.md",
+    };
+
+    for (const [document, target] of Object.entries(chineseLinks)) {
+      expect(readText(document), document).toContain(
+        linkFrom(document, target),
+      );
+    }
+  });
+});
+
+describe("documentation link integrity", () => {
+  it("resolves every relative link inside the documentation set", () => {
+    const documents = [
+      "README.md",
+      "README.zh.md",
+      "CONTRIBUTING.md",
+      "CONTRIBUTING.zh.md",
+      "AGENTS.md",
+      "SECURITY.md",
+      "CODE_OF_CONDUCT.md",
+      "packages/core/README.md",
+      "packages/core/README.zh.md",
+      "packages/ui/README.md",
+      "packages/ui/README.zh.md",
+      "docs/AGENTS.md",
+      "docs/installation.md",
+      "docs/installation.zh.md",
+      "docs/creating-a-theme.md",
+      "docs/creating-a-theme.zh.md",
+      "docs/theme-spec.md",
+      "docs/theme-spec.zh.md",
+    ];
+
+    for (const document of documents) {
+      const content = readText(document);
+      const links = [...content.matchAll(/\]\(([^)]+)\)/g)]
+        .map((match) => match[1])
+        .filter(
+          (link): link is string =>
+            link !== undefined &&
+            !/^(https?:|mailto:|#)/.test(link) &&
+            !link.startsWith("<"),
+        );
+
+      for (const link of links) {
+        const path = link.split("#")[0] ?? link;
+        const target = new URL(path, new URL(document, repositoryRoot));
+        expect(
+          existsSync(target),
+          `${document} links missing target ${link}`,
+        ).toBe(true);
+      }
     }
   });
 });

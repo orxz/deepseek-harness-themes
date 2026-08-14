@@ -1,5 +1,7 @@
 # deepseek-harness-themes
 
+[English](README.md) | [简体中文](README.zh.md)
+
 [![ci](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml/badge.svg)](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml)
 [![core](https://img.shields.io/npm/v/%40dshthemes%2Fcore?label=core)](https://www.npmjs.com/package/@dshthemes/core)
 [![ui](https://img.shields.io/npm/v/%40dshthemes%2Fui?label=ui)](https://www.npmjs.com/package/@dshthemes/ui)
@@ -42,15 +44,15 @@ dsh plugin --profile <profile> add @dshthemes/ui
 dsh plugin --profile <profile> remove @dshthemes/ui
 ```
 
-仅用核心包、手写 patch 替代方式与本地开发见 [docs/installation.md](docs/installation.md)。
+仅用核心包、手写 patch 替代方式与本地开发见 [安装指南](docs/installation.zh.md)。
 
 ## 主题理念
 
-主题改变 deepseek-harness 的外观，而非行为。一个主题应当：易于安装、易于切换、易于定制、跨 UI 状态一致、适合长时间编码、与 agent 逻辑解耦。token 契约见 [docs/theme-spec.md](docs/theme-spec.md)。
+主题改变 deepseek-harness 的外观，而非行为。一个主题应当：易于安装、易于切换、易于定制、跨 UI 状态一致、适合长时间编码、与 agent 逻辑解耦。token 契约见[主题规范](docs/theme-spec.zh.md)。
 
 ## 贡献
 
-欢迎社区主题——[docs/creating-a-theme.md](docs/creating-a-theme.md) 是分步指南。常驻命令见 [AGENTS.md](AGENTS.md)。
+欢迎社区主题——[创建主题](docs/creating-a-theme.zh.md)是分步指南。常驻命令见 [AGENTS.md](AGENTS.md)。
 
 参与须遵守[行为准则](CODE_OF_CONDUCT.md)。安全问题请按[安全策略](SECURITY.md)私下上报。
 

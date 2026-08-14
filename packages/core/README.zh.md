@@ -1,5 +1,7 @@
 # `@dshthemes/core`
 
+[English](README.md) | [简体中文](README.zh.md)
+
 面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的主题定义与注册辅助。本包零 UI、零 dsh 应用树运行时依赖：它以结构化方式对接官方主题扩展点（`@deepseek-ai/dsh-client-ui-theme` 的 `ctx.theme`）。
 
 ## 交付内容
@@ -33,7 +35,7 @@ export function apply(ctx: ClientContext): void {
 }
 ```
 
-主题选择由宿主负责：注册后调用 `ctx.theme.setTheme('catppuccin')`。第三方选择的持久化由配套插件 [`@dshthemes/ui`](../ui/README.md) 提供。
+主题选择由宿主负责：注册后调用 `ctx.theme.setTheme('catppuccin')`。第三方选择的持久化由配套插件 [`@dshthemes/ui`](../ui/README.zh.md) 提供。
 
 ## Model Experience
 
@@ -46,4 +48,4 @@ export function apply(ctx: ClientContext): void {
 ## 已知限制
 
 - 宿主不校验覆盖集的完整性；本包以 `REQUIRED_TOKENS` + `pnpm test` 强制补足。
-- 按宿主设计，经 `ctx.theme` 的主题选择是进程内状态；持久化边界见 `docs/theme-spec.md`。
+- 按宿主设计，经 `ctx.theme` 的主题选择是进程内状态；持久化边界见[主题规范](../../docs/theme-spec.zh.md)。
