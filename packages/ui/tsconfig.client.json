@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "paths": {
+      "@deepseek-harness-themes/core": ["../../build/dsh-types/core.d.ts"],
+      "@deepseek-ai/dsh-client-runtime/client": [
+        "../../build/dsh-types/runtime-client.d.ts"
+      ]
+    }
+  },
+  "include": ["src/client.ts", "src/css-modules.d.ts"]
+}

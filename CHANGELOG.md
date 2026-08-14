@@ -1,0 +1,14 @@
+# Changelog
+
+All notable changes to this project are documented in this file.
+
+## 0.0.1
+
+Initial release, verified against a real deepseek-harness checkout (host tree activation, browser bundle registration, settings picker rendering, live theme switching with token application).
+
+- `@deepseek-harness-themes/core`: 10 theme definitions over the official `ctx.theme` extension point plus `registerThemes(registry)` and a zero-UI client entry.
+- `@deepseek-harness-themes/ui`: client plugin with a theme picker settings row and durable third-party theme selection.
+- Client bundles follow the host's `window.__ModuleLoader__.load({ id, factory })` contract (CJS factory, inlined CSS Modules, inlined core library).
+- Official bundle packaging: both packages ship `dsh.bundle` manifests, so `dsh plugin add @deepseek-harness-themes/ui` installs and mounts the feature in one command (verified against a real dsh checkout).
+- Official package invariants: cordis peer+dev mirror, Model Experience README sections, build step in CI.
+- Docs: theme spec, installation, creating-a-theme.

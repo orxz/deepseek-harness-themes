@@ -1,0 +1,12 @@
+node_modules/
+lib/
+coverage/
+dist/
+.tooling/
+.tmp-check/
+.smoke-test/
+.pnpm-store/
+.qoder/
+qoder/
+*.tgz
+.DS_Store
