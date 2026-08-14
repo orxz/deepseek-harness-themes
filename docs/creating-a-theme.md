@@ -42,10 +42,15 @@ Add the theme name to both dictionaries in `packages/ui/src/locales.ts` under `t
 ## 5. Verify
 
 ```sh
-pnpm test          # id uniqueness, required+recommended coverage, color validity, freeze
+pnpm test          # id uniqueness, token coverage, color validity, freeze, contrast bars
 pnpm typecheck
 pnpm test:coverage # per-file 100% gate
 ```
+
+Contrast failures name the token, the surface, and the ratio reached. Prefer a
+lighter entry from the palette you are reproducing over inventing one; if the
+palette has none, say so in the theme file's JSDoc. The bars are in
+[theme-spec.md](theme-spec.md#contrast).
 
 ## 6. Preview
 

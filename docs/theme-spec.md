@@ -76,6 +76,30 @@ The theme-facing vocabulary from the project README maps to host tokens as follo
 
 The host offers no validation that an override set is complete. This repository owns completeness: `REQUIRED_TOKENS` plus the test suite (`packages/core/tests/themes.spec.ts`) that fails on missing tokens, duplicate or reserved ids, invalid color values, and non-frozen definitions.
 
+## Contrast
+
+Every theme is held to minimum contrast ratios against the six surfaces normal
+label text sits on: `bg-base`, `bg-layer-1`, `bg-layer-2`, `bubble`,
+`markdown-code-block`, and `sidebar-fill`.
+
+| Token group                              | Ratio   |
+| ---------------------------------------- | ------- |
+| `label-primary`, `label-secondary`       | 4.5 : 1 |
+| `label-tertiary`, `label-caption`        | 3 : 1   |
+| `brand-primary`, every `state-*-primary` | 3 : 1   |
+
+`pnpm test` enforces this through `packages/core/tests/contrast.spec.ts`; the
+pairings and thresholds live in `packages/core/tests/contrast.ts`.
+
+Primary and secondary labels carry body copy and meet WCAG AA. Tertiary and
+caption are de-emphasised metadata held at 3:1, which is **below** AA — the
+price of keeping the upstream palettes these themes are named after. Where a
+palette offers a lighter authentic entry, use it rather than inventing a
+colour; where it does not, record the departure in the theme file's JSDoc.
+
+Inverted surfaces are out of scope: `tooltip-bg` pairs with
+`label-primary-inverted`, not with the normal label ramp.
+
 ## Persistence boundary
 
 Third-party selection is process-local by host design. The picker plugin persists it under its own settings namespace:

@@ -3,6 +3,9 @@ import type { ThemeDefinition } from "../types.ts";
 /**
  * High-contrast dark theme inspired by Dracula: purple accents over
  * near-black indigo surfaces.
+ *
+ * Tertiary text departs from Dracula's Comment `#6272a4`, which reaches only
+ * 2.51:1 on these surfaces; the upstream palette offers no lighter mid tone.
  */
 export const dracula: ThemeDefinition = Object.freeze({
   id: "dracula",
@@ -15,7 +18,7 @@ export const dracula: ThemeDefinition = Object.freeze({
     "--dsw-alias-bg-overlay": "#44475a",
     "--dsw-alias-label-primary": "#f8f8f2",
     "--dsw-alias-label-secondary": "#c5c8c6",
-    "--dsw-alias-label-tertiary": "#6272a4",
+    "--dsw-alias-label-tertiary": "#7280ad",
     "--dsw-alias-brand-primary": "#bd93f9",
     "--dsw-alias-state-business-primary": "#8be9fd",
     "--dsw-alias-state-success-primary": "#50fa7b",
@@ -55,7 +58,7 @@ export const dracula: ThemeDefinition = Object.freeze({
     "--dsw-alias-interactive-bg-hover-solid": "#3b3f51",
     "--dsw-alias-interactive-bg-hover-danger": "rgba(255, 85, 85, 0.18)",
     "--dsw-alias-interactive-bg-hover-accent": "rgba(189, 147, 249, 0.24)",
-    "--dsw-alias-label-caption": "#6272a4",
+    "--dsw-alias-label-caption": "#7280ad",
     "--dsw-alias-label-primary-inverted": "#282a36",
     "--dsw-alias-label-primary-dimmed": "#c5c8c6",
     "--dsw-alias-label-dimmed": "#3b3f51",

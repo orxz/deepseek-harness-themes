@@ -3,6 +3,9 @@ import type { ThemeDefinition } from "../types.ts";
 /**
  * Modern dark theme inspired by Tokyo Night: midnight-blue surfaces with
  * neon-blue and lavender accents.
+ *
+ * Tertiary text uses the palette's `dark5` rather than its comment colour,
+ * which reaches only 2.35:1 on these surfaces.
  */
 export const tokyoNight: ThemeDefinition = Object.freeze({
   id: "tokyo-night",
@@ -15,7 +18,7 @@ export const tokyoNight: ThemeDefinition = Object.freeze({
     "--dsw-alias-bg-overlay": "#3b4261",
     "--dsw-alias-label-primary": "#c0caf5",
     "--dsw-alias-label-secondary": "#a9b1d6",
-    "--dsw-alias-label-tertiary": "#565f89",
+    "--dsw-alias-label-tertiary": "#737aa2",
     "--dsw-alias-brand-primary": "#7aa2f7",
     "--dsw-alias-state-business-primary": "#7dcfff",
     "--dsw-alias-state-success-primary": "#9ece6a",
@@ -55,7 +58,7 @@ export const tokyoNight: ThemeDefinition = Object.freeze({
     "--dsw-alias-interactive-bg-hover-solid": "#2c3044",
     "--dsw-alias-interactive-bg-hover-danger": "rgba(247, 118, 142, 0.18)",
     "--dsw-alias-interactive-bg-hover-accent": "rgba(122, 162, 247, 0.24)",
-    "--dsw-alias-label-caption": "#565f89",
+    "--dsw-alias-label-caption": "#737aa2",
     "--dsw-alias-label-primary-inverted": "#1a1b26",
     "--dsw-alias-label-primary-dimmed": "#a9b1d6",
     "--dsw-alias-label-dimmed": "#2c3044",
