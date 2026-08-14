@@ -46,7 +46,7 @@ describe("repository automation", () => {
       expect.objectContaining({ "continue-on-error": true }),
     );
     expect(manifest.scripts?.gate).toBe(
-      "pnpm typecheck && pnpm build && pnpm test:coverage && pnpm lint && pnpm smoke:packages",
+      "pnpm typecheck && pnpm build && pnpm test:coverage && pnpm lint && pnpm fmt:check && pnpm smoke:packages",
     );
     expect(
       existsSync(new URL(".github/workflows/debug.yml", repositoryRoot)),
@@ -193,5 +193,69 @@ describe("local quality hooks", () => {
     expect(manifest.engines?.node).toBe(
       `>=${nodeVersion.split(".").slice(0, 2).join(".")}`,
     );
+  });
+});
+
+describe("continuous integration hardening", () => {
+  interface Workflow {
+    concurrency?: { group?: string; "cancel-in-progress"?: unknown };
+    jobs?: Record<string, { steps?: Array<Record<string, unknown>> }>;
+    permissions?: Record<string, string>;
+  }
+
+  function setupNodeStep(workflow: Workflow): Record<string, unknown> {
+    const step = workflowSteps(workflow).find(
+      (candidate) =>
+        typeof candidate.uses === "string" &&
+        candidate.uses.startsWith("actions/setup-node@"),
+    );
+    if (step === undefined) throw new Error("workflow never sets up Node");
+    return step;
+  }
+
+  it("grants the quality gate read-only access and collapses superseded runs", () => {
+    const ci = readYaml(".github/workflows/ci.yml") as Workflow;
+
+    expect(ci.permissions).toEqual({ contents: "read" });
+    expect(ci.concurrency?.group).toBe(
+      "${{ github.workflow }}-${{ github.ref }}",
+    );
+    expect(ci.concurrency?.["cancel-in-progress"]).toBe(
+      "${{ github.event_name == 'pull_request' }}",
+    );
+  });
+
+  it("resolves the Node version for every workflow from .nvmrc", () => {
+    const workflows = [
+      readYaml(".github/workflows/ci.yml") as Workflow,
+      readYaml(".github/workflows/release.yml") as Workflow,
+    ];
+
+    for (const workflow of workflows) {
+      const step = setupNodeStep(workflow);
+
+      expect(step.with).toMatchObject({ "node-version-file": ".nvmrc" });
+      expect(step.with).not.toHaveProperty("node-version");
+    }
+  });
+
+  it("keeps actions and npm dependencies under weekly review", () => {
+    const dependabot = readYaml(".github/dependabot.yml") as {
+      updates?: Array<{
+        directory?: string;
+        "package-ecosystem"?: string;
+        schedule?: { interval?: string };
+      }>;
+      version?: number;
+    };
+    const updates = dependabot.updates ?? [];
+
+    expect(dependabot.version).toBe(2);
+    expect(updates.map((update) => update["package-ecosystem"])).toEqual(
+      expect.arrayContaining(["github-actions", "npm"]),
+    );
+    for (const update of updates) {
+      expect(update.schedule?.interval).toBe("weekly");
+    }
   });
 });
