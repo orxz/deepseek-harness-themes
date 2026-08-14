@@ -1,4 +1,4 @@
-import { registerThemes, themes } from "@dsh-themes/core";
+import { registerThemes, themes } from "@dshthemes/core";
 import { createPicker } from "./picker.ts";
 import type {
   PickerSettingsScope,

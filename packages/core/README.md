@@ -1,4 +1,4 @@
-# `@dsh-themes/core`
+# `@dshthemes/core`
 
 Theme definitions and registration helpers for [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) themes. This package carries no UI and no runtime dependency on the dsh application tree: it targets the official theme extension point (`ctx.theme` from `@deepseek-ai/dsh-client-ui-theme`) structurally.
 
@@ -20,20 +20,20 @@ Theme definitions and registration helpers for [deepseek-harness](https://github
 Standalone install (registers all themes, no picker):
 
 ```sh
-dsh plugin --profile <profile> add @dsh-themes/core
+dsh plugin --profile <profile> add @dshthemes/core
 ```
 
 For custom assemblies, use the registration helper directly:
 
 ```ts
-import { registerThemes } from "@dsh-themes/core";
+import { registerThemes } from "@dshthemes/core";
 
 export function apply(ctx: ClientContext): void {
   ctx.effect(() => registerThemes(ctx.theme), "my-plugin: register themes");
 }
 ```
 
-Selection is a host concern: call `ctx.theme.setTheme('catppuccin')` once the theme is registered. Durable third-party selection lives in the companion [`@dsh-themes/ui`](../ui/README.md) plugin.
+Selection is a host concern: call `ctx.theme.setTheme('catppuccin')` once the theme is registered. Durable third-party selection lives in the companion [`@dshthemes/ui`](../ui/README.md) plugin.
 
 ## Model Experience
 

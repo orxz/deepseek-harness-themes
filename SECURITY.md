@@ -11,11 +11,11 @@ Problems in deepseek-harness itself belong upstream, at
 
 ## Supported versions
 
-| Package            | Supported      |
-| ------------------ | -------------- |
-| `@dsh-themes/core` | latest release |
-| `@dsh-themes/ui`   | latest release |
-| anything older     | not supported  |
+| Package           | Supported      |
+| ----------------- | -------------- |
+| `@dshthemes/core` | latest release |
+| `@dshthemes/ui`   | latest release |
+| anything older    | not supported  |
 
 Both packages share one version, so a fix ships to both at the same release.
 

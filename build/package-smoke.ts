@@ -13,13 +13,13 @@ import { basename, join, resolve } from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 
-const PACKAGES = ["@dsh-themes/core", "@dsh-themes/ui"] as const;
+const PACKAGES = ["@dshthemes/core", "@dshthemes/ui"] as const;
 
 const PUBLIC_SPECIFIERS = [
-  "@dsh-themes/core",
-  "@dsh-themes/core/client",
-  "@dsh-themes/ui",
-  "@dsh-themes/ui/client",
+  "@dshthemes/core",
+  "@dshthemes/core/client",
+  "@dshthemes/ui",
+  "@dshthemes/ui/client",
 ] as const;
 
 const DIRECT_CLIENT_HOST_IMPORTS = [
@@ -173,7 +173,7 @@ export async function runPackageSmoke(
     const installedUiClient = join(
       consumerDirectory,
       "node_modules",
-      "@dsh-themes",
+      "@dshthemes",
       "ui",
       "lib",
       "client.js",
@@ -199,7 +199,7 @@ function verifyConsumerImports(consumerDirectory: string): void {
         throw new Error(specifier + " resolved outside the installed package");
       }
     }
-    const core = await import("@dsh-themes/core");
+    const core = await import("@dshthemes/core");
     if (!Array.isArray(core.themes) || core.themes.length !== 6) {
       throw new Error("installed core package did not expose six themes");
     }

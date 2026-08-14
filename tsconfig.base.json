@@ -17,9 +17,9 @@
     "noEmit": true,
     "types": [],
     "paths": {
-      "@dsh-themes/core": ["./packages/core/src/index.ts"],
-      "@dsh-themes/core/client": ["./packages/core/src/client.ts"],
-      "@dsh-themes/ui/client": ["./packages/ui/src/index.ts"],
+      "@dshthemes/core": ["./packages/core/src/index.ts"],
+      "@dshthemes/core/client": ["./packages/core/src/client.ts"],
+      "@dshthemes/ui/client": ["./packages/ui/src/index.ts"],
       "@deepseek-ai/dsh-client-runtime/client": [
         "./build/dsh-types/runtime-client.d.ts"
       ]

@@ -1,4 +1,4 @@
-import type { ThemeRegistry } from "@dsh-themes/core";
+import type { ThemeRegistry } from "@dshthemes/core";
 import {
   DEFAULT_SELECTION,
   isThemeSelection,

@@ -1,4 +1,4 @@
-# `@dsh-themes/core`
+# `@dshthemes/core`
 
 面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的主题定义与注册辅助。本包零 UI、零 dsh 应用树运行时依赖：它以结构化方式对接官方主题扩展点（`@deepseek-ai/dsh-client-ui-theme` 的 `ctx.theme`）。
 
@@ -20,20 +20,20 @@
 独立安装（注册全部主题，无选择器）：
 
 ```sh
-dsh plugin --profile <profile> add @dsh-themes/core
+dsh plugin --profile <profile> add @dshthemes/core
 ```
 
 自定义组装可直接使用注册辅助函数：
 
 ```ts
-import { registerThemes } from "@dsh-themes/core";
+import { registerThemes } from "@dshthemes/core";
 
 export function apply(ctx: ClientContext): void {
   ctx.effect(() => registerThemes(ctx.theme), "my-plugin: register themes");
 }
 ```
 
-主题选择由宿主负责：注册后调用 `ctx.theme.setTheme('catppuccin')`。第三方选择的持久化由配套插件 [`@dsh-themes/ui`](../ui/README.md) 提供。
+主题选择由宿主负责：注册后调用 `ctx.theme.setTheme('catppuccin')`。第三方选择的持久化由配套插件 [`@dshthemes/ui`](../ui/README.md) 提供。
 
 ## Model Experience
 

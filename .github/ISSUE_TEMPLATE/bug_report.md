@@ -21,7 +21,7 @@ What should have happened.
 ## Environment
 
 - deepseek-harness version:
-- Package and version (`@dsh-themes/core` / `ui`):
+- Package and version (`@dshthemes/core` / `ui`):
 - Node version:
 - Browser (if relevant):
 

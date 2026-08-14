@@ -1,8 +1,8 @@
 # deepseek-harness-themes
 
 [![ci](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml/badge.svg)](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml)
-[![core](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fcore?label=core)](https://www.npmjs.com/package/@dsh-themes/core)
-[![ui](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fui?label=ui)](https://www.npmjs.com/package/@dsh-themes/ui)
+[![core](https://img.shields.io/npm/v/%40dshthemes%2Fcore?label=core)](https://www.npmjs.com/package/@dshthemes/core)
+[![ui](https://img.shields.io/npm/v/%40dshthemes%2Fui?label=ui)](https://www.npmjs.com/package/@dshthemes/ui)
 
 面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的 UI 主题集合。
 
@@ -12,10 +12,10 @@
 
 ## 包结构
 
-| 包                                               | 职责                                                                               |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| [`@dsh-themes/core`](packages/core/README.zh.md) | 六个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
-| [`@dsh-themes/ui`](packages/ui/README.zh.md)     | 客户端插件：注册全部主题、在设置页 General 区添加主题选择行、持久化第三方选择      |
+| 包                                              | 职责                                                                               |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [`@dshthemes/core`](packages/core/README.zh.md) | 六个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
+| [`@dshthemes/ui`](packages/ui/README.zh.md)     | 客户端插件：注册全部主题、在设置页 General 区添加主题选择行、持久化第三方选择      |
 
 ## 主题
 
@@ -33,13 +33,13 @@
 一条命令完成依赖安装、profile 层添加与功能挂载：
 
 ```sh
-dsh plugin --profile <profile> add @dsh-themes/ui
+dsh plugin --profile <profile> add @dshthemes/ui
 ```
 
 卸载同样简单：
 
 ```sh
-dsh plugin --profile <profile> remove @dsh-themes/ui
+dsh plugin --profile <profile> remove @dshthemes/ui
 ```
 
 仅用核心包、手写 patch 替代方式与本地开发见 [docs/installation.md](docs/installation.md)。

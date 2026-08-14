@@ -7,7 +7,7 @@
     "outDir": "lib",
     "rootDir": "src",
     "paths": {
-      "@dsh-themes/core": ["../../build/dsh-types/core.d.ts"],
+      "@dshthemes/core": ["../../build/dsh-types/core.d.ts"],
       "@deepseek-ai/dsh-client-runtime/client": [
         "../../build/dsh-types/runtime-client.d.ts"
       ]
