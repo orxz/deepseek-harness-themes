@@ -13,7 +13,8 @@ export type PickerKey =
   | "theme.solarized"
   | "theme.gruvbox"
   | "theme.nord"
-  | "theme.synthwave-84";
+  | "theme.synthwave-84"
+  | "theme.cobalt2";
 
 export const en: Record<PickerKey, string> = {
   "picker.title": "Theme",
@@ -30,6 +31,7 @@ export const en: Record<PickerKey, string> = {
   "theme.gruvbox": "Gruvbox",
   "theme.nord": "Nord",
   "theme.synthwave-84": "Synthwave '84",
+  "theme.cobalt2": "Cobalt2",
 };
 
 export const zh: Record<PickerKey, string> = {
@@ -47,4 +49,5 @@ export const zh: Record<PickerKey, string> = {
   "theme.gruvbox": "Gruvbox",
   "theme.nord": "Nord",
   "theme.synthwave-84": "Synthwave '84",
+  "theme.cobalt2": "Cobalt2",
 };

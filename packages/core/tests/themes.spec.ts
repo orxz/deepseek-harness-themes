@@ -29,6 +29,7 @@ describe("theme registry", () => {
       "gruvbox",
       "nord",
       "synthwave-84",
+      "cobalt2",
     ]);
   });
 

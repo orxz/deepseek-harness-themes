@@ -1,5 +1,6 @@
 import type { ThemeDefinition } from "../types.ts";
 import { catppuccin } from "./catppuccin.ts";
+import { cobalt2 } from "./cobalt2.ts";
 import { deepseek } from "./deepseek.ts";
 import { dracula } from "./dracula.ts";
 import { githubDark } from "./github-dark.ts";
@@ -12,6 +13,7 @@ import { tokyoNight } from "./tokyo-night.ts";
 
 export {
   catppuccin,
+  cobalt2,
   deepseek,
   dracula,
   githubDark,
@@ -35,4 +37,5 @@ export const themes: readonly ThemeDefinition[] = Object.freeze([
   gruvbox,
   nord,
   synthwave84,
+  cobalt2,
 ]);
