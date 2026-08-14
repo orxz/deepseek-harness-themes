@@ -4,10 +4,15 @@ import { themes } from "./themes/index.ts";
 export { themes };
 export {
   catppuccin,
+  cobalt2,
   deepseek,
   dracula,
   githubDark,
+  gruvbox,
+  nord,
   oled,
+  solarized,
+  synthwave84,
   tokyoNight,
 } from "./themes/index.ts";
 export type { ThemeDefinition, ThemeRegistry, ThemeTokens } from "./types.ts";

@@ -3,7 +3,7 @@ import type { ThemeDefinition } from "../types.ts";
 /**
  * Cobalt2: Wes Bos's cobalt blue with the signature yellow — editor
  * `#193549` base, line-highlight/indent-guide ladder, terminal/panel darks.
- * Business blue `#0088ff` holds 3.7:1 on the base, above the 3:1 accent bar;
+ * Business blue `#0088ff` holds ≈3.6:1 on the base, above the 3:1 accent bar;
  * text colors are upstream white/`#e1efff`/`#ccc`/`#aaa`. Button hover
  * variants are lightened.
  */

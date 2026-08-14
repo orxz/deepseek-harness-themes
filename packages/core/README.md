@@ -6,7 +6,7 @@ Theme definitions and registration helpers for [deepseek-harness](https://github
 
 ## What it ships
 
-- Six theme definitions (`ThemeDefinition = { id, colorScheme, tokens }`), each covering the full `REQUIRED_TOKENS` and `RECOMMENDED_TOKENS` sets declared in `src/tokens.ts`. Previews of all six: [docs/previews.md](../../docs/previews.md).
+- Eleven theme definitions (`ThemeDefinition = { id, colorScheme, tokens }`), each covering the full `REQUIRED_TOKENS` and `RECOMMENDED_TOKENS` sets declared in `src/tokens.ts`. Previews of all eleven: [docs/previews.md](../../docs/previews.md).
 - `registerThemes(registry)` — registers every shipped theme and returns one disposer that unregisters all of them.
 - A `/client` plugin entry (`apply`/`inject: ['theme']`) that registers all themes through a labelled `ctx.effect`, for users who want themes without the picker UI.
 

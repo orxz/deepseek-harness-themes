@@ -14,10 +14,10 @@
 
 ## 包结构
 
-| 包                                              | 职责                                                                               |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [`@dshthemes/core`](packages/core/README.zh.md) | 六个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
-| [`@dshthemes/ui`](packages/ui/README.zh.md)     | 客户端插件：注册全部主题、在设置页 General 区添加主题选择行、持久化第三方选择      |
+| 包                                              | 职责                                                                                 |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [`@dshthemes/core`](packages/core/README.zh.md) | 十一个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
+| [`@dshthemes/ui`](packages/ui/README.zh.md)     | 客户端插件：注册全部主题、在设置页 General 区添加主题选择行、持久化第三方选择        |
 
 ## 主题
 

@@ -6,7 +6,7 @@
 
 ## 交付内容
 
-- 六个主题定义（`ThemeDefinition = { id, colorScheme, tokens }`），每个都覆盖 `src/tokens.ts` 声明的完整 `REQUIRED_TOKENS` 与 `RECOMMENDED_TOKENS` 集合。六个主题的预览见[主题预览](../../docs/previews.zh.md)。
+- 十一个主题定义（`ThemeDefinition = { id, colorScheme, tokens }`），每个都覆盖 `src/tokens.ts` 声明的完整 `REQUIRED_TOKENS` 与 `RECOMMENDED_TOKENS` 集合。十一个主题的预览见[主题预览](../../docs/previews.zh.md)。
 - `registerThemes(registry)` —— 注册全部随包主题，返回一个 disposer 可整体卸载。
 - `/client` 插件入口（`apply`/`inject: ['theme']`），经带标签的 `ctx.effect` 注册全部主题，供不需要选择器的用户使用。
 

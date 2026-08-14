@@ -16,7 +16,7 @@ Community-maintained theme collection built on the official theme extension poin
 
 | Package                                      | Role                                                                                                               |
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [`@dshthemes/core`](packages/core/README.md) | Six `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI                    |
+| [`@dshthemes/core`](packages/core/README.md) | Eleven `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI                 |
 | [`@dshthemes/ui`](packages/ui/README.md)     | Client plugin: registers all themes, adds a Theme picker row to Settings → General, persists third-party selection |
 
 ## Themes

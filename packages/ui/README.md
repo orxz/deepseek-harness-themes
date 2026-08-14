@@ -6,7 +6,7 @@ Theme picker plugin for [deepseek-harness](https://github.com/deepseek-ai/deepse
 
 ## What it does
 
-- Registers all six shipped themes through a labelled `ctx.effect` (unload tears them down).
+- Registers all eleven shipped themes through a labelled `ctx.effect` (unload tears them down).
 - Binds the `dsh-themes` settings namespace and restores the persisted third-party selection on activation when it is still registered.
 - Persists third-party selections on every `theme/change`; built-in selections clear the marker (`system`) and stay owned by the host Appearance row.
 - Injects a picker row into the `settings.general.item` slot (id `themes`, order `11`, right after the host Appearance row) rendering the built-in cubes plus one entry per registered theme.
@@ -54,4 +54,4 @@ None; this package neither assembles nor sends a provider request.
 
 - Third-party selection durability lives in this plugin's own namespace; it never writes to the host's built-in theme schema.
 - Remote browsers keep the selection process-local by host design (settings RPCs are loopback-only there); see the host's `SettingsScope` contract.
-- The picker lists every registered third-party theme (including themes registered by other plugins), but the shipped dictionaries only cover this package's six ids; themes from other plugins render under a title-cased form of their id and without a swatch.
+- The picker lists every registered third-party theme (including themes registered by other plugins), but the shipped dictionaries only cover this package's eleven ids; themes from other plugins render under a title-cased form of their id and without a swatch.

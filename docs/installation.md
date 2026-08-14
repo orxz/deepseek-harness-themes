@@ -11,7 +11,7 @@ dsh plugin --profile web add @dshthemes/ui
 dsh web
 ```
 
-What the six themes look like: [previews](previews.md).
+What the eleven themes look like: [previews](previews.md).
 
 Open Settings → General: the Theme row appears right after the host Appearance row. The built-in cubes (Light / Dark / System) behave exactly like the host row; the additional entries switch to the registered themes. Third-party selection persists in the `dsh-themes` settings namespace, so switching themes afterwards is a browser preference and needs no further command.
 
@@ -67,7 +67,7 @@ ctx.effect(() => {
 }, "deployment: fixed theme");
 ```
 
-The two packages are alternatives. Both register the same six theme ids and the host registry throws on a duplicate id, so one profile mounts either the picker row or the core row, never both.
+The two packages are alternatives. Both register the same eleven theme ids and the host registry throws on a duplicate id, so one profile mounts either the picker row or the core row, never both.
 
 The core package also exports `registerThemes(registry)` and the theme definitions for fully custom assemblies.
 

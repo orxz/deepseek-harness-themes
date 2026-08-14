@@ -11,7 +11,7 @@ dsh plugin --profile web add @dshthemes/ui
 dsh web
 ```
 
-六个主题的外观见[主题预览](previews.zh.md)。
+十一个主题的外观见[主题预览](previews.zh.md)。
 
 打开 设置 → General：Theme 行紧跟在宿主 Appearance 行之后。内置三立方块（Light / Dark / System）与宿主行为完全一致；其余条目切换到已注册主题。第三方选择持久化在 `dsh-themes` 设置命名空间，因此之后换主题只是浏览器偏好，不再需要任何命令。
 
@@ -67,7 +67,7 @@ ctx.effect(() => {
 }, "deployment: fixed theme");
 ```
 
-两个包互为替代。它们注册同一批六个主题 id，而宿主注册表对重复 id 抛错，因此一个 profile 只能挂载选择器行或 core 行之一，不能同时挂载。
+两个包互为替代。它们注册同一批十一个主题 id，而宿主注册表对重复 id 抛错，因此一个 profile 只能挂载选择器行或 core 行之一，不能同时挂载。
 
 core 包还导出 `registerThemes(registry)` 与全部主题定义，供完全自定义的组装使用。
 
