@@ -5,10 +5,13 @@ Community themes and fixes are welcome. This repository follows the deepseek-har
 ## Setup
 
 ```sh
-# Node >= 22.19, pnpm 11.7.0 (Corepack)
-pnpm install
+nvm use          # .nvmrc pins the Node version CI and releases run on
+pnpm install     # pnpm 11.7.0 comes from packageManager via Corepack
 pnpm typecheck   # first successful typecheck means the setup is complete
 ```
+
+`pnpm install` also syncs the Git hooks: staged files are auto-fixed and
+formatted on commit, and `pnpm typecheck` runs on push.
 
 ## Workflow
 

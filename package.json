@@ -18,8 +18,9 @@
     "smoke:packages": "node build/package-smoke.ts",
     "lint": "oxlint packages build vitest.config.ts",
     "fmt": "prettier --write .",
+    "fmt:check": "prettier --check .",
     "build": "pnpm -r build",
-    "gate": "pnpm typecheck && pnpm build && pnpm test:coverage && pnpm lint && pnpm smoke:packages",
+    "gate": "pnpm typecheck && pnpm build && pnpm test:coverage && pnpm lint && pnpm fmt:check && pnpm smoke:packages",
     "release": "pnpm gate && changeset publish"
   },
   "devDependencies": {

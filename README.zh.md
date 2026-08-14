@@ -1,5 +1,9 @@
 # deepseek-harness-themes
 
+[![ci](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml/badge.svg)](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml)
+[![core](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fcore?label=core)](https://www.npmjs.com/package/@deepseek-harness-themes/core)
+[![ui](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fui?label=ui)](https://www.npmjs.com/package/@deepseek-harness-themes/ui)
+
 面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的 UI 主题集合。
 
 > One harness. Multiple styles.
@@ -51,6 +55,8 @@ dsh plugin --profile <profile> remove @deepseek-harness-themes/ui
 ## 贡献
 
 欢迎社区主题——[docs/creating-a-theme.md](docs/creating-a-theme.md) 是分步指南。常驻命令见 [AGENTS.md](AGENTS.md)。
+
+参与须遵守[行为准则](CODE_OF_CONDUCT.md)。安全问题请按[安全策略](SECURITY.md)私下上报。
 
 ## License
 
