@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.0",
-    "@types/node": "22.19.21",
+    "@types/node": "26.2.0",
     "@vitest/coverage-istanbul": "3.2.7",
     "lefthook": "^2.1.10",
     "lightningcss": "^1.33.0",
