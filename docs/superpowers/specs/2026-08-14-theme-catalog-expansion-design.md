@@ -22,21 +22,32 @@ aggregate lists), star-anomaly outliers (dark-islands), deleted repos
 Dedup rule (user-confirmed): group candidates by **dominant background hue**
 and keep one representative per family — the most starred / most iconic.
 
-| Family               | Candidates (stars)                          | Kept              | Upstream                  | Stars |
-| -------------------- | ------------------------------------------- | ----------------- | ------------------------- | ----- |
-| Yellow-green base    | Solarized 16.0k, Everforest 4.2k            | **Solarized**     | altercation/solarized     | 16.0k |
-| Warm brown/orange    | Gruvbox 15.7k, Ayu 4.4k, Flexoki 3.6k       | **Gruvbox**       | morhetz/gruvbox           | 15.7k |
-| Ice-blue/gray        | Nord 6.9k, One Dark Pro 1.8k, Kanagawa 6.3k | **Nord**          | nordtheme/nord            | 6.9k  |
-| Neon purple/pink     | Synthwave '84 5.3k, Rose Pine 1.6k          | **Synthwave '84** | robb0wen/synthwave-vscode | 5.3k  |
-| Cobalt blue + yellow | Cobalt2 0.8k                                | **Cobalt2**       | wesbos/cobalt2-vscode     | 0.8k  |
+| Family            | Candidates (stars)                          | Kept              | Upstream                  | Stars |
+| ----------------- | ------------------------------------------- | ----------------- | ------------------------- | ----- |
+| Teal base         | Solarized 16.0k, Everforest 4.2k            | **Solarized**     | altercation/solarized     | 16.0k |
+| Warm neutral base | Gruvbox 15.7k, Ayu 4.4k, Flexoki 3.6k       | **Gruvbox**       | morhetz/gruvbox           | 15.7k |
+| Steel blue base   | Nord 6.9k, One Dark Pro 1.8k, Kanagawa 6.3k | **Nord**          | nordtheme/nord            | 6.9k  |
+| Violet base       | Synthwave '84 5.3k, Rose Pine 1.6k          | **Synthwave '84** | robb0wen/synthwave-vscode | 5.3k  |
+| Cobalt blue base  | Cobalt2 0.8k                                | **Cobalt2**       | wesbos/cobalt2-vscode     | 0.8k  |
 
-After the expansion the 11 themes cover 11 distinguishable base hues:
+After the expansion, measured base hues (HSL, verified 2026-08-14) group the
+11 themes into 7 hue families:
 
-```
-DeepSeek(blue) OLED(black) Dracula(purple) Catppuccin(pastel)
-TokyoNight(indigo) GitHubDark(gray) + Solarized(yellow-green)
-Gruvbox(warm orange) Nord(ice blue) Synthwave(neon purple) Cobalt2(cobalt+yellow)
-```
+| Hue family (base H°)       | Members                               | Differentiator                              |
+| -------------------------- | ------------------------------------- | ------------------------------------------- |
+| White / pure black (S = 0) | deepseek, oled                        | lightness extremes                          |
+| Neutral gray (S = 0)       | gruvbox                               | warm-orange accent set                      |
+| Teal-cyan (192–205)        | solarized (S = 100), cobalt2 (S = 49) | saturation + accent (yellow vs cobalt blue) |
+| Steel blue (216–220)       | github-dark, nord                     | lightness (L 7 vs L 22) + frost accents     |
+| Blue-violet (231–240)      | dracula, tokyo-night, catppuccin      | accent palettes (purple / indigo / pastel)  |
+| Violet-magenta (267)       | synthwave-84                          | neon pink/cyan accents                      |
+
+Proximity caveats, verified and accepted: nord sits 4° from github-dark and
+cobalt2 sits 13° from solarized; no alternative among the top-starred themes
+adds a genuinely new base hue (Kanagawa ≈240°, One Dark Pro ≈220°,
+Everforest ≈206°, Rosé Pine ≈249° all collide harder). Within-family
+separation comes from the accent palettes and surface lightness, both unique
+per theme.
 
 ## Theme Designs
 
@@ -62,6 +73,8 @@ deviation in the file's JSDoc (Dracula precedent).
   orange).
 - Surfaces: bg0/bg1 `#3c3836`/bg2 `#504945` ladder; text fg1 `#ebdbb2`
   primary, fg4 `#a89984` tertiary (≈6:1, safe).
+- The base `#282828` is pure neutral gray (S = 0); the warm-orange identity
+  lives entirely in the accent set.
 - States: `#fb4934` red, `#b8bb26` green, `#fabd2f` yellow, `#83a598` blue,
   `#8ec07c` aqua.
 - Lowest-risk palette of the five; deviations not expected.
@@ -70,6 +83,8 @@ deviation in the file's JSDoc (Dracula precedent).
 
 - Identity: `--dsw-alias-bg-base` `#2e3440` (nord0), brand `#88c0d0`
   (frost nord8, ≈9:1).
+- Base hue sits 4° from github-dark's; separation comes from higher surface
+  lightness (L 22 vs L 7) and the frost accent palette.
 - Surfaces: nord0→nord2 `#3b4252`/`#434c5e` ladder.
 - Known risk: nord3 `#4c566a` on nord0 is ≈2:1 — unusable for any text or
   border token; tertiary text takes nord9 `#81a1c1`, borders take
