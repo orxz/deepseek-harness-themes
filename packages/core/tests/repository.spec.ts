@@ -123,9 +123,11 @@ describe("repository automation", () => {
     const run = (step: Record<string, unknown>): string =>
       typeof step.run === "string" ? step.run : "";
 
-    // Trusted publishing needs npm >= 11.5.1; the npm bundled with Node is older.
+    // Trusted publishing needs npm >= 11.5.1; the npm bundled with Node is
+    // older. The major stays pinned at 11 because npm@12 needs a Node version
+    // newer than the one .nvmrc pins.
     expect(
-      steps.some((step) => run(step).includes("npm install -g npm@latest")),
+      steps.some((step) => run(step).includes("npm install -g npm@11")),
     ).toBe(true);
     expect(steps.some((step) => run(step).includes("npm --version"))).toBe(
       true,
