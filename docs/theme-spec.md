@@ -1,5 +1,7 @@
 # Theme Spec
 
+[English](theme-spec.md) | [简体中文](theme-spec.zh.md)
+
 The token contract every theme in this repository follows. The authoritative list lives in [`packages/core/src/tokens.ts`](../packages/core/src/tokens.ts); this document is its human-facing twin and the two must stay in sync.
 
 ## How themes work

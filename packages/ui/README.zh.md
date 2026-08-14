@@ -1,6 +1,8 @@
 # `@dshthemes/ui`
 
-面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的主题选择器插件：注册全部 [`@dshthemes/core`](../core/README.md) 主题、在设置页 General 区添加主题行、持久化第三方主题选择。
+[English](README.md) | [简体中文](README.zh.md)
+
+面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的主题选择器插件：注册全部 [`@dshthemes/core`](../core/README.zh.md) 主题、在设置页 General 区添加主题行、持久化第三方主题选择。
 
 ## 功能
 
@@ -24,7 +26,7 @@ dsh-themes:
 
 ## 用法
 
-一条命令完成依赖安装、profile 层添加与功能挂载（见 [docs/installation.md](../../docs/installation.md)）：
+一条命令完成依赖安装、profile 层添加与功能挂载（见[安装指南](../../docs/installation.zh.md)）：
 
 ```sh
 dsh plugin --profile <profile> add @dshthemes/ui

@@ -1,5 +1,7 @@
 # `@dshthemes/ui`
 
+[English](README.md) | [简体中文](README.zh.md)
+
 Theme picker plugin for [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness): registers all [`@dshthemes/core`](../core/README.md) themes, adds a Theme row to the settings General section, and persists the third-party selection.
 
 ## What it does

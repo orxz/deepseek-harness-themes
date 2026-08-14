@@ -1,5 +1,7 @@
 # Installation
 
+[English](installation.md) | [简体中文](installation.zh.md)
+
 Two shapes: the full picker plugin (themes + settings row + persistence), or the core package alone for compositions that bring their own selection UI.
 
 ## Prerequisites
