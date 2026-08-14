@@ -37,6 +37,8 @@ Tests assert the configuration policy and inspect built artifacts so a future de
 
 Use Changesets as the single source for package version intent and changelog entries. Add root commands for creating changesets, applying versions, running the repository quality gate, validating packed artifacts, and publishing.
 
+Treat `core` and `ui` as a fixed release group. The UI distribution inlines core, so a core-only version bump would otherwise leave the published UI artifact carrying an older catalog. Any change to either package therefore versions and publishes both at the same release number.
+
 On every push to `main`, the release workflow uses `changesets/action`:
 
 1. If unreleased changesets exist, create or update a version pull request.
@@ -101,7 +103,7 @@ Workflow YAML is verified through focused structural assertions and the same com
 - `feature/project-init` contains the foundation implementation and targets `main` through a pull request.
 - builds emit no deprecated dependency-policy warnings and do not bundle `@deepseek-ai/*` runtime code.
 - all direct runtime host dependencies are represented in peer dependency metadata.
-- Changesets automatically maintains version pull requests and publishes merged versions with `NPM_TOKEN`.
+- Changesets automatically maintains version pull requests, keeps the two published packages in one fixed release group, and publishes merged versions with `NPM_TOKEN`.
 - one strict `pnpm gate` succeeds locally and is used by CI and release automation.
 - packed package installation and public export resolution pass in an isolated consumer.
 - tests, type-checking, build, coverage, lint, documentation, and lockfile are current.
