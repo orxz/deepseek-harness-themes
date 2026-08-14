@@ -28,6 +28,8 @@ pnpm typecheck   # 首次类型检查通过即搭建完成
 
 ## 发布
 
+发布的前提是 npm 组织 `deepseek-harness-themes` 已存在，且 `NPM_TOKEN` 属于其中有发布权限的成员：该 scope 不是用户名，两个条件不同时满足时 npm 会对每一次发布 `PUT` 返回 `404 Not Found`。release workflow 在发布前会输出 npm 身份与 scope 权限，因此失败时日志会指明缺的是哪一半。
+
 UI 发布物会内联 core，因此 Changesets 保持 `core` 与 `ui` 版本一致。发布包改动合入 `main` 后，自动创建或更新版本 PR；版本 PR 合并后运行 `pnpm gate`、发布两个 npm 包，并创建对应的 GitHub Release 与标签。
 
 ## 提交风格

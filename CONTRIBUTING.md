@@ -29,6 +29,8 @@ Follow [docs/creating-a-theme.md](docs/creating-a-theme.md): one frozen `ThemeDe
 
 ## Releases
 
+Publishing requires the `deepseek-harness-themes` npm organisation to exist and `NPM_TOKEN` to belong to a member with publish rights: the scope is not a username, so npm answers every publish `PUT` with `404 Not Found` until both hold. The release workflow reports its npm identity and scope access before publishing, so a rejected release names which half is missing.
+
 Changesets keeps `core` and `ui` at the same version because the UI distribution inlines core. Merging package changes into `main` creates or updates the automated version PR. Merging that version PR runs `pnpm gate`, publishes both packages to npm, and creates the corresponding GitHub releases and tags.
 
 ## Commit style

@@ -84,6 +84,45 @@ describe("repository automation", () => {
     expect(manifest.scripts?.release).toBe("pnpm gate && changeset publish");
   });
 
+  it("names the failing half when a publish is rejected", () => {
+    const release = readYaml(".github/workflows/release.yml") as {
+      jobs?: Record<string, { steps?: Array<Record<string, unknown>> }>;
+    };
+    const steps = workflowSteps(release);
+    const run = (step: Record<string, unknown>): string =>
+      typeof step.run === "string" ? step.run : "";
+
+    // A publish PUT 404s both when the token is rejected and when the scope is
+    // not ours, so the workflow has to tell those two apart on its own.
+    expect(steps.some((step) => run(step).includes("npm whoami"))).toBe(true);
+    expect(
+      steps.some((step) =>
+        run(step).includes("npm access list packages @deepseek-harness-themes"),
+      ),
+    ).toBe(true);
+    expect(steps.some((step) => run(step).includes("_authToken"))).toBe(true);
+    expect(
+      steps.some((step) =>
+        run(step).includes("steps.changesets.outputs.published"),
+      ),
+    ).toBe(true);
+  });
+
+  it("hands the npm token to the release step under both names", () => {
+    const release = readYaml(".github/workflows/release.yml") as {
+      jobs?: Record<string, { steps?: Array<Record<string, unknown>> }>;
+    };
+    const publish = workflowSteps(release).find(
+      (step) => step.uses === "changesets/action@v2",
+    );
+
+    expect(publish?.env).toMatchObject({
+      NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}",
+      NPM_TOKEN: "${{ secrets.NPM_TOKEN }}",
+    });
+    expect(publish?.id).toBe("changesets");
+  });
+
   it("disables host peer auto-installation and lints build tooling", () => {
     const workspace = readYaml("pnpm-workspace.yaml");
     const manifest = readJson("package.json") as {
