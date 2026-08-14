@@ -12,11 +12,19 @@ describe("bundle manifest", () => {
   it("declares the dsh.bundle patch in package.json", () => {
     const manifest = JSON.parse(readPackageFile("package.json")) as {
       dsh?: { bundle?: { patch?: string } };
+      dependencies?: Record<string, string>;
       files?: string[];
+      peerDependencies?: Record<string, string>;
     };
 
     expect(manifest.dsh?.bundle?.patch).toBe("./cordis.patch.yml");
     expect(manifest.files).toContain("cordis.patch.yml");
+    expect(manifest.peerDependencies?.["@deepseek-ai/schemastery"]).toBe(
+      "^3.18.1",
+    );
+    expect(manifest.dependencies).not.toHaveProperty(
+      "@deepseek-ai/schemastery",
+    );
   });
 
   it("ships the theme row in cordis.patch.yml", () => {

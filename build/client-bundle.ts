@@ -12,7 +12,7 @@
 import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import type { UserConfig } from "tsdown";
+import type { TsdownPlugin, UserConfig } from "tsdown";
 import { transform } from "lightningcss";
 
 /** Platform modules shared into the frozen module table by the dsh web shell. */
@@ -26,6 +26,9 @@ export const PLATFORM_MODULES = [
   "@deepseek-ai/dsh-client-runtime/client",
 ] as const;
 
+/** Any DeepSeek runtime module is supplied by the host module table. */
+const HOST_MODULE = /^@deepseek-ai(?:\/|$)/;
+
 /** Virtual-id prefix keeping module CSS away from tsdown's own css pipeline. */
 const CSS_VIRTUAL_PREFIX = "\0dsh-css:";
 const CSS_VIRTUAL_SUFFIX = ".mjs";
@@ -37,16 +40,23 @@ const CSS_VIRTUAL_SUFFIX = ".mjs";
  * @param id - plugin id (package name), stamped into the handoff.
  * @param libEntry - node-half entry (the host face).
  * @param clientEntry - browser entry (the client face).
- * @param externals - extra module-table specifiers beyond the platform
- *   modules (e.g. the sibling core package).
+ * @param options - package-specific dependency boundary additions.
  */
 export function clientBundle(
   id: string,
   libEntry: string,
   clientEntry: string,
-  externals: readonly string[] = [],
+  options: ClientBundleOptions = {},
 ): UserConfig[] {
-  return [libConfig(id, libEntry), clientConfig(id, clientEntry, externals)];
+  return [libConfig(id, libEntry), clientConfig(id, clientEntry, options)];
+}
+
+/** Dependency policy additions for one browser plugin bundle. */
+export interface ClientBundleOptions {
+  /** Extra module-table specifiers supplied by the host. */
+  externals?: readonly string[];
+  /** Product dependencies intentionally inlined into the plugin artifact. */
+  bundledDependencies?: readonly string[];
 }
 
 /** Node-half library build: ESM output with declarations. */
@@ -66,9 +76,10 @@ function libConfig(id: string, entry: string): UserConfig {
 function clientConfig(
   id: string,
   entry: string,
-  externals: readonly string[],
+  options: ClientBundleOptions,
 ): UserConfig {
-  const clientExternals = [...PLATFORM_MODULES, ...externals];
+  const clientExternals = [...PLATFORM_MODULES, ...(options.externals ?? [])];
+  const bundledDependencies = options.bundledDependencies ?? [];
   return {
     name: `${id}/client`,
     entry: { client: entry },
@@ -76,7 +87,14 @@ function clientConfig(
     format: "cjs",
     platform: "browser",
     clean: false,
-    external: [...clientExternals],
+    deps: {
+      neverBundle: [HOST_MODULE, ...clientExternals],
+      alwaysBundle: (specifier: string) =>
+        bundledDependencies.some((dependency) =>
+          matchesModule(specifier, dependency),
+        ) && !isClientExternal(specifier, clientExternals),
+      onlyBundle: [...bundledDependencies],
+    },
     define: {
       "process.env.NODE_ENV": JSON.stringify(
         process.env.NODE_ENV ?? "production",
@@ -88,10 +106,6 @@ function clientConfig(
         MODE: process.env.NODE_ENV ?? "production",
       }),
     },
-    // Bundle everything not in the module table; a require() the table
-    // cannot answer is a guaranteed runtime throw.
-    noExternal: (specifier: string) =>
-      clientExternals.includes(specifier) ? undefined : true,
     plugins: [cssModulesPlugin(id)],
     outputOptions: {
       entryFileNames: "client.js",
@@ -102,8 +116,20 @@ function clientConfig(
   };
 }
 
+/** Match a package root and all of its subpath imports. */
+function matchesModule(id: string, moduleId: string): boolean {
+  return id === moduleId || id.startsWith(`${moduleId}/`);
+}
+
+/** Return whether the host module table owns one client import. */
+function isClientExternal(id: string, externals: readonly string[]): boolean {
+  return (
+    HOST_MODULE.test(id) || externals.some((item) => matchesModule(id, item))
+  );
+}
+
 /** Inline CSS Modules with lightningcss and inject a per-plugin style tag. */
-function cssModulesPlugin(id: string) {
+function cssModulesPlugin(id: string): TsdownPlugin {
   return {
     name: "dsh-css-modules-inline",
     resolveId(source: string, importer: string | undefined) {
