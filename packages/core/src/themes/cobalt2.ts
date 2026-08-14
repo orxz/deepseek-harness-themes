@@ -15,7 +15,7 @@ export const cobalt2: ThemeDefinition = Object.freeze({
     "--dsw-alias-bg-layer-1": "#1f4662",
     "--dsw-alias-bg-layer-2": "#3b5364",
     "--dsw-alias-bg-layer-3": "#406179",
-    "--dsw-alias-bg-overlay": "#406179",
+    "--dsw-alias-bg-overlay": "#496d84",
     "--dsw-alias-label-primary": "#ffffff",
     "--dsw-alias-label-secondary": "#e1efff",
     "--dsw-alias-label-tertiary": "#cccccc",

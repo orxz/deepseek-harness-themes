@@ -19,7 +19,7 @@ export const nord: ThemeDefinition = Object.freeze({
     "--dsw-alias-bg-layer-1": "#3b4252",
     "--dsw-alias-bg-layer-2": "#434c5e",
     "--dsw-alias-bg-layer-3": "#4c566a",
-    "--dsw-alias-bg-overlay": "#4c566a",
+    "--dsw-alias-bg-overlay": "#566073",
     "--dsw-alias-label-primary": "#eceff4",
     "--dsw-alias-label-secondary": "#d8dee9",
     "--dsw-alias-label-tertiary": "#81a1c1",
