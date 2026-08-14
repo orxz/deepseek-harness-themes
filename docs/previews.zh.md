@@ -54,6 +54,46 @@
 
 ![GitHub Dark 在 harness 中的实际效果](../screenshots/github-dark.png)
 
+## Solarized
+
+深色——Solarized Dark 科学配色：青绿底 + 黄色点缀。底色 `#002b36`，主色 `#b58900`。
+
+![Solarized 主题预览](../previews/solarized.svg)
+
+![Solarized 在 harness 中的实际效果](../screenshots/solarized.png)
+
+## Gruvbox
+
+深色——Gruvbox 复古暖色调 + 橙色点缀。底色 `#282828`，主色 `#fe8019`。
+
+![Gruvbox 主题预览](../previews/gruvbox.svg)
+
+![Gruvbox 在 harness 中的实际效果](../screenshots/gruvbox.png)
+
+## Nord
+
+深色——Nord 北极冰蓝 + 霜蓝点缀。底色 `#2e3440`，主色 `#88c0d0`。
+
+![Nord 主题预览](../previews/nord.svg)
+
+![Nord 在 harness 中的实际效果](../screenshots/nord.png)
+
+## Synthwave '84
+
+深色——深紫底上的霓虹粉与青。底色 `#241b2f`，主色 `#ff7edb`。
+
+![Synthwave '84 主题预览](../previews/synthwave-84.svg)
+
+![Synthwave '84 在 harness 中的实际效果](../screenshots/synthwave-84.png)
+
+## Cobalt2
+
+深色——钴蓝底 + 标志性黄色。底色 `#193549`，主色 `#ffc600`。
+
+![Cobalt2 主题预览](../previews/cobalt2.svg)
+
+![Cobalt2 在 harness 中的实际效果](../screenshots/cobalt2.png)
+
 ## 新增主题
 
 新主题的预览是生成的，不靠手绘：步骤见[创建主题](creating-a-theme.zh.md)。上面引用的两个颜色是 `--dsw-alias-bg-base` 与 `--dsw-alias-brand-primary`，与设置行色卡取的是同一对。

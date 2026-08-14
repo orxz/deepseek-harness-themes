@@ -23,14 +23,19 @@ Community-maintained theme collection built on the official theme extension poin
 
 Every preview is generated from that theme's own tokens; the full gallery is [docs/previews.md](docs/previews.md).
 
-| Theme       | Base                                   | Preview                                                                          |
-| ----------- | -------------------------------------- | -------------------------------------------------------------------------------- |
-| DeepSeek    | light — clean DeepSeek-inspired blue   | <img src="previews/deepseek.svg" alt="DeepSeek theme preview" width="220">       |
-| OLED        | dark — true black for emissive panels  | <img src="previews/oled.svg" alt="OLED theme preview" width="220">               |
-| Dracula     | dark — high-contrast purple/indigo     | <img src="previews/dracula.svg" alt="Dracula theme preview" width="220">         |
-| Catppuccin  | dark — soft pastel (Mocha)             | <img src="previews/catppuccin.svg" alt="Catppuccin theme preview" width="220">   |
-| Tokyo Night | dark — midnight blue with neon accents | <img src="previews/tokyo-night.svg" alt="Tokyo Night theme preview" width="220"> |
-| GitHub Dark | dark — familiar GitHub interface       | <img src="previews/github-dark.svg" alt="GitHub Dark theme preview" width="220"> |
+| Theme         | Base                                   | Preview                                                                             |
+| ------------- | -------------------------------------- | ----------------------------------------------------------------------------------- |
+| DeepSeek      | light — clean DeepSeek-inspired blue   | <img src="previews/deepseek.svg" alt="DeepSeek theme preview" width="220">          |
+| OLED          | dark — true black for emissive panels  | <img src="previews/oled.svg" alt="OLED theme preview" width="220">                  |
+| Dracula       | dark — high-contrast purple/indigo     | <img src="previews/dracula.svg" alt="Dracula theme preview" width="220">            |
+| Catppuccin    | dark — soft pastel (Mocha)             | <img src="previews/catppuccin.svg" alt="Catppuccin theme preview" width="220">      |
+| Tokyo Night   | dark — midnight blue with neon accents | <img src="previews/tokyo-night.svg" alt="Tokyo Night theme preview" width="220">    |
+| GitHub Dark   | dark — familiar GitHub interface       | <img src="previews/github-dark.svg" alt="GitHub Dark theme preview" width="220">    |
+| Solarized     | dark — scientific teal, yellow accent  | <img src="previews/solarized.svg" alt="Solarized theme preview" width="220">        |
+| Gruvbox       | dark — retro warm palette, orange      | <img src="previews/gruvbox.svg" alt="Gruvbox theme preview" width="220">            |
+| Nord          | dark — arctic north-blues, frost       | <img src="previews/nord.svg" alt="Nord theme preview" width="220">                  |
+| Synthwave '84 | dark — neon pink/cyan on deep violet   | <img src="previews/synthwave-84.svg" alt="Synthwave '84 theme preview" width="220"> |
+| Cobalt2       | dark — cobalt blue, signature yellow   | <img src="previews/cobalt2.svg" alt="Cobalt2 theme preview" width="220">            |
 
 ## Install
 

@@ -23,14 +23,19 @@
 
 每张预览都由该主题自己的 token 生成；完整画廊见[主题预览](docs/previews.zh.md)。
 
-| 主题        | 基座                       | 预览                                                                        |
-| ----------- | -------------------------- | --------------------------------------------------------------------------- |
-| DeepSeek    | 浅色——清爽的 DeepSeek 蓝   | <img src="previews/deepseek.svg" alt="DeepSeek 主题预览" width="220">       |
-| OLED        | 深色——真黑，适配 OLED 屏幕 | <img src="previews/oled.svg" alt="OLED 主题预览" width="220">               |
-| Dracula     | 深色——高对比紫/靛蓝        | <img src="previews/dracula.svg" alt="Dracula 主题预览" width="220">         |
-| Catppuccin  | 深色——柔和马卡龙（Mocha）  | <img src="previews/catppuccin.svg" alt="Catppuccin 主题预览" width="220">   |
-| Tokyo Night | 深色——午夜蓝 + 霓虹点缀    | <img src="previews/tokyo-night.svg" alt="Tokyo Night 主题预览" width="220"> |
-| GitHub Dark | 深色——熟悉的 GitHub 界面   | <img src="previews/github-dark.svg" alt="GitHub Dark 主题预览" width="220"> |
+| 主题          | 基座                              | 预览                                                                           |
+| ------------- | --------------------------------- | ------------------------------------------------------------------------------ |
+| DeepSeek      | 浅色——清爽的 DeepSeek 蓝          | <img src="previews/deepseek.svg" alt="DeepSeek 主题预览" width="220">          |
+| OLED          | 深色——真黑，适配 OLED 屏幕        | <img src="previews/oled.svg" alt="OLED 主题预览" width="220">                  |
+| Dracula       | 深色——高对比紫/靛蓝               | <img src="previews/dracula.svg" alt="Dracula 主题预览" width="220">            |
+| Catppuccin    | 深色——柔和马卡龙（Mocha）         | <img src="previews/catppuccin.svg" alt="Catppuccin 主题预览" width="220">      |
+| Tokyo Night   | 深色——午夜蓝 + 霓虹点缀           | <img src="previews/tokyo-night.svg" alt="Tokyo Night 主题预览" width="220">    |
+| GitHub Dark   | 深色——熟悉的 GitHub 界面          | <img src="previews/github-dark.svg" alt="GitHub Dark 主题预览" width="220">    |
+| Solarized     | 深色——科学配色的青绿底 + 黄色点缀 | <img src="previews/solarized.svg" alt="Solarized 主题预览" width="220">        |
+| Gruvbox       | 深色——复古暖色调 + 橙色点缀       | <img src="previews/gruvbox.svg" alt="Gruvbox 主题预览" width="220">            |
+| Nord          | 深色——北极冰蓝 + 霜蓝点缀         | <img src="previews/nord.svg" alt="Nord 主题预览" width="220">                  |
+| Synthwave '84 | 深色——深紫底上的霓虹粉与青        | <img src="previews/synthwave-84.svg" alt="Synthwave '84 主题预览" width="220"> |
+| Cobalt2       | 深色——钴蓝底 + 标志性黄色         | <img src="previews/cobalt2.svg" alt="Cobalt2 主题预览" width="220">            |
 
 ## 安装
 

@@ -54,6 +54,46 @@ Dark — the familiar GitHub interface. Base `#0d1117`, brand `#58a6ff`.
 
 ![GitHub Dark applied in the harness](../screenshots/github-dark.png)
 
+## Solarized
+
+Dark — Solarized Dark's scientific palette: teal base03 surfaces, solarized yellow accent. Base `#002b36`, brand `#b58900`.
+
+![Solarized theme preview](../previews/solarized.svg)
+
+![Solarized applied in the harness](../screenshots/solarized.png)
+
+## Gruvbox
+
+Dark — Gruvbox Dark's retro groove: warm neutral surfaces, bright orange accent. Base `#282828`, brand `#fe8019`.
+
+![Gruvbox theme preview](../previews/gruvbox.svg)
+
+![Gruvbox applied in the harness](../screenshots/gruvbox.png)
+
+## Nord
+
+Dark — Nord's arctic north-blues with frost accents. Base `#2e3440`, brand `#88c0d0`.
+
+![Nord theme preview](../previews/nord.svg)
+
+![Nord applied in the harness](../screenshots/nord.png)
+
+## Synthwave '84
+
+Dark — neon pink and cyan over a deep violet night. Base `#241b2f`, brand `#ff7edb`.
+
+![Synthwave '84 theme preview](../previews/synthwave-84.svg)
+
+![Synthwave '84 applied in the harness](../screenshots/synthwave-84.png)
+
+## Cobalt2
+
+Dark — cobalt blue with Wes Bos's signature yellow. Base `#193549`, brand `#ffc600`.
+
+![Cobalt2 theme preview](../previews/cobalt2.svg)
+
+![Cobalt2 applied in the harness](../screenshots/cobalt2.png)
+
 ## Adding one
 
 A new theme's preview is generated, never drawn: [creating a theme](creating-a-theme.md) covers the step. The two colours quoted above are `--dsw-alias-bg-base` and `--dsw-alias-brand-primary`, the same pair the settings-row swatch paints with.
