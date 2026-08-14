@@ -31,6 +31,8 @@ const DIRECT_CLIENT_HOST_IMPORTS = [
 ] as const;
 
 const REQUIRED_PACKAGE_FILES = [
+  "LICENSE",
+  "README.zh.md",
   "cordis.patch.yml",
   "lib/index.js",
   "lib/index.d.ts",

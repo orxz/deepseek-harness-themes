@@ -43,6 +43,22 @@ describe("packed package validation", () => {
     );
   });
 
+  it("rejects a package published without its license", async () => {
+    const root = await createPackageFixture({ omittedFile: "LICENSE" });
+
+    await expect(validatePackageDirectory(root)).rejects.toThrow(
+      "@fixture/theme: missing required file ./LICENSE",
+    );
+  });
+
+  it("rejects a package published without the translated readme", async () => {
+    const root = await createPackageFixture({ omittedFile: "README.zh.md" });
+
+    await expect(validatePackageDirectory(root)).rejects.toThrow(
+      "@fixture/theme: missing required file ./README.zh.md",
+    );
+  });
+
   it("rejects a root export pointed at the client bundle", async () => {
     const root = await createPackageFixture({
       rootDefault: "./lib/client.js",
@@ -107,6 +123,8 @@ async function createPackageFixture(
   );
 
   const files = [
+    "LICENSE",
+    "README.zh.md",
     "cordis.patch.yml",
     "lib/index.js",
     "lib/index.d.ts",

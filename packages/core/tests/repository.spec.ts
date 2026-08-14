@@ -101,3 +101,54 @@ describe("repository automation", () => {
     );
   });
 });
+
+describe("published package metadata", () => {
+  const packages = [
+    ["core", "@deepseek-harness-themes/core"],
+    ["ui", "@deepseek-harness-themes/ui"],
+  ] as const;
+
+  it.each(packages)(
+    "points %s consumers at the project homepage and issue tracker",
+    (directory, name) => {
+      const manifest = readJson(`packages/${directory}/package.json`) as {
+        bugs?: unknown;
+        homepage?: unknown;
+        name?: unknown;
+      };
+
+      expect(manifest.name).toBe(name);
+      expect(manifest.homepage).toBe(
+        "https://github.com/orxz/deepseek-harness-themes",
+      );
+      expect(manifest.bugs).toBe(
+        "https://github.com/orxz/deepseek-harness-themes/issues",
+      );
+    },
+  );
+
+  it("routes release history to the generated per-package changelogs", () => {
+    const changelog = readFileSync(
+      new URL("CHANGELOG.md", repositoryRoot),
+      "utf8",
+    );
+
+    expect(changelog).toContain("packages/core/CHANGELOG.md");
+    expect(changelog).toContain("packages/ui/CHANGELOG.md");
+    expect(changelog).toContain("## 0.0.1");
+  });
+
+  it.each(packages)(
+    "ships the %s license file and the translated readme",
+    (directory) => {
+      const manifest = readJson(`packages/${directory}/package.json`) as {
+        files?: unknown;
+      };
+
+      expect(
+        existsSync(new URL(`packages/${directory}/LICENSE`, repositoryRoot)),
+      ).toBe(true);
+      expect(manifest.files).toContain("README.zh.md");
+    },
+  );
+});

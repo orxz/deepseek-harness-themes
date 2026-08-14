@@ -1,6 +1,14 @@
 # Changelog
 
-All notable changes to this project are documented in this file.
+Release notes live with the packages they describe. Changesets generates them
+from the changesets merged into `main`:
+
+- `packages/core/CHANGELOG.md` — `@deepseek-harness-themes/core`
+- `packages/ui/CHANGELOG.md` — `@deepseek-harness-themes/ui`
+
+Both packages share one version because the UI distribution inlines core.
+
+This file keeps the initial release, which predates the Changesets workflow.
 
 ## 0.0.1
 
