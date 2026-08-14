@@ -1,5 +1,12 @@
 # @dshthemes/core
 
+## 0.1.2
+
+### Patch Changes
+
+- fb04e84: Keep the settings schema out of the browser bundle so the picker loads. The durable schema is built with `@deepseek-ai/schemastery`, a host package the web shell does not seed into the browser plugin module table, and the client entry reached it through the shared preference module — so the loader rejected the whole plugin with "missed the module table" and no Theme row ever appeared. The schema now lives in a Node-only module, and the packaged client bundle is validated against the browser module table so a future host import fails the release instead of the page.
+- fb04e84: Declare every peer dependency optional so installing into a profile is quiet and complete. The harness supplies cordis, schemastery, React, and the client runtime through its own module table, and the picker bundle inlines the theme catalog, so none of them belong in a profile's `node_modules`. pnpm previously reported them as missing peers and advised installing them — advice that is unnecessary for the host modules and actively wrong for `@dshthemes/core`, whose bundle row would register the same theme ids a second time and throw.
+
 ## 0.1.1
 
 ### Patch Changes
