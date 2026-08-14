@@ -1,7 +1,7 @@
 import { clientBundle } from "../../build/client-bundle.ts";
 
 export default clientBundle(
-  "@deepseek-harness-themes/core",
+  "@dsh-themes/core",
   "src/index.ts",
   "src/client.ts",
 );

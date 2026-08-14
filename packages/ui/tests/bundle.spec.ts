@@ -37,15 +37,13 @@ describe("bundle manifest", () => {
     expect(manifest.dependencies).not.toHaveProperty(
       "@deepseek-ai/dsh-client-runtime",
     );
-    expect(manifest.devDependencies?.["@deepseek-harness-themes/core"]).toBe(
-      "workspace:^",
-    );
+    expect(manifest.devDependencies?.["@dsh-themes/core"]).toBe("workspace:^");
   });
 
   it("ships the theme row in cordis.patch.yml", () => {
     const patch = readPackageFile("cordis.patch.yml");
 
     expect(patch).toContain("id: dsh-themes");
-    expect(patch).toContain('name: "@deepseek-harness-themes/ui"');
+    expect(patch).toContain('name: "@dsh-themes/ui"');
   });
 });

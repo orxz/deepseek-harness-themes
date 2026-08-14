@@ -1,4 +1,4 @@
-# @deepseek-harness-themes/ui
+# @dsh-themes/ui
 
 ## 0.0.2
 
@@ -8,4 +8,4 @@
 - b1ad961: Ship the MIT license and the translated README inside both published packages, and point package metadata at the project homepage and issue tracker.
 - Updated dependencies [431961e]
 - Updated dependencies [b1ad961]
-  - @deepseek-harness-themes/core@0.0.2
+  - @dsh-themes/core@0.0.2

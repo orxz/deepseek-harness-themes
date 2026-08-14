@@ -1,4 +1,4 @@
-import { registerThemes, themes } from "@deepseek-harness-themes/core";
+import { registerThemes, themes } from "@dsh-themes/core";
 import { createPicker } from "./picker.ts";
 import type {
   PickerSettingsScope,

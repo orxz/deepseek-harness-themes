@@ -18,7 +18,7 @@ describe("client bundle dependency policy", () => {
 
   it("externalizes host modules and bundles only declared product dependencies", () => {
     const client = clientBundle("example", "src/index.ts", "src/client.ts", {
-      bundledDependencies: ["@deepseek-harness-themes/core", "clsx"],
+      bundledDependencies: ["@dsh-themes/core", "clsx"],
     })[1] as UserConfig;
     const alwaysBundle = client.deps?.alwaysBundle as (
       id: string,
@@ -29,11 +29,8 @@ describe("client bundle dependency policy", () => {
     expect(alwaysBundle("@deepseek-ai/dsh-client-runtime/client")).toBe(false);
     expect(alwaysBundle("react/jsx-runtime")).toBe(false);
     expect(alwaysBundle("clsx")).toBe(true);
-    expect(alwaysBundle("@deepseek-harness-themes/core")).toBe(true);
+    expect(alwaysBundle("@dsh-themes/core")).toBe(true);
     expect(alwaysBundle("unexpected-dependency")).toBe(false);
-    expect(client.deps?.onlyBundle).toEqual([
-      "@deepseek-harness-themes/core",
-      "clsx",
-    ]);
+    expect(client.deps?.onlyBundle).toEqual(["@dsh-themes/core", "clsx"]);
   });
 });

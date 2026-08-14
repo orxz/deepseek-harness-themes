@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { themes } from "@deepseek-harness-themes/core";
+import { themes } from "@dsh-themes/core";
 import { createPicker } from "../src/picker.ts";
 import type { PickerThemeService, PickerSettingsScope } from "../src/picker.ts";
 

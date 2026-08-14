@@ -25,7 +25,7 @@ describe("repository automation", () => {
     expect(config).toMatchObject({
       access: "public",
       baseBranch: "main",
-      fixed: [["@deepseek-harness-themes/core", "@deepseek-harness-themes/ui"]],
+      fixed: [["@dsh-themes/core", "@dsh-themes/ui"]],
       updateInternalDependencies: "patch",
     });
   });
@@ -97,7 +97,7 @@ describe("repository automation", () => {
     expect(steps.some((step) => run(step).includes("npm whoami"))).toBe(true);
     expect(
       steps.some((step) =>
-        run(step).includes("npm access list packages @deepseek-harness-themes"),
+        run(step).includes("npm access list packages @dsh-themes"),
       ),
     ).toBe(true);
     expect(steps.some((step) => run(step).includes("_authToken"))).toBe(true);
@@ -143,8 +143,8 @@ describe("repository automation", () => {
 
 describe("published package metadata", () => {
   const packages = [
-    ["core", "@deepseek-harness-themes/core"],
-    ["ui", "@deepseek-harness-themes/ui"],
+    ["core", "@dsh-themes/core"],
+    ["ui", "@dsh-themes/ui"],
   ] as const;
 
   it.each(packages)(

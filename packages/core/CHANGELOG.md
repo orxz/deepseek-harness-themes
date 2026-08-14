@@ -1,4 +1,4 @@
-# @deepseek-harness-themes/core
+# @dsh-themes/core
 
 ## 0.0.2
 

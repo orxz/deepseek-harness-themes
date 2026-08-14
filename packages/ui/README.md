@@ -1,6 +1,6 @@
-# `@deepseek-harness-themes/ui`
+# `@dsh-themes/ui`
 
-Theme picker plugin for [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness): registers all [`@deepseek-harness-themes/core`](../core/README.md) themes, adds a Theme row to the settings General section, and persists the third-party selection.
+Theme picker plugin for [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness): registers all [`@dsh-themes/core`](../core/README.md) themes, adds a Theme row to the settings General section, and persists the third-party selection.
 
 ## What it does
 
@@ -27,7 +27,7 @@ The value `system` means "no override — follow the host preference". Non-strin
 One command installs the dependency, adds the layer to the profile, and mounts the feature (see [docs/installation.md](../../docs/installation.md)):
 
 ```sh
-dsh plugin --profile <profile> add @deepseek-harness-themes/ui
+dsh plugin --profile <profile> add @dsh-themes/ui
 ```
 
 The package ships a bundle manifest, so `dsh plugin` appends it to `dsh.profile.bundles` automatically. Profiles that prefer a hand-written layer can insert the row instead:
@@ -35,7 +35,7 @@ The package ships a bundle manifest, so `dsh plugin` appends it to `dsh.profile.
 ```yaml
 - insert:
     - id: dsh-themes
-      name: "@deepseek-harness-themes/ui"
+      name: "@dsh-themes/ui"
 ```
 
 The browser roster scans `dsh.client` plugins automatically, so no host row is needed beyond the patch entry.

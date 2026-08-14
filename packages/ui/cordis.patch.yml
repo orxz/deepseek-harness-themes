@@ -1,7 +1,7 @@
-# Bundle layer for @deepseek-harness-themes/ui: mounts the full picker
+# Bundle layer for @dsh-themes/ui: mounts the full picker
 # feature (theme registration, settings row, durable selection). Installed by
 # `dsh plugin add`; profile compositions may still insert this row manually
 # instead.
 - insert:
     - id: dsh-themes
-      name: "@deepseek-harness-themes/ui"
+      name: "@dsh-themes/ui"

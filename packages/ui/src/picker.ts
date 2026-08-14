@@ -1,4 +1,4 @@
-import type { ThemeRegistry } from "@deepseek-harness-themes/core";
+import type { ThemeRegistry } from "@dsh-themes/core";
 import {
   DEFAULT_SELECTION,
   isThemeSelection,

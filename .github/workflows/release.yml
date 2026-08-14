@@ -43,8 +43,8 @@ jobs:
           else
             echo "::warning title=npm auth::npm whoami failed, so publishing will 404: $identity"
           fi
-          if ! npm access list packages @deepseek-harness-themes 2>&1; then
-            echo "::warning title=npm scope::@deepseek-harness-themes is not writable by this token. Create the npm organisation, or grant the token access to it; every publish PUT 404s until then."
+          if ! npm access list packages @dsh-themes 2>&1; then
+            echo "::warning title=npm scope::@dsh-themes is not writable by this token. Create the npm organisation, or grant the token access to it; every publish PUT 404s until then."
           fi
 
       - name: Create release pull request or publish
