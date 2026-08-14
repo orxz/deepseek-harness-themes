@@ -1,5 +1,9 @@
 packages:
   - packages/*
+autoInstallPeers: false
+saveExact: true
+strictPeerDependencies: false
+verifyDepsBeforeRun: false
 allowBuilds:
   esbuild: true
   lefthook: true

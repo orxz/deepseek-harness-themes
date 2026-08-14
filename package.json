@@ -10,16 +10,21 @@
     "node": ">=22.19"
   },
   "scripts": {
+    "changeset": "changeset",
+    "version:packages": "changeset version",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "lint": "oxlint packages",
+    "smoke:packages": "node build/package-smoke.ts",
+    "lint": "oxlint packages build vitest.config.ts",
     "fmt": "prettier --write .",
-    "build": "pnpm -r build"
+    "build": "pnpm -r build",
+    "gate": "pnpm typecheck && pnpm build && pnpm test:coverage && pnpm lint && pnpm smoke:packages",
+    "release": "pnpm gate && changeset publish"
   },
   "devDependencies": {
-    "@vitest/coverage-istanbul": "3.2.4",
-    "@vitest/coverage-v8": "^3.2.4",
+    "@changesets/cli": "^3.0.0",
+    "@vitest/coverage-istanbul": "3.2.7",
     "lefthook": "^2.1.10",
     "lightningcss": "^1.33.0",
     "oxlint": "^1.78.0",
@@ -27,6 +32,7 @@
     "tsdown": "^0.22.14",
     "typescript": "^5.9.2",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "yaml": "2.9.0"
   }
 }

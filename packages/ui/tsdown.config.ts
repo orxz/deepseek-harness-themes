@@ -9,4 +9,7 @@ export default clientBundle(
   "@deepseek-harness-themes/ui",
   "src/index.ts",
   "src/client.ts",
+  {
+    bundledDependencies: ["@deepseek-harness-themes/core", "clsx"],
+  },
 );
