@@ -203,8 +203,8 @@ function verifyConsumerImports(consumerDirectory: string): void {
       }
     }
     const core = await import("@deepseek-harness-themes/core");
-    if (!Array.isArray(core.themes) || core.themes.length !== 10) {
-      throw new Error("installed core package did not expose ten themes");
+    if (!Array.isArray(core.themes) || core.themes.length !== 6) {
+      throw new Error("installed core package did not expose six themes");
     }
   `;
   run(

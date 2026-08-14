@@ -14,23 +14,19 @@ Community-maintained theme collection built on the official theme extension poin
 
 | Package                                                    | Role                                                                                                               |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [`@deepseek-harness-themes/core`](packages/core/README.md) | Ten `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI                    |
+| [`@deepseek-harness-themes/core`](packages/core/README.md) | Six `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI                    |
 | [`@deepseek-harness-themes/ui`](packages/ui/README.md)     | Client plugin: registers all themes, adds a Theme picker row to Settings → General, persists third-party selection |
 
 ## Themes
 
-| Theme       | Base                                      |
-| ----------- | ----------------------------------------- |
-| DeepSeek    | light — clean DeepSeek-inspired blue      |
-| Midnight    | dark — low-contrast, long-session comfort |
-| OLED        | dark — true black for emissive panels     |
-| Nord        | dark — cool restrained Nordic palette     |
-| Dracula     | dark — high-contrast purple/indigo        |
-| Catppuccin  | dark — soft pastel (Mocha)                |
-| Tokyo Night | dark — midnight blue with neon accents    |
-| GitHub Dark | dark — familiar GitHub interface          |
-| Monokai     | dark — classic developer palette          |
-| Minimal     | light — low-color, distraction-free       |
+| Theme       | Base                                   |
+| ----------- | -------------------------------------- |
+| DeepSeek    | light — clean DeepSeek-inspired blue   |
+| OLED        | dark — true black for emissive panels  |
+| Dracula     | dark — high-contrast purple/indigo     |
+| Catppuccin  | dark — soft pastel (Mocha)             |
+| Tokyo Night | dark — midnight blue with neon accents |
+| GitHub Dark | dark — familiar GitHub interface       |
 
 ## Install
 

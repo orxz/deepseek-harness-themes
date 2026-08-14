@@ -75,12 +75,12 @@ function makeScope(
 describe("createPicker", () => {
   it("restores a persisted third-party theme that is still registered", () => {
     const theme = makeThemeService();
-    const scope = makeScope({ theme: "midnight" });
+    const scope = makeScope({ theme: "catppuccin" });
     const picker = createPicker(theme, scope);
 
     picker.restore();
 
-    expect(theme.setTheme).toHaveBeenCalledWith("midnight");
+    expect(theme.setTheme).toHaveBeenCalledWith("catppuccin");
   });
 
   it("ignores a persisted value that is no longer registered", () => {
@@ -122,18 +122,18 @@ describe("createPicker", () => {
     expect(theme.setTheme).not.toHaveBeenCalled();
 
     // The scope settles with the persisted section; the subscription fires.
-    await scope.set("theme", "midnight");
+    await scope.set("theme", "catppuccin");
 
-    expect(theme.setTheme).toHaveBeenCalledWith("midnight");
+    expect(theme.setTheme).toHaveBeenCalledWith("catppuccin");
   });
 
   it("restores immediately when the scope is already ready at creation", () => {
     const theme = makeThemeService();
-    const scope = makeScope({ theme: "midnight" });
+    const scope = makeScope({ theme: "catppuccin" });
 
     createPicker(theme, scope);
 
-    expect(theme.setTheme).toHaveBeenCalledWith("midnight");
+    expect(theme.setTheme).toHaveBeenCalledWith("catppuccin");
   });
 
   it("persists a third-party active theme on sync", async () => {
@@ -142,16 +142,16 @@ describe("createPicker", () => {
     const picker = createPicker(theme, scope);
 
     await picker.sync({
-      preference: "midnight",
-      active: { id: "midnight", colorScheme: "dark" },
+      preference: "catppuccin",
+      active: { id: "catppuccin", colorScheme: "dark" },
     });
 
-    expect(scope.set).toHaveBeenCalledWith("theme", "midnight");
+    expect(scope.set).toHaveBeenCalledWith("theme", "catppuccin");
   });
 
   it("resets the durable marker when the active theme is built-in", async () => {
     const theme = makeThemeService();
-    const scope = makeScope({ theme: "midnight" });
+    const scope = makeScope({ theme: "catppuccin" });
     const picker = createPicker(theme, scope);
 
     await picker.sync({
@@ -177,12 +177,12 @@ describe("createPicker", () => {
 
   it("skips a redundant durable write when the marker already matches", async () => {
     const theme = makeThemeService();
-    const scope = makeScope({ theme: "midnight" });
+    const scope = makeScope({ theme: "catppuccin" });
     const picker = createPicker(theme, scope);
 
     await picker.sync({
-      preference: "midnight",
-      active: { id: "midnight", colorScheme: "dark" },
+      preference: "catppuccin",
+      active: { id: "catppuccin", colorScheme: "dark" },
     });
 
     expect(scope.set).not.toHaveBeenCalled();
@@ -193,9 +193,9 @@ describe("createPicker", () => {
     const scope = makeScope();
     const picker = createPicker(theme, scope);
 
-    picker.setTheme("nord");
+    picker.setTheme("dracula");
 
-    expect(theme.setTheme).toHaveBeenCalledWith("nord");
+    expect(theme.setTheme).toHaveBeenCalledWith("dracula");
   });
 
   it("exposes the current snapshot through getTheme", () => {

@@ -51,7 +51,7 @@ dsh plugin --profile <profile> add @deepseek-harness-themes/core
 ```ts
 // In any client plugin loaded after the core entry:
 ctx.effect(() => {
-  ctx.theme.setTheme("midnight");
+  ctx.theme.setTheme("catppuccin");
 }, "deployment: fixed theme");
 ```
 

@@ -14,7 +14,7 @@
 
 | 包                                                            | 职责                                                                               |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [`@deepseek-harness-themes/core`](packages/core/README.zh.md) | 十个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
+| [`@deepseek-harness-themes/core`](packages/core/README.zh.md) | 六个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
 | [`@deepseek-harness-themes/ui`](packages/ui/README.zh.md)     | 客户端插件：注册全部主题、在设置页 General 区添加主题选择行、持久化第三方选择      |
 
 ## 主题
@@ -22,15 +22,11 @@
 | 主题        | 基座                       |
 | ----------- | -------------------------- |
 | DeepSeek    | 浅色——清爽的 DeepSeek 蓝   |
-| Midnight    | 深色——低对比，适合长会话   |
 | OLED        | 深色——真黑，适配 OLED 屏幕 |
-| Nord        | 深色——冷静克制的北欧色板   |
 | Dracula     | 深色——高对比紫/靛蓝        |
 | Catppuccin  | 深色——柔和马卡龙（Mocha）  |
 | Tokyo Night | 深色——午夜蓝 + 霓虹点缀    |
 | GitHub Dark | 深色——熟悉的 GitHub 界面   |
-| Monokai     | 深色——经典开发者色板       |
-| Minimal     | 浅色——低彩、无干扰         |
 
 ## 安装
 

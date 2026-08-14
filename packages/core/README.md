@@ -4,7 +4,7 @@ Theme definitions and registration helpers for [deepseek-harness](https://github
 
 ## What it ships
 
-- Ten theme definitions (`ThemeDefinition = { id, colorScheme, tokens }`), each covering the full `REQUIRED_TOKENS` and `RECOMMENDED_TOKENS` sets declared in `src/tokens.ts`.
+- Six theme definitions (`ThemeDefinition = { id, colorScheme, tokens }`), each covering the full `REQUIRED_TOKENS` and `RECOMMENDED_TOKENS` sets declared in `src/tokens.ts`.
 - `registerThemes(registry)` — registers every shipped theme and returns one disposer that unregisters all of them.
 - A `/client` plugin entry (`apply`/`inject: ['theme']`) that registers all themes through a labelled `ctx.effect`, for users who want themes without the picker UI.
 
@@ -33,7 +33,7 @@ export function apply(ctx: ClientContext): void {
 }
 ```
 
-Selection is a host concern: call `ctx.theme.setTheme('midnight')` once the theme is registered. Durable third-party selection lives in the companion [`@deepseek-harness-themes/ui`](../ui/README.md) plugin.
+Selection is a host concern: call `ctx.theme.setTheme('catppuccin')` once the theme is registered. Durable third-party selection lives in the companion [`@deepseek-harness-themes/ui`](../ui/README.md) plugin.
 
 ## Model Experience
 

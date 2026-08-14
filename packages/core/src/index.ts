@@ -7,10 +7,6 @@ export {
   deepseek,
   dracula,
   githubDark,
-  midnight,
-  minimal,
-  monokai,
-  nord,
   oled,
   tokyoNight,
 } from "./themes/index.ts";

@@ -4,7 +4,7 @@
 
 ## 交付内容
 
-- 十个主题定义（`ThemeDefinition = { id, colorScheme, tokens }`），每个都覆盖 `src/tokens.ts` 声明的完整 `REQUIRED_TOKENS` 与 `RECOMMENDED_TOKENS` 集合。
+- 六个主题定义（`ThemeDefinition = { id, colorScheme, tokens }`），每个都覆盖 `src/tokens.ts` 声明的完整 `REQUIRED_TOKENS` 与 `RECOMMENDED_TOKENS` 集合。
 - `registerThemes(registry)` —— 注册全部随包主题，返回一个 disposer 可整体卸载。
 - `/client` 插件入口（`apply`/`inject: ['theme']`），经带标签的 `ctx.effect` 注册全部主题，供不需要选择器的用户使用。
 
@@ -33,7 +33,7 @@ export function apply(ctx: ClientContext): void {
 }
 ```
 
-主题选择由宿主负责：注册后调用 `ctx.theme.setTheme('midnight')`。第三方选择的持久化由配套插件 [`@deepseek-harness-themes/ui`](../ui/README.md) 提供。
+主题选择由宿主负责：注册后调用 `ctx.theme.setTheme('catppuccin')`。第三方选择的持久化由配套插件 [`@deepseek-harness-themes/ui`](../ui/README.md) 提供。
 
 ## Model Experience
 

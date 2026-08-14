@@ -11,9 +11,9 @@ const INITIAL: PickerStoreState = {
 };
 
 const SNAPSHOT: PickerStoreState = {
-  preference: "midnight",
-  activeId: "midnight",
-  themes: [{ id: "midnight", colorScheme: "dark" }],
+  preference: "catppuccin",
+  activeId: "catppuccin",
+  themes: [{ id: "catppuccin", colorScheme: "dark" }],
   revision: 0,
 };
 

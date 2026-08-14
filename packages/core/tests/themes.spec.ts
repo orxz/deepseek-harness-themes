@@ -17,18 +17,14 @@ const CSS_COLOR =
   /^(#[\da-f]{3,8}|rgb\([\d\s.,%]+\)|rgba\([\d\s.,%]+\)|hsl\([\d\s.,%]+\)|hsla\([\d\s.,%]+\)|var\(--[\w-]+(?:,\s*.+)?\))$/i;
 
 describe("theme registry", () => {
-  it("ships exactly the ten announced themes", () => {
+  it("ships exactly the six announced themes", () => {
     expect(themes.map((t) => t.id)).toEqual([
       "deepseek",
-      "midnight",
       "oled",
-      "nord",
       "dracula",
       "catppuccin",
       "tokyo-night",
       "github-dark",
-      "monokai",
-      "minimal",
     ]);
   });
 

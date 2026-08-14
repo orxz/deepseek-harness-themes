@@ -16,13 +16,13 @@ describe("preference contract", () => {
   });
 
   it("accepts any string as a theme selection and rejects non-strings", () => {
-    expect(isThemeSelection("midnight")).toBe(true);
+    expect(isThemeSelection("catppuccin")).toBe(true);
     expect(isThemeSelection("system")).toBe(true);
     expect(isThemeSelection("")).toBe(true);
     expect(isThemeSelection(42)).toBe(false);
     expect(isThemeSelection(null)).toBe(false);
     expect(isThemeSelection(undefined)).toBe(false);
-    expect(isThemeSelection({ theme: "midnight" })).toBe(false);
+    expect(isThemeSelection({ theme: "catppuccin" })).toBe(false);
   });
 });
 
@@ -33,8 +33,8 @@ describe("durable schema", () => {
   });
 
   it("passes a string selection through", () => {
-    expect(THEME_PREFERENCE_SCHEMA({ theme: "midnight" })).toEqual({
-      theme: "midnight",
+    expect(THEME_PREFERENCE_SCHEMA({ theme: "catppuccin" })).toEqual({
+      theme: "catppuccin",
     });
   });
 

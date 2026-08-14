@@ -4,7 +4,7 @@
 
 ## 功能
 
-- 经带标签的 `ctx.effect` 注册全部十个主题（卸载时一并撤销）。
+- 经带标签的 `ctx.effect` 注册全部六个主题（卸载时一并撤销）。
 - 绑定 `dsh-themes` 设置命名空间；激活时若持久化的第三方选择仍已注册则恢复。
 - 每次 `theme/change` 持久化第三方选择；切回内置主题时清除标记（`system`），内置偏好仍归宿主 Appearance 行所有。
 - 向 `settings.general.item` 槽位注入选择器行（id `themes`、order `11`，紧随宿主 Appearance 行）：内置三立方块 + 每个已注册主题一个条目。
@@ -17,7 +17,7 @@
 ```yaml
 # $DSH_HOME/settings.yaml
 dsh-themes:
-  theme: midnight
+  theme: catppuccin
 ```
 
 `system` 值表示"无覆盖——跟随宿主偏好"。恢复时忽略非字符串或未注册的值。
@@ -52,4 +52,4 @@ dsh plugin --profile <profile> add @deepseek-harness-themes/ui
 
 - 第三方选择的持久化存在于本插件自建命名空间，绝不写入宿主内置主题 schema。
 - 按宿主设计，远程浏览器的选择保持进程本地（settings RPC 仅限 loopback）；见宿主 `SettingsScope` 契约。
-- 选择器会列出宿主注册的全部第三方主题（含其他插件注册的），但随包词典只覆盖本包的十个 id；其他插件的主题以其原始 id 作为文案显示。
+- 选择器会列出宿主注册的全部第三方主题（含其他插件注册的），但随包词典只覆盖本包的六个 id；其他插件的主题以 id 的首字母大写形式显示，且不带色卡。

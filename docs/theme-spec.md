@@ -83,7 +83,7 @@ Third-party selection is process-local by host design. The picker plugin persist
 ```yaml
 # $DSH_HOME/settings.yaml
 dsh-themes:
-  theme: midnight
+  theme: catppuccin
 ```
 
 The host's built-in schema (`ui-theme.preference`) only accepts `light`/`dark`/`system` and is never written by third-party ids.

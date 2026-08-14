@@ -11,8 +11,8 @@ function makeCtx() {
     preference: "system",
     active: { id: "dark", colorScheme: "dark" as const, tokens: {} },
     themes: [
-      { id: "midnight", colorScheme: "dark" as const, tokens: {} },
-      { id: "nord", colorScheme: "dark" as const, tokens: {} },
+      { id: "catppuccin", colorScheme: "dark" as const, tokens: {} },
+      { id: "dracula", colorScheme: "dark" as const, tokens: {} },
     ],
     revision: 0,
   }));
@@ -139,23 +139,23 @@ describe("ui plugin assembly", () => {
       inject: (actions: unknown) => { setTheme: (id: string) => void };
     };
     const face = entry.inject({ sync: () => {} });
-    face.setTheme("nord");
+    face.setTheme("dracula");
 
-    expect(setTheme).toHaveBeenCalledWith("nord");
+    expect(setTheme).toHaveBeenCalledWith("dracula");
   });
 
   it("restores the persisted selection on activation", () => {
     const { ctx, scope, setTheme } = makeCtx();
     scope.getSnapshot = vi.fn(() => ({
       status: "ready" as const,
-      value: { theme: "midnight" },
+      value: { theme: "catppuccin" },
       writable: true,
       mode: "host" as const,
     }));
 
     apply(ctx);
 
-    expect(setTheme).toHaveBeenCalledWith("midnight");
+    expect(setTheme).toHaveBeenCalledWith("catppuccin");
   });
 
   it("listens for theme/change and persists third-party actives", async () => {
@@ -164,12 +164,12 @@ describe("ui plugin assembly", () => {
     apply(ctx);
     await Promise.resolve();
     emit("theme/change", {
-      preference: "nord",
-      active: { id: "nord", colorScheme: "dark" },
+      preference: "dracula",
+      active: { id: "dracula", colorScheme: "dark" },
     });
     await Promise.resolve();
 
-    expect(scope.set).toHaveBeenCalledWith("theme", "nord");
+    expect(scope.set).toHaveBeenCalledWith("theme", "dracula");
   });
 
   it("tears the picker lifecycle down through the effect disposer", () => {
