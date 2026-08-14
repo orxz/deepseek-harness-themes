@@ -1,5 +1,13 @@
 # @dshthemes/ui
 
+## 0.1.1
+
+### Patch Changes
+
+- 08b7726: Verify the OIDC trusted-publishing release pipeline end to end with a canary patch release.
+- Updated dependencies [08b7726]
+  - @dshthemes/core@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
