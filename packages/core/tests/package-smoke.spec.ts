@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   validateClientBundle,
+  validateClientHostImports,
   validatePackageDirectory,
 } from "../../../build/package-smoke.ts";
 
@@ -73,16 +74,58 @@ describe("packed package validation", () => {
 describe("client bundle validation", () => {
   it("accepts bundles that leave every direct host runtime external", () => {
     expect(() =>
-      validateClientBundle(`
+      validateClientHostImports(`
         require("@deepseek-ai/dsh-client-runtime/client");
-        require("@deepseek-ai/schemastery");
+        require("react/jsx-runtime");
       `),
     ).not.toThrow();
   });
 
+  it("serves platform seeds and the plugins the package injects", () => {
+    // `dsh-client-runtime/client` is not a seed word: the loader resolves it
+    // because the package injects that plugin, so the injected list has to be
+    // part of the judgement rather than a hard-coded allowance.
+    expect(() =>
+      validateClientBundle(
+        `
+        require("react/jsx-runtime");
+        require("@deepseek-ai/dsh-client-ui-primitives");
+        require("@deepseek-ai/dsh-client-runtime/client");
+      `,
+        ["@deepseek-ai/dsh-client-runtime"],
+      ),
+    ).not.toThrow();
+  });
+
+  it("rejects a bundle that requires a module the shell never serves", () => {
+    // The settings schema library exists in Node but is not seeded into the
+    // browser table, and requiring it fails the whole plugin load.
+    expect(() =>
+      validateClientBundle(
+        `
+        require("@deepseek-ai/dsh-client-runtime/client");
+        require("@deepseek-ai/schemastery");
+      `,
+        ["@deepseek-ai/dsh-client-runtime"],
+      ),
+    ).toThrow(
+      "client bundle requires @deepseek-ai/schemastery, which the browser module table does not serve",
+    );
+  });
+
+  it("rejects a bundle whose host runtime resolves through no injection", () => {
+    expect(() =>
+      validateClientBundle(
+        `require("@deepseek-ai/dsh-client-runtime/client");`,
+      ),
+    ).toThrow(
+      "client bundle requires @deepseek-ai/dsh-client-runtime/client, which the browser module table does not serve",
+    );
+  });
+
   it("rejects a bundle that embeds a direct host runtime", () => {
     expect(() =>
-      validateClientBundle("export const bakedActions = {};"),
+      validateClientHostImports("export const bakedActions = {};"),
     ).toThrow("client bundle embeds @deepseek-ai/dsh-client-runtime/client");
   });
 });

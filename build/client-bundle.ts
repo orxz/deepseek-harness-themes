@@ -15,7 +15,13 @@ import { dirname, resolve } from "node:path";
 import type { TsdownPlugin, UserConfig } from "tsdown";
 import { transform } from "lightningcss";
 
-/** Platform modules shared into the frozen module table by the dsh web shell. */
+/**
+ * Platform modules the dsh web shell seeds into the frozen browser module
+ * table (`dsh-web-frontend`'s shell entry). Every other host specifier a
+ * client bundle resolves has to arrive some other way — a shell-own module,
+ * or a plugin the package names in `dsh.client.inject` — so this list is the
+ * seed set alone, not "everything a browser plugin may require".
+ */
 export const PLATFORM_MODULES = [
   "react",
   "react/jsx-runtime",
@@ -23,7 +29,23 @@ export const PLATFORM_MODULES = [
   "react-dom/client",
   "@deepseek-ai/cordis",
   "@deepseek-ai/dsh-client-ui-slots",
-  "@deepseek-ai/dsh-client-runtime/client",
+  "@deepseek-ai/dsh-client-web-react",
+  "@deepseek-ai/dsh-client-ui-primitives",
+  "@deepseek-ai/dsh-client-ui-attachment",
+  "@deepseek-ai/dsh-client-schema-form",
+] as const;
+
+/**
+ * Modules the dsh web shell registers into the table itself, beyond the
+ * platform seeds. Everything else a client bundle may resolve is a plugin
+ * the package names in `dsh.client.inject`, which the loader guarantees is
+ * registered first — so those three sources are the whole table from a
+ * plugin's side, and a require outside them fails the load with "missed the
+ * module table", taking the entire plugin down.
+ */
+export const SHELL_OWN_MODULES = [
+  "@deepseek-ai/dsh-client-app-shell",
+  "@deepseek-ai/dsh-client-modules",
 ] as const;
 
 /** Any DeepSeek runtime module is supplied by the host module table. */

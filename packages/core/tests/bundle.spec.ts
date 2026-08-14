@@ -19,6 +19,22 @@ describe("bundle manifest", () => {
     expect(manifest.files).toContain("cordis.patch.yml");
   });
 
+  it("asks the installing profile for none of its peers", () => {
+    const manifest = JSON.parse(readPackageFile("package.json")) as {
+      peerDependencies?: Record<string, string>;
+      peerDependenciesMeta?: Record<string, { optional?: boolean }>;
+    };
+
+    // The host runtime is supplied by the dsh installation, never by the
+    // profile a user installs this package into.
+    for (const name of Object.keys(manifest.peerDependencies ?? {})) {
+      expect(
+        manifest.peerDependenciesMeta?.[name]?.optional,
+        `${name} must be an optional peer`,
+      ).toBe(true);
+    }
+  });
+
   it("ships the theme row in cordis.patch.yml", () => {
     const patch = readPackageFile("cordis.patch.yml");
 

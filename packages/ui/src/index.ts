@@ -9,7 +9,8 @@
  * application tree; at runtime the real host Context satisfies it.
  */
 
-import { THEME_PREFERENCE_SCHEMA, THEMES_NAMESPACE } from "./preference.ts";
+import { THEMES_NAMESPACE } from "./preference.ts";
+import { THEME_PREFERENCE_SCHEMA } from "./schema.ts";
 
 /** The host settings face this entry consumes. */
 export interface HostSettingsService {

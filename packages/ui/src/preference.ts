@@ -4,12 +4,14 @@
  * The host's built-in theme schema (`ui-theme.preference`) only accepts
  * `light`/`dark`/`system`, so this plugin owns its own settings namespace for
  * third-party ids. The value `system` is the sentinel meaning "no override —
- * follow the host preference". The schema is expressed with
- * `@deepseek-ai/schemastery` (the host's schema library) so Host-side
- * registration can reuse it verbatim.
+ * follow the host preference".
+ *
+ * Both halves of the plugin import this module, so it stays free of host
+ * packages: the browser module table serves platform seed words and shell-own
+ * modules only, and a client bundle requiring anything else fails to load.
+ * The schemastery envelope built on these names lives in `./schema.ts`, which
+ * only the Node half imports.
  */
-
-import z from "@deepseek-ai/schemastery";
 
 /** Settings namespace owned by the picker plugin. */
 export const THEMES_NAMESPACE = "dsh-themes";
@@ -24,14 +26,6 @@ export const DEFAULT_SELECTION = "system";
 export interface ThemePreferenceSettings {
   theme?: string;
 }
-
-/**
- * Durable schema; also the wire envelope the settings scope validates
- * against. The default keeps the field optional in the stored document.
- */
-export const THEME_PREFERENCE_SCHEMA: z<ThemePreferenceSettings> = z.object({
-  [THEME_FIELD]: z.string().default(DEFAULT_SELECTION),
-});
 
 /**
  * Narrow one wire or registry value to a persistable selection.

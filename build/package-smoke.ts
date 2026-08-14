@@ -12,6 +12,7 @@ import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
+import { PLATFORM_MODULES, SHELL_OWN_MODULES } from "./client-bundle.ts";
 
 const PACKAGES = ["@dshthemes/core", "@dshthemes/ui"] as const;
 
@@ -24,7 +25,6 @@ const PUBLIC_SPECIFIERS = [
 
 const DIRECT_CLIENT_HOST_IMPORTS = [
   "@deepseek-ai/dsh-client-runtime/client",
-  "@deepseek-ai/schemastery",
 ] as const;
 
 const REQUIRED_PACKAGE_FILES = [
@@ -83,8 +83,35 @@ export async function validatePackageDirectory(
   }
 }
 
-/** Ensure a built client layer still imports host runtimes externally. */
-export function validateClientBundle(clientBundle: string): void {
+/**
+ * Ensure every specifier a built client layer resolves is one the browser
+ * module table serves it: a platform seed, a shell-own module, or a plugin
+ * the package injects (the loader strips one `/client` suffix before looking
+ * a plugin factory up).
+ *
+ * @param clientBundle - the built browser factory's source text.
+ * @param injects - the package's `dsh.client.inject` list.
+ */
+export function validateClientBundle(
+  clientBundle: string,
+  injects: readonly string[] = [],
+): void {
+  const served = new Set<string>([
+    ...PLATFORM_MODULES,
+    ...SHELL_OWN_MODULES,
+    ...injects.flatMap((plugin) => [plugin, `${plugin}/client`]),
+  ]);
+  for (const specifier of clientExternals(clientBundle)) {
+    if (!served.has(specifier)) {
+      throw new Error(
+        `client bundle requires ${specifier}, which the browser module table does not serve`,
+      );
+    }
+  }
+}
+
+/** Ensure the picker bundle still leaves its direct host runtimes external. */
+export function validateClientHostImports(clientBundle: string): void {
   for (const specifier of DIRECT_CLIENT_HOST_IMPORTS) {
     const externalImportPatterns = [
       `require("${specifier}")`,
@@ -98,6 +125,22 @@ export function validateClientBundle(clientBundle: string): void {
       throw new Error(`client bundle embeds ${specifier}`);
     }
   }
+}
+
+/**
+ * Every static string-literal `require()` the built browser factory resolves
+ * through the loader; template-literal or dynamic requires are outside this
+ * scan.
+ */
+function clientExternals(clientBundle: string): Set<string> {
+  const specifiers = new Set<string>();
+  for (const match of clientBundle.matchAll(
+    /\brequire\(\s*["']([^"']+)["']\s*\)/g,
+  )) {
+    const specifier = match[1];
+    if (specifier !== undefined) specifiers.add(specifier);
+  }
+  return specifiers;
 }
 
 /** Pack both workspaces, install them as a consumer, and verify public use. */
@@ -170,15 +213,24 @@ export async function runPackageSmoke(
         join(consumerDirectory, "node_modules", ...packageName.split("/")),
       );
     }
-    const installedUiClient = join(
-      consumerDirectory,
-      "node_modules",
-      "@dshthemes",
-      "ui",
-      "lib",
-      "client.js",
-    );
-    validateClientBundle(await readFile(installedUiClient, "utf8"));
+    for (const packageName of PACKAGES) {
+      const packageRoot = join(
+        consumerDirectory,
+        "node_modules",
+        ...packageName.split("/"),
+      );
+      const manifest = JSON.parse(
+        await readFile(join(packageRoot, "package.json"), "utf8"),
+      ) as { dsh?: { client?: { inject?: string[] } } };
+      const clientBundle = await readFile(
+        join(packageRoot, "lib", "client.js"),
+        "utf8",
+      );
+      validateClientBundle(clientBundle, manifest.dsh?.client?.inject ?? []);
+      if (packageName === "@dshthemes/ui") {
+        validateClientHostImports(clientBundle);
+      }
+    }
     verifyConsumerImports(consumerDirectory);
 
     console.log(

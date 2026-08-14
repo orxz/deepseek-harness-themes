@@ -27,10 +27,6 @@ describe("bundle manifest", () => {
     expect(manifest.peerDependencies?.["@deepseek-ai/dsh-client-runtime"]).toBe(
       "^0.0.1-rc.1",
     );
-    expect(
-      manifest.peerDependenciesMeta?.["@deepseek-ai/dsh-client-runtime"]
-        ?.optional,
-    ).toBe(true);
     expect(manifest.dependencies).not.toHaveProperty(
       "@deepseek-ai/schemastery",
     );
@@ -38,6 +34,27 @@ describe("bundle manifest", () => {
       "@deepseek-ai/dsh-client-runtime",
     );
     expect(manifest.devDependencies?.["@dshthemes/core"]).toBe("workspace:^");
+  });
+
+  it("asks the installing profile for none of its peers", () => {
+    const manifest = JSON.parse(readPackageFile("package.json")) as {
+      peerDependencies?: Record<string, string>;
+      peerDependenciesMeta?: Record<string, { optional?: boolean }>;
+    };
+
+    // Every peer here is supplied by the dsh installation: host modules reach
+    // the plugin through the loader's module table and the maintained
+    // `$DSH_HOME/profiles/node_modules` fallback, and the core catalog is
+    // inlined into the client bundle. A required peer would make pnpm demand
+    // an install that is unnecessary at best — a second cordis instance, or a
+    // core bundle row registering the same theme ids twice — so each one is
+    // declared optional.
+    for (const name of Object.keys(manifest.peerDependencies ?? {})) {
+      expect(
+        manifest.peerDependenciesMeta?.[name]?.optional,
+        `${name} must be an optional peer`,
+      ).toBe(true);
+    }
   });
 
   it("ships the theme row in cordis.patch.yml", () => {

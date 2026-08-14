@@ -1,9 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { apply, inject, type PickerHostContext } from "../src/index.ts";
-import {
-  THEME_PREFERENCE_SCHEMA,
-  THEMES_NAMESPACE,
-} from "../src/preference.ts";
+import { THEMES_NAMESPACE } from "../src/preference.ts";
+import { THEME_PREFERENCE_SCHEMA } from "../src/schema.ts";
 
 /** Build a fake host context capturing the optional settings seam. */
 function makeHostCtx(withSettings = true) {
