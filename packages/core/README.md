@@ -6,7 +6,7 @@ Theme definitions and registration helpers for [deepseek-harness](https://github
 
 ## What it ships
 
-- Six theme definitions (`ThemeDefinition = { id, colorScheme, tokens }`), each covering the full `REQUIRED_TOKENS` and `RECOMMENDED_TOKENS` sets declared in `src/tokens.ts`.
+- Six theme definitions (`ThemeDefinition = { id, colorScheme, tokens }`), each covering the full `REQUIRED_TOKENS` and `RECOMMENDED_TOKENS` sets declared in `src/tokens.ts`. Previews of all six: [docs/previews.md](../../docs/previews.md).
 - `registerThemes(registry)` — registers every shipped theme and returns one disposer that unregisters all of them.
 - A `/client` plugin entry (`apply`/`inject: ['theme']`) that registers all themes through a labelled `ctx.effect`, for users who want themes without the picker UI.
 
@@ -19,11 +19,13 @@ Theme definitions and registration helpers for [deepseek-harness](https://github
 
 ## Usage
 
-Standalone install (registers all themes, no picker):
+Standalone install (registers all themes, no picker); `web` is the shipped Web profile:
 
 ```sh
-dsh plugin --profile <profile> add @dshthemes/core
+dsh plugin --profile web add @dshthemes/core
 ```
+
+This row and the [`@dshthemes/ui`](../ui/README.md) row are alternatives: both register the same theme ids, and a duplicate id throws.
 
 For custom assemblies, use the registration helper directly:
 

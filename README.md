@@ -21,30 +21,37 @@ Community-maintained theme collection built on the official theme extension poin
 
 ## Themes
 
-| Theme       | Base                                   |
-| ----------- | -------------------------------------- |
-| DeepSeek    | light — clean DeepSeek-inspired blue   |
-| OLED        | dark — true black for emissive panels  |
-| Dracula     | dark — high-contrast purple/indigo     |
-| Catppuccin  | dark — soft pastel (Mocha)             |
-| Tokyo Night | dark — midnight blue with neon accents |
-| GitHub Dark | dark — familiar GitHub interface       |
+Every preview is generated from that theme's own tokens; the full gallery is [docs/previews.md](docs/previews.md).
+
+| Theme       | Base                                   | Preview                                                                          |
+| ----------- | -------------------------------------- | -------------------------------------------------------------------------------- |
+| DeepSeek    | light — clean DeepSeek-inspired blue   | <img src="previews/deepseek.svg" alt="DeepSeek theme preview" width="220">       |
+| OLED        | dark — true black for emissive panels  | <img src="previews/oled.svg" alt="OLED theme preview" width="220">               |
+| Dracula     | dark — high-contrast purple/indigo     | <img src="previews/dracula.svg" alt="Dracula theme preview" width="220">         |
+| Catppuccin  | dark — soft pastel (Mocha)             | <img src="previews/catppuccin.svg" alt="Catppuccin theme preview" width="220">   |
+| Tokyo Night | dark — midnight blue with neon accents | <img src="previews/tokyo-night.svg" alt="Tokyo Night theme preview" width="220"> |
+| GitHub Dark | dark — familiar GitHub interface       | <img src="previews/github-dark.svg" alt="GitHub Dark theme preview" width="220"> |
 
 ## Install
 
-One command installs the dependency, adds the layer to the profile, and mounts the feature:
+Two commands: one installs the dependency, adds the layer to the profile, and mounts the feature; the other starts the Web surface.
 
 ```sh
-dsh plugin --profile <profile> add @dshthemes/ui
+dsh plugin --profile web add @dshthemes/ui
+dsh web
 ```
+
+`web` is the shipped Web profile and initializes on first use. Pick a theme under Settings → General; the selection persists, so nothing else runs from a terminal.
+
+<img src="screenshots/settings.png" alt="The Theme picker row under Settings → General" width="480">
 
 Remove it just as easily:
 
 ```sh
-dsh plugin --profile <profile> remove @dshthemes/ui
+dsh plugin --profile web remove @dshthemes/ui
 ```
 
-See [docs/installation.md](docs/installation.md) for the core-only shape, the hand-written patch alternative, and local development.
+See [docs/installation.md](docs/installation.md) for the core-only shape, installing from a source checkout, the hand-written patch alternative, local development, and troubleshooting.
 
 ## Theme philosophy
 

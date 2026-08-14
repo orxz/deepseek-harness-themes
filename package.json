@@ -17,6 +17,7 @@
     "test:coverage": "vitest run --coverage",
     "smoke:packages": "node build/package-smoke.ts",
     "lint": "oxlint packages build vitest.config.ts",
+    "previews": "node build/theme-previews.ts",
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "build": "pnpm -r build",

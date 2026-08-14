@@ -6,7 +6,7 @@
 
 ## 交付内容
 
-- 六个主题定义（`ThemeDefinition = { id, colorScheme, tokens }`），每个都覆盖 `src/tokens.ts` 声明的完整 `REQUIRED_TOKENS` 与 `RECOMMENDED_TOKENS` 集合。
+- 六个主题定义（`ThemeDefinition = { id, colorScheme, tokens }`），每个都覆盖 `src/tokens.ts` 声明的完整 `REQUIRED_TOKENS` 与 `RECOMMENDED_TOKENS` 集合。六个主题的预览见[主题预览](../../docs/previews.zh.md)。
 - `registerThemes(registry)` —— 注册全部随包主题，返回一个 disposer 可整体卸载。
 - `/client` 插件入口（`apply`/`inject: ['theme']`），经带标签的 `ctx.effect` 注册全部主题，供不需要选择器的用户使用。
 
@@ -19,11 +19,13 @@
 
 ## 用法
 
-独立安装（注册全部主题，无选择器）：
+独立安装（注册全部主题，无选择器），其中 `web` 是随包的 Web profile：
 
 ```sh
-dsh plugin --profile <profile> add @dshthemes/core
+dsh plugin --profile web add @dshthemes/core
 ```
+
+本行与 [`@dshthemes/ui`](../ui/README.zh.md) 行互为替代：两者注册同一批主题 id，而重复 id 会抛错。
 
 自定义组装可直接使用注册辅助函数：
 

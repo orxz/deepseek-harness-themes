@@ -26,13 +26,13 @@ dsh-themes:
 
 ## 用法
 
-一条命令完成依赖安装、profile 层添加与功能挂载（见[安装指南](../../docs/installation.zh.md)）：
+一条命令完成依赖安装、profile 层添加与功能挂载，其中 `web` 是随包的 Web profile（其他 profile、源码安装与故障排查见[安装指南](../../docs/installation.zh.md)）：
 
 ```sh
-dsh plugin --profile <profile> add @dshthemes/ui
+dsh plugin --profile web add @dshthemes/ui
 ```
 
-本包随带 bundle manifest，`dsh plugin` 会将其自动追加进 `dsh.profile.bundles`。偏好手写层的 profile 也可以直接插入该行：
+本包随带 bundle manifest，`dsh plugin` 会将其自动追加进 `dsh.profile.bundles` —— registry 包名、本地路径与打包 tarball 一视同仁。偏好手写层的 profile 也可以直接插入该行：
 
 ```yaml
 - insert:

@@ -26,13 +26,13 @@ The value `system` means "no override — follow the host preference". Non-strin
 
 ## Usage
 
-One command installs the dependency, adds the layer to the profile, and mounts the feature (see [docs/installation.md](../../docs/installation.md)):
+One command installs the dependency, adds the layer to the profile, and mounts the feature; `web` is the shipped Web profile (see [docs/installation.md](../../docs/installation.md) for the other profiles, source checkouts, and troubleshooting):
 
 ```sh
-dsh plugin --profile <profile> add @dshthemes/ui
+dsh plugin --profile web add @dshthemes/ui
 ```
 
-The package ships a bundle manifest, so `dsh plugin` appends it to `dsh.profile.bundles` automatically. Profiles that prefer a hand-written layer can insert the row instead:
+The package ships a bundle manifest, so `dsh plugin` appends it to `dsh.profile.bundles` automatically — from a registry name, a local path, or a packed tarball alike. Profiles that prefer a hand-written layer can insert the row instead:
 
 ```yaml
 - insert:

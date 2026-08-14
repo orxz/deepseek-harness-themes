@@ -416,6 +416,7 @@ describe("documentation language parity", () => {
     "packages/ui/README.md",
     "docs/installation.md",
     "docs/creating-a-theme.md",
+    "docs/previews.md",
     "docs/theme-spec.md",
   ] as const;
 
@@ -489,13 +490,20 @@ describe("documentation link integrity", () => {
       "docs/installation.zh.md",
       "docs/creating-a-theme.md",
       "docs/creating-a-theme.zh.md",
+      "docs/previews.md",
+      "docs/previews.zh.md",
       "docs/theme-spec.md",
       "docs/theme-spec.zh.md",
     ];
 
     for (const document of documents) {
       const content = readText(document);
-      const links = [...content.matchAll(/\]\(([^)]+)\)/g)]
+      // Markdown links and images share this shape; an inline <img> carries
+      // its target in an attribute instead, and previews are shown that way.
+      const links = [
+        ...content.matchAll(/\]\(([^)]+)\)/g),
+        ...content.matchAll(/<img[^>]*\ssrc="([^"]+)"/g),
+      ]
         .map((match) => match[1])
         .filter(
           (link): link is string =>
@@ -512,6 +520,43 @@ describe("documentation link integrity", () => {
           `${document} links missing target ${link}`,
         ).toBe(true);
       }
+    }
+  });
+});
+
+describe("installation guidance", () => {
+  const installDocuments = [
+    "README.md",
+    "README.zh.md",
+    "docs/installation.md",
+    "docs/installation.zh.md",
+    "packages/core/README.md",
+    "packages/core/README.zh.md",
+    "packages/ui/README.md",
+    "packages/ui/README.zh.md",
+  ] as const;
+
+  it("names the shipped web profile in every install command", () => {
+    for (const document of installDocuments) {
+      const content = readText(document);
+
+      // `--profile` is a required option with no default, so a placeholder
+      // leaves the reader without an answer; `web` is the shipped Web profile
+      // and initializes on first use.
+      expect(content, document).toContain("dsh plugin --profile web add ");
+      expect(content, document).not.toContain("--profile <profile>");
+    }
+  });
+
+  it("routes both installation halves through the source checkout", () => {
+    for (const guide of ["docs/installation.md", "docs/installation.zh.md"]) {
+      const content = readText(guide);
+
+      // lib/ is generated, so a checkout only mounts after a build; both the
+      // linked checkout and the packed tarball are documented routes.
+      expect(content, guide).toContain("pnpm install && pnpm build");
+      expect(content, guide).toContain('dsh plugin --profile web add "link:');
+      expect(content, guide).toContain("--pack-destination");
     }
   });
 });

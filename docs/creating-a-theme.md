@@ -56,4 +56,12 @@ palette has none, say so in the theme file's JSDoc. The bars are in
 
 ## 6. Preview
 
-Run the harness web development pair with the plugin installed (see [docs/installation.md](installation.md)) and screenshot the result into `screenshots/<id>.png`.
+Generate the theme's preview and commit it with the theme:
+
+```sh
+pnpm previews
+```
+
+The generator paints `previews/<id>.svg` from the token dictionary you just wrote, and `pnpm test` fails while a committed preview is missing or stale. Capture the mounted theme from the live pair below into `screenshots/<id>.png`. Add the row to the theme tables in both READMEs and a section to [docs/previews.md](previews.md) and its Chinese twin — the section carries the projection, the capture, and the theme's two identity colours (`--dsw-alias-bg-base`, `--dsw-alias-brand-primary`); `pnpm test` fails while any of the three is missing.
+
+For a live check, run the harness web development pair with the plugin installed (see [docs/installation.md](installation.md)).

@@ -21,30 +21,37 @@
 
 ## 主题
 
-| 主题        | 基座                       |
-| ----------- | -------------------------- |
-| DeepSeek    | 浅色——清爽的 DeepSeek 蓝   |
-| OLED        | 深色——真黑，适配 OLED 屏幕 |
-| Dracula     | 深色——高对比紫/靛蓝        |
-| Catppuccin  | 深色——柔和马卡龙（Mocha）  |
-| Tokyo Night | 深色——午夜蓝 + 霓虹点缀    |
-| GitHub Dark | 深色——熟悉的 GitHub 界面   |
+每张预览都由该主题自己的 token 生成；完整画廊见[主题预览](docs/previews.zh.md)。
+
+| 主题        | 基座                       | 预览                                                                        |
+| ----------- | -------------------------- | --------------------------------------------------------------------------- |
+| DeepSeek    | 浅色——清爽的 DeepSeek 蓝   | <img src="previews/deepseek.svg" alt="DeepSeek 主题预览" width="220">       |
+| OLED        | 深色——真黑，适配 OLED 屏幕 | <img src="previews/oled.svg" alt="OLED 主题预览" width="220">               |
+| Dracula     | 深色——高对比紫/靛蓝        | <img src="previews/dracula.svg" alt="Dracula 主题预览" width="220">         |
+| Catppuccin  | 深色——柔和马卡龙（Mocha）  | <img src="previews/catppuccin.svg" alt="Catppuccin 主题预览" width="220">   |
+| Tokyo Night | 深色——午夜蓝 + 霓虹点缀    | <img src="previews/tokyo-night.svg" alt="Tokyo Night 主题预览" width="220"> |
+| GitHub Dark | 深色——熟悉的 GitHub 界面   | <img src="previews/github-dark.svg" alt="GitHub Dark 主题预览" width="220"> |
 
 ## 安装
 
-一条命令完成依赖安装、profile 层添加与功能挂载：
+两条命令：一条完成依赖安装、profile 层添加与功能挂载，另一条启动 Web 界面。
 
 ```sh
-dsh plugin --profile <profile> add @dshthemes/ui
+dsh plugin --profile web add @dshthemes/ui
+dsh web
 ```
+
+`web` 是随包的 Web profile，首次使用时自动初始化。在 设置 → General 里选主题即可，选择会持久化，之后不再需要终端。
+
+<img src="screenshots/settings.png" alt="设置 → General 中的 Theme 选择行" width="480">
 
 卸载同样简单：
 
 ```sh
-dsh plugin --profile <profile> remove @dshthemes/ui
+dsh plugin --profile web remove @dshthemes/ui
 ```
 
-仅用核心包、手写 patch 替代方式与本地开发见 [安装指南](docs/installation.zh.md)。
+仅用核心包、源码安装、手写 patch 替代方式、本地开发与故障排查见[安装指南](docs/installation.zh.md)。
 
 ## 主题理念
 

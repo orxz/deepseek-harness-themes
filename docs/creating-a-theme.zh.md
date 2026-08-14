@@ -54,4 +54,12 @@ pnpm test:coverage # 逐文件 100% 覆盖门槛
 
 ## 6. 预览
 
-安装插件后运行 harness Web 开发组合（见[安装指南](installation.zh.md)），截图保存到 `screenshots/<id>.png`。
+生成该主题的预览，与主题一同提交：
+
+```sh
+pnpm previews
+```
+
+生成器会用你刚写好的 token 字典绘制 `previews/<id>.svg`；只要已提交的预览缺失或过期，`pnpm test` 就会失败。用下文的真实运行组合，把挂载后的主题截到 `screenshots/<id>.png`。在两份 README 的主题表中加一行，并在[主题预览](previews.zh.md)与其英文原版中各加一节——小节要包含投影、截图与该主题的两个身份色（`--dsw-alias-bg-base`、`--dsw-alias-brand-primary`）；三缺其一时 `pnpm test` 都会失败。
+
+想看实际运行效果，安装插件后运行 harness Web 开发组合（见[安装指南](installation.zh.md)）。
