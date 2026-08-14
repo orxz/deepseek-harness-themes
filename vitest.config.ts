@@ -1,13 +1,16 @@
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
+
+const root = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   plugins: [tsconfigPaths({ projects: ["tsconfig.base.json"] })],
   resolve: {
     alias: {
       "@deepseek-ai/dsh-client-runtime/client": resolve(
-        __dirname,
+        root,
         "build/dsh-types/runtime-client.test.ts",
       ),
     },
