@@ -1,0 +1,37 @@
+name: Release
+
+# Publishes both packages to npm when a version tag is pushed.
+# Uses npm Trusted Publishing (OIDC): no NPM_TOKEN secret needed —
+# the workflow exchanges its GitHub identity for a short-lived npm
+# token. Configure the publisher on npmjs.com first:
+#   Access Tokens → Trusted Publishing → GitHub Actions,
+#   repo orxz/deepseek-harness-themes, workflow release.yml.
+# Then: git tag v0.0.1 && git push origin v0.0.1
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write # npm Trusted Publishing (OIDC)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      # Topological order: core first, then ui (which depends on core).
+      - name: Publish packages
+        run: pnpm -r publish --provenance --access public
