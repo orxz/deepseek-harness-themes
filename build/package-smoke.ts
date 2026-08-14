@@ -252,8 +252,8 @@ function verifyConsumerImports(consumerDirectory: string): void {
       }
     }
     const core = await import("@dshthemes/core");
-    if (!Array.isArray(core.themes) || core.themes.length !== 6) {
-      throw new Error("installed core package did not expose six themes");
+    if (!Array.isArray(core.themes) || core.themes.length !== 11) {
+      throw new Error("installed core package did not expose eleven themes");
     }
   `;
   run(
