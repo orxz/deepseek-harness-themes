@@ -1,9 +1,15 @@
 pre-commit:
   commands:
+    # Auto-fixes run before formatting so Prettier normalizes whatever oxlint rewrites.
     lint:
-      run: pnpm lint -- --fix
+      priority: 1
+      glob: "*.{ts,tsx}"
+      run: pnpm exec oxlint --fix {staged_files}
+      stage_fixed: true
     fmt:
-      run: pnpm fmt
+      priority: 2
+      run: pnpm exec prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
 
 pre-push:
   commands:

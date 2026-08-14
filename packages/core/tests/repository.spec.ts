@@ -152,3 +152,46 @@ describe("published package metadata", () => {
     },
   );
 });
+
+describe("local quality hooks", () => {
+  it("fixes staged files before formatting them and keeps the result staged", () => {
+    const hooks = readYaml("lefthook.yml") as {
+      "pre-commit"?: {
+        commands?: Record<
+          string,
+          { priority?: number; run?: string; stage_fixed?: boolean }
+        >;
+      };
+    };
+    const commands = hooks["pre-commit"]?.commands ?? {};
+
+    for (const [name, command] of Object.entries(commands)) {
+      expect(command.stage_fixed, `${name} must stage what it rewrites`).toBe(
+        true,
+      );
+      expect(command.run, `${name} must act on staged files`).toContain(
+        "{staged_files}",
+      );
+      expect(
+        command.run,
+        `${name} must not hide flags behind an argument separator`,
+      ).not.toContain("-- --fix");
+    }
+    expect(commands.lint?.priority).toBeLessThan(commands.fmt?.priority ?? 0);
+  });
+
+  it("pins one Node version for local shells and continuous integration", () => {
+    const nodeVersion = readFileSync(
+      new URL(".nvmrc", repositoryRoot),
+      "utf8",
+    ).trim();
+    const manifest = readJson("package.json") as {
+      engines?: Record<string, string>;
+    };
+
+    expect(nodeVersion).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(manifest.engines?.node).toBe(
+      `>=${nodeVersion.split(".").slice(0, 2).join(".")}`,
+    );
+  });
+});
