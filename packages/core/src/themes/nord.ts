@@ -34,7 +34,7 @@ export const nord: ThemeDefinition = Object.freeze({
     "--dsw-alias-interactive-bg-active": "rgba(236, 239, 244, 0.12)",
     "--dsw-alias-button-primary-fill": "#88c0d0",
     "--dsw-alias-button-primary-hover": "#9ccdda",
-    "--dsw-alias-markdown-code-block": "#2e3440",
+    "--dsw-alias-markdown-code-block": "#272e38",
     "--dsw-alias-markdown-code-block-banner": "#3b4252",
     "--dsw-alias-markdown-inline-code": "#3b4252",
     "--dsw-alias-markdown-tag": "#3b4252",
