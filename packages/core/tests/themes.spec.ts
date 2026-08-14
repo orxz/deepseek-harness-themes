@@ -17,7 +17,7 @@ const CSS_COLOR =
   /^(#[\da-f]{3,8}|rgb\([\d\s.,%]+\)|rgba\([\d\s.,%]+\)|hsl\([\d\s.,%]+\)|hsla\([\d\s.,%]+\)|var\(--[\w-]+(?:,\s*.+)?\))$/i;
 
 describe("theme registry", () => {
-  it("ships exactly the six announced themes", () => {
+  it("ships exactly the announced themes", () => {
     expect(themes.map((t) => t.id)).toEqual([
       "deepseek",
       "oled",
@@ -25,6 +25,7 @@ describe("theme registry", () => {
       "catppuccin",
       "tokyo-night",
       "github-dark",
+      "solarized",
     ]);
   });
 
