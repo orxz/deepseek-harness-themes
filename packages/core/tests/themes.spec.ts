@@ -28,6 +28,7 @@ describe("theme registry", () => {
       "solarized",
       "gruvbox",
       "nord",
+      "synthwave-84",
     ]);
   });
 

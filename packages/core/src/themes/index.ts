@@ -7,6 +7,7 @@ import { gruvbox } from "./gruvbox.ts";
 import { nord } from "./nord.ts";
 import { oled } from "./oled.ts";
 import { solarized } from "./solarized.ts";
+import { synthwave84 } from "./synthwave-84.ts";
 import { tokyoNight } from "./tokyo-night.ts";
 
 export {
@@ -18,6 +19,7 @@ export {
   nord,
   oled,
   solarized,
+  synthwave84,
   tokyoNight,
 };
 
@@ -32,4 +34,5 @@ export const themes: readonly ThemeDefinition[] = Object.freeze([
   solarized,
   gruvbox,
   nord,
+  synthwave84,
 ]);
