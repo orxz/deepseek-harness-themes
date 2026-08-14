@@ -100,7 +100,22 @@ describe("repository automation", () => {
         run(step).includes("npm access list packages @dsh-themes"),
       ),
     ).toBe(true);
+    // The token must land as a literal in the npmrc npm actually reads: the
+    // `${NODE_AUTH_TOKEN}` placeholder setup-node writes resolves to an empty
+    // string in any step that does not also export it.
+    expect(
+      steps.some((step) => run(step).includes("NPM_CONFIG_USERCONFIG")),
+    ).toBe(true);
     expect(steps.some((step) => run(step).includes("_authToken"))).toBe(true);
+    // An absent secret and a rejected token both surface as 401/404, so the
+    // empty case is failed loudly and separately.
+    expect(
+      steps.some((step) => run(step).includes('if [ -z "$NPM_TOKEN" ]')),
+    ).toBe(true);
+    const preflight = steps.find((step) => run(step).includes("npm whoami"));
+    expect(preflight?.env).toMatchObject({
+      NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}",
+    });
     expect(
       steps.some((step) =>
         run(step).includes("steps.changesets.outputs.published"),

@@ -25,11 +25,19 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
 
-      # pnpm does not reliably pick up the npmrc actions/setup-node writes, so
-      # point it at the token directly. User scope only: a project .npmrc would
-      # be swept into the version commit.
-      - name: Authenticate pnpm with npm
-        run: pnpm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN" --location=user
+      # actions/setup-node writes `_authToken=${NODE_AUTH_TOKEN}`, a reference
+      # resolved when npm reads the file — it is empty in any step that does not
+      # also export that variable. Write the literal token into the same npmrc
+      # instead, so every later step authenticates the same way.
+      - name: Authenticate with npm
+        run: |
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "::error title=npm auth::The NPM_TOKEN secret is empty or not set on this repository."
+            exit 1
+          fi
+          npmrc="${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> "$npmrc"
+          echo "wrote npm credentials to $npmrc"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -44,8 +52,10 @@ jobs:
             echo "::warning title=npm auth::npm whoami failed, so publishing will 404: $identity"
           fi
           if ! npm access list packages @dsh-themes 2>&1; then
-            echo "::warning title=npm scope::@dsh-themes is not writable by this token. Create the npm organisation, or grant the token access to it; every publish PUT 404s until then."
+            echo "::warning title=npm scope::@dsh-themes is not writable by this token. Add the token's account to the organisation with publish rights; every publish PUT 404s until then."
           fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create release pull request or publish
         id: changesets
