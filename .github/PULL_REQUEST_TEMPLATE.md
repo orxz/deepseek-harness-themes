@@ -4,11 +4,11 @@ What this PR changes and why.
 
 ## Verification
 
-- [ ] `pnpm typecheck`
-- [ ] `pnpm test` (all green)
-- [ ] `pnpm test:coverage` (per-file 100%)
-- [ ] `pnpm lint`
-- [ ] `pnpm build` (both packages)
+- [ ] `pnpm gate`
+
+## Release
+
+- [ ] Added a changeset for published-package changes, or this PR only changes docs/tests.
 
 ## Docs
 
