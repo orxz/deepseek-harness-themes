@@ -1,6 +1,6 @@
 {
   "name": "@dshthemes/ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Theme picker plugin for deepseek-harness themes: registers all themes, adds a settings row, and persists third-party selection",
   "type": "module",
   "main": "lib/index.js",
