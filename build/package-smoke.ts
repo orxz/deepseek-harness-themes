@@ -18,6 +18,18 @@ const PACKAGES = [
   "@deepseek-harness-themes/ui",
 ] as const;
 
+const PUBLIC_SPECIFIERS = [
+  "@deepseek-harness-themes/core",
+  "@deepseek-harness-themes/core/client",
+  "@deepseek-harness-themes/ui",
+  "@deepseek-harness-themes/ui/client",
+] as const;
+
+const DIRECT_CLIENT_HOST_IMPORTS = [
+  "@deepseek-ai/dsh-client-runtime/client",
+  "@deepseek-ai/schemastery",
+] as const;
+
 const REQUIRED_PACKAGE_FILES = [
   "cordis.patch.yml",
   "lib/index.js",
@@ -50,6 +62,13 @@ export async function validatePackageDirectory(
   if (manifest.exports === undefined) {
     throw new Error(`${packageName}: missing exports map`);
   }
+  validatePublicExport(packageName, manifest.exports, ".", "./lib/index.js");
+  validatePublicExport(
+    packageName,
+    manifest.exports,
+    "./client",
+    "./lib/client.js",
+  );
 
   for (const target of collectExportTargets(manifest.exports)) {
     if (!existsSync(join(packageRoot, target.slice(2)))) {
@@ -61,6 +80,23 @@ export async function validatePackageDirectory(
       throw new Error(
         `${packageName}: missing required file ./${requiredFile}`,
       );
+    }
+  }
+}
+
+/** Ensure a built client layer still imports host runtimes externally. */
+export function validateClientBundle(clientBundle: string): void {
+  for (const specifier of DIRECT_CLIENT_HOST_IMPORTS) {
+    const externalImportPatterns = [
+      `require("${specifier}")`,
+      `require('${specifier}')`,
+      `from "${specifier}"`,
+      `from '${specifier}'`,
+    ];
+    if (
+      !externalImportPatterns.some((pattern) => clientBundle.includes(pattern))
+    ) {
+      throw new Error(`client bundle embeds ${specifier}`);
     }
   }
 }
@@ -135,26 +171,69 @@ export async function runPackageSmoke(
         join(consumerDirectory, "node_modules", ...packageName.split("/")),
       );
     }
-    const coreEntry = join(
+    const installedUiClient = join(
       consumerDirectory,
       "node_modules",
       "@deepseek-harness-themes",
-      "core",
+      "ui",
       "lib",
-      "index.js",
+      "client.js",
     );
-    const core = (await import(pathToFileURL(coreEntry).href)) as {
-      themes?: unknown;
-    };
-    if (!Array.isArray(core.themes) || core.themes.length !== 10) {
-      throw new Error("installed core package did not expose ten themes");
-    }
+    validateClientBundle(await readFile(installedUiClient, "utf8"));
+    verifyConsumerImports(consumerDirectory);
 
     console.log(
       `Package smoke passed: ${tarballs.map((file) => basename(file)).join(", ")}`,
     );
   } finally {
     await rm(temporaryRoot, { force: true, recursive: true });
+  }
+}
+
+/** Resolve every public entry and import the root package from the consumer. */
+function verifyConsumerImports(consumerDirectory: string): void {
+  const script = `
+    const specifiers = ${JSON.stringify(PUBLIC_SPECIFIERS)};
+    for (const specifier of specifiers) {
+      const resolved = import.meta.resolve(specifier);
+      if (!resolved.startsWith("file:")) {
+        throw new Error(specifier + " resolved outside the installed package");
+      }
+    }
+    const core = await import("@deepseek-harness-themes/core");
+    if (!Array.isArray(core.themes) || core.themes.length !== 10) {
+      throw new Error("installed core package did not expose ten themes");
+    }
+  `;
+  run(
+    process.execPath,
+    ["--input-type=module", "--eval", script],
+    consumerDirectory,
+  );
+}
+
+/** Require one named conditional export to target its documented entry file. */
+function validatePublicExport(
+  packageName: string,
+  exportsMap: unknown,
+  exportName: string,
+  expectedDefault: string,
+): void {
+  if (exportsMap === null || typeof exportsMap !== "object") {
+    throw new Error(`${packageName}: missing public export ${exportName}`);
+  }
+  const publicExport = (exportsMap as Record<string, unknown>)[exportName];
+  if (publicExport === undefined) {
+    throw new Error(`${packageName}: missing public export ${exportName}`);
+  }
+  const defaultTarget =
+    publicExport !== null && typeof publicExport === "object"
+      ? (publicExport as Record<string, unknown>).default
+      : publicExport;
+  if (defaultTarget !== expectedDefault) {
+    throw new Error(
+      `${packageName}: public export ${exportName} default must target ${expectedDefault}`,
+    );
   }
 }
 

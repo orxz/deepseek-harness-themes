@@ -12,9 +12,11 @@ describe("bundle manifest", () => {
   it("declares the dsh.bundle patch in package.json", () => {
     const manifest = JSON.parse(readPackageFile("package.json")) as {
       dsh?: { bundle?: { patch?: string } };
+      devDependencies?: Record<string, string>;
       dependencies?: Record<string, string>;
       files?: string[];
       peerDependencies?: Record<string, string>;
+      peerDependenciesMeta?: Record<string, { optional?: boolean }>;
     };
 
     expect(manifest.dsh?.bundle?.patch).toBe("./cordis.patch.yml");
@@ -22,8 +24,21 @@ describe("bundle manifest", () => {
     expect(manifest.peerDependencies?.["@deepseek-ai/schemastery"]).toBe(
       "^3.18.1",
     );
+    expect(manifest.peerDependencies?.["@deepseek-ai/dsh-client-runtime"]).toBe(
+      "^0.0.1-rc.1",
+    );
+    expect(
+      manifest.peerDependenciesMeta?.["@deepseek-ai/dsh-client-runtime"]
+        ?.optional,
+    ).toBe(true);
     expect(manifest.dependencies).not.toHaveProperty(
       "@deepseek-ai/schemastery",
+    );
+    expect(manifest.dependencies).not.toHaveProperty(
+      "@deepseek-ai/dsh-client-runtime",
+    );
+    expect(manifest.devDependencies?.["@deepseek-harness-themes/core"]).toBe(
+      "workspace:^",
     );
   });
 

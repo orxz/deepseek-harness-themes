@@ -16,7 +16,7 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "smoke:packages": "node build/package-smoke.ts",
-    "lint": "oxlint packages",
+    "lint": "oxlint packages build vitest.config.ts",
     "fmt": "prettier --write .",
     "build": "pnpm -r build",
     "gate": "pnpm typecheck && pnpm build && pnpm test:coverage && pnpm lint && pnpm smoke:packages",
@@ -32,6 +32,7 @@
     "tsdown": "^0.22.14",
     "typescript": "^5.9.2",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "yaml": "2.9.0"
   }
 }

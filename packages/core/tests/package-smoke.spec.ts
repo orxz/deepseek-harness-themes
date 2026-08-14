@@ -2,7 +2,10 @@ import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { validatePackageDirectory } from "../../../build/package-smoke.ts";
+import {
+  validateClientBundle,
+  validatePackageDirectory,
+} from "../../../build/package-smoke.ts";
 
 const temporaryRoots: string[] = [];
 
@@ -25,15 +28,58 @@ describe("packed package validation", () => {
   });
 
   it("rejects an export target omitted from the installed package", async () => {
-    const root = await createPackageFixture("lib/client.js");
+    const root = await createPackageFixture({ omittedFile: "lib/client.js" });
 
     await expect(validatePackageDirectory(root)).rejects.toThrow(
       "@fixture/theme: missing export target ./lib/client.js",
     );
   });
+
+  it("rejects a package without the public client subpath", async () => {
+    const root = await createPackageFixture({ omitClientExport: true });
+
+    await expect(validatePackageDirectory(root)).rejects.toThrow(
+      "@fixture/theme: missing public export ./client",
+    );
+  });
+
+  it("rejects a root export pointed at the client bundle", async () => {
+    const root = await createPackageFixture({
+      rootDefault: "./lib/client.js",
+    });
+
+    await expect(validatePackageDirectory(root)).rejects.toThrow(
+      "@fixture/theme: public export . default must target ./lib/index.js",
+    );
+  });
 });
 
-async function createPackageFixture(omittedFile?: string): Promise<string> {
+describe("client bundle validation", () => {
+  it("accepts bundles that leave every direct host runtime external", () => {
+    expect(() =>
+      validateClientBundle(`
+        require("@deepseek-ai/dsh-client-runtime/client");
+        require("@deepseek-ai/schemastery");
+      `),
+    ).not.toThrow();
+  });
+
+  it("rejects a bundle that embeds a direct host runtime", () => {
+    expect(() =>
+      validateClientBundle("export const bakedActions = {};"),
+    ).toThrow("client bundle embeds @deepseek-ai/dsh-client-runtime/client");
+  });
+});
+
+interface PackageFixtureOptions {
+  omitClientExport?: boolean;
+  omittedFile?: string;
+  rootDefault?: string;
+}
+
+async function createPackageFixture(
+  options: PackageFixtureOptions = {},
+): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "dsh-package-fixture-"));
   temporaryRoots.push(root);
   await mkdir(join(root, "lib"));
@@ -45,12 +91,16 @@ async function createPackageFixture(omittedFile?: string): Promise<string> {
       exports: {
         ".": {
           types: "./lib/index.d.ts",
-          default: "./lib/index.js",
+          default: options.rootDefault ?? "./lib/index.js",
         },
-        "./client": {
-          types: "./lib/client.d.ts",
-          default: "./lib/client.js",
-        },
+        ...(options.omitClientExport
+          ? {}
+          : {
+              "./client": {
+                types: "./lib/client.d.ts",
+                default: "./lib/client.js",
+              },
+            }),
         "./package.json": "./package.json",
       },
     }),
@@ -65,7 +115,7 @@ async function createPackageFixture(omittedFile?: string): Promise<string> {
   ];
   await Promise.all(
     files
-      .filter((file) => file !== omittedFile)
+      .filter((file) => file !== options.omittedFile)
       .map((file) => writeFile(join(root, file), "export {};\n")),
   );
   return root;

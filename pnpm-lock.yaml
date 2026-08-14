@@ -1,7 +1,7 @@
 lockfileVersion: "9.0"
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 importers:
@@ -33,10 +33,13 @@ importers:
         version: 5.9.3
       vite-tsconfig-paths:
         specifier: ^6.1.1
-        version: 6.1.1(typescript@5.9.3)(vite@8.2.1(esbuild@0.28.2)(yaml@2.9.0))
+        version: 6.1.1(typescript@5.9.3)(vite@7.3.6(lightningcss@1.33.0)(yaml@2.9.0))
       vitest:
         specifier: ^3.2.4
         version: 3.2.7(jsdom@30.0.1)(lightningcss@1.33.0)(yaml@2.9.0)
+      yaml:
+        specifier: 2.9.0
+        version: 2.9.0
 
   packages/core:
     devDependencies:
@@ -46,9 +49,6 @@ importers:
 
   packages/ui:
     dependencies:
-      "@deepseek-harness-themes/core":
-        specifier: workspace:^
-        version: link:../core
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -59,6 +59,12 @@ importers:
       "@deepseek-ai/schemastery":
         specifier: 3.18.1
         version: 3.18.1
+      "@deepseek-harness-themes/core":
+        specifier: workspace:^
+        version: link:../core
+      "@testing-library/dom":
+        specifier: 10.4.1
+        version: 10.4.1
       "@testing-library/react":
         specifier: ^16.3.2
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.1)(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3126,52 +3132,6 @@ packages:
       yaml:
         optional: true
 
-  vite@8.2.1:
-    resolution:
-      {
-        integrity: sha512-EU/eS7BH3XROHh2YnBefjM6DBKA6ZeMZEYQbj7NLWg5wHYlhB8B/Mayd5XsgWq+NFYccDOTemRpdETWR6Ka/lw==,
-      }
-    engines: { node: ^20.19.0 || >=22.12.0 }
-    hasBin: true
-    peerDependencies:
-      "@types/node": ^20.19.0 || >=22.12.0
-      "@vitejs/devtools": ^0.4.0
-      esbuild: ^0.27.0 || ^0.28.0
-      jiti: ">=1.21.0"
-      less: ^4.0.0
-      sass: ^1.70.0
-      sass-embedded: ^1.70.0
-      stylus: ">=0.54.8"
-      sugarss: ^5.0.0
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      "@types/node":
-        optional: true
-      "@vitejs/devtools":
-        optional: true
-      esbuild:
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-
   vitest@3.2.7:
     resolution:
       {
@@ -4861,12 +4821,12 @@ snapshots:
       - tsx
       - yaml
 
-  vite-tsconfig-paths@6.1.1(typescript@5.9.3)(vite@8.2.1(esbuild@0.28.2)(yaml@2.9.0)):
+  vite-tsconfig-paths@6.1.1(typescript@5.9.3)(vite@7.3.6(lightningcss@1.33.0)(yaml@2.9.0)):
     dependencies:
       debug: 4.4.3
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.9.3)
-      vite: 8.2.1(esbuild@0.28.2)(yaml@2.9.0)
+      vite: 7.3.6(lightningcss@1.33.0)(yaml@2.9.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4882,18 +4842,6 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
       lightningcss: 1.33.0
-      yaml: 2.9.0
-
-  vite@8.2.1(esbuild@0.28.2)(yaml@2.9.0):
-    dependencies:
-      lightningcss: 1.33.0
-      picomatch: 4.0.5
-      postcss: 8.5.26
-      rolldown: 1.2.4
-      tinyglobby: 0.2.17
-    optionalDependencies:
-      esbuild: 0.28.2
-      fsevents: 2.3.3
       yaml: 2.9.0
 
   vitest@3.2.7(jsdom@30.0.1)(lightningcss@1.33.0)(yaml@2.9.0):
