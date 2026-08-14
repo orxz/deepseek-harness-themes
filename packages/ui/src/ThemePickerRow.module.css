@@ -15,41 +15,105 @@
   gap: 8px;
 }
 
-.themeCube {
-  flex: 1;
-  padding: 6px 10px;
+.themeList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* One selected language for both shapes: brand border, raised fill, live tick. */
+.themeCube,
+.themeItem {
   background: var(--dsw-alias-button-elevated-fill);
   color: var(--dsw-alias-label-secondary);
   border: 1px solid var(--dsw-alias-border-l1);
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 18px;
   cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
-.themeCube.selected {
-  background: var(--dsw-alias-interactive-bg-active);
+.themeCube:hover,
+.themeItem:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
   color: var(--dsw-alias-label-primary);
 }
 
-.themeList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.themeCube:focus-visible,
+.themeItem:focus-visible {
+  outline: 2px solid var(--dsw-alias-brand-primary);
+  outline-offset: 2px;
+}
+
+.themeCube.selected,
+.themeItem.selected {
+  background: var(--dsw-alias-interactive-bg-active);
+  border-color: var(--dsw-alias-brand-primary);
+  color: var(--dsw-alias-label-primary);
+}
+
+.themeCube {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 18px;
 }
 
 .themeItem {
-  padding: 4px 10px;
-  background: var(--dsw-alias-button-elevated-fill);
-  color: var(--dsw-alias-label-secondary);
-  border: 1px solid var(--dsw-alias-border-l1);
-  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px;
+  border-radius: 8px;
   font-size: 12px;
   line-height: 18px;
-  cursor: pointer;
+  text-align: left;
 }
 
-.themeItem.selected {
-  color: var(--dsw-alias-brand-primary);
-  border-color: var(--dsw-alias-brand-primary);
+/* Base colour fills the chip; the accent rides the bottom third. */
+.swatch {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: inset 0 0 0 1px var(--dsw-alias-border-l2);
+}
+
+.swatchAccent {
+  display: block;
+  width: 100%;
+  height: 6px;
+}
+
+.themeName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tick {
+  flex: 0 0 auto;
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dsw-alias-brand-primary);
+  opacity: 0;
+}
+
+.themeItem.selected .tick {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .themeCube,
+  .themeItem {
+    transition: none;
+  }
 }

@@ -3,9 +3,16 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import {
   ThemePickerRow,
+  type ThemeFace,
   type ThemePickerRowProps,
 } from "../src/ThemePickerRow.tsx";
 import type { PickerStoreState } from "../src/store.ts";
+
+const FACES: Record<string, ThemeFace> = {
+  midnight: { base: "#0b0e14", accent: "#4f8cff" },
+  nord: { base: "#2e3440", accent: "#88c0d0" },
+  minimal: { base: "#fafafa", accent: "#111111" },
+};
 
 /** Build a picker row props face over one mutable state cell. */
 function makeProps(
@@ -17,6 +24,7 @@ function makeProps(
       selector(state),
     t: (key: string) => `[${key}]`,
     setTheme: vi.fn(),
+    faces: FACES,
     ...overrides,
   } satisfies ThemePickerRowProps;
 }
@@ -41,6 +49,9 @@ const WITH_THIRD_PARTY: PickerStoreState = {
   revision: 1,
 };
 
+const radios = (): HTMLElement[] =>
+  Array.from(document.querySelectorAll<HTMLElement>('[role="radio"]'));
+
 describe("ThemePickerRow", () => {
   it("renders the built-in selection cubes always", () => {
     render(<ThemePickerRow {...makeProps(BUILTINS)} />);
@@ -50,16 +61,60 @@ describe("ThemePickerRow", () => {
     }
   });
 
-  it("lists third-party themes with pressed state following the preference", () => {
+  it("exposes one radiogroup holding every selectable theme", () => {
     render(<ThemePickerRow {...makeProps(WITH_THIRD_PARTY)} />);
 
-    for (const id of ["midnight", "nord", "minimal"]) {
-      const button = screen.getByText(`[theme.${id}]`).closest("button");
-      expect(button).toBeTruthy();
-      expect(button?.getAttribute("aria-pressed")).toBe(
-        id === "midnight" ? "true" : "false",
-      );
-    }
+    expect(screen.getAllByRole("radiogroup")).toHaveLength(1);
+    expect(radios()).toHaveLength(6);
+  });
+
+  it("checks exactly the option matching the preference", () => {
+    render(<ThemePickerRow {...makeProps(WITH_THIRD_PARTY)} />);
+
+    const checked = radios().filter(
+      (node) => node.getAttribute("aria-checked") === "true",
+    );
+    expect(checked).toHaveLength(1);
+    expect(checked[0]?.dataset.themeId).toBe("midnight");
+  });
+
+  it("keeps one tab stop by roving tabindex onto the checked option", () => {
+    render(<ThemePickerRow {...makeProps(WITH_THIRD_PARTY)} />);
+
+    const tabbable = radios().filter((node) => node.tabIndex === 0);
+    expect(tabbable).toHaveLength(1);
+    expect(tabbable[0]?.dataset.themeId).toBe("midnight");
+  });
+
+  it("falls back to the first option when the preference is unregistered", () => {
+    const state = { ...WITH_THIRD_PARTY, preference: "gone" };
+    render(<ThemePickerRow {...makeProps(state)} />);
+
+    expect(radios().filter((node) => node.tabIndex === 0)).toHaveLength(1);
+    expect(radios()[0]?.tabIndex).toBe(0);
+  });
+
+  it("paints a swatch for shipped themes and none for the built-in cubes", () => {
+    render(<ThemePickerRow {...makeProps(WITH_THIRD_PARTY)} />);
+
+    const nord = radios().find((node) => node.dataset.themeId === "nord");
+    const system = radios().find((node) => node.dataset.themeId === "system");
+    expect(nord?.querySelector("[data-swatch]")).toBeTruthy();
+    expect(system?.querySelector("[data-swatch]")).toBeNull();
+  });
+
+  it("humanizes themes registered without a dictionary entry", () => {
+    const state: PickerStoreState = {
+      ...WITH_THIRD_PARTY,
+      themes: [
+        ...WITH_THIRD_PARTY.themes,
+        { id: "solarized-light", colorScheme: "light" },
+      ],
+    };
+    render(<ThemePickerRow {...makeProps(state)} />);
+
+    expect(screen.getByText("Solarized Light")).toBeTruthy();
+    expect(screen.queryByText("[theme.solarized-light]")).toBeNull();
   });
 
   it("omits the built-in pair from the third-party list", () => {
@@ -69,33 +124,59 @@ describe("ThemePickerRow", () => {
     expect(screen.queryByText("[theme.dark]")).toBeNull();
   });
 
-  it("marks the built-in cube pressed when it is the preference", () => {
-    const state: PickerStoreState = {
-      ...BUILTINS,
-      preference: "light",
-      activeId: "light",
-    };
-    render(<ThemePickerRow {...makeProps(state)} />);
-
-    const button = screen.getByText("[picker.light]").closest("button");
-    expect(button?.getAttribute("aria-pressed")).toBe("true");
-  });
-
-  it("delegates third-party selection to the injected setTheme", () => {
+  it("delegates click selection to the injected setTheme", () => {
     const setTheme = vi.fn();
     render(<ThemePickerRow {...makeProps(WITH_THIRD_PARTY, { setTheme })} />);
 
     fireEvent.click(screen.getByText("[theme.nord]"));
-
-    expect(setTheme).toHaveBeenCalledWith("nord");
-  });
-
-  it("delegates built-in selection to the injected setTheme", () => {
-    const setTheme = vi.fn();
-    render(<ThemePickerRow {...makeProps(BUILTINS, { setTheme })} />);
-
     fireEvent.click(screen.getByText("[picker.system]"));
 
-    expect(setTheme).toHaveBeenCalledWith("system");
+    expect(setTheme).toHaveBeenNthCalledWith(1, "nord");
+    expect(setTheme).toHaveBeenNthCalledWith(2, "system");
+  });
+
+  it("moves selection and focus with the arrow keys", () => {
+    const setTheme = vi.fn();
+    render(<ThemePickerRow {...makeProps(WITH_THIRD_PARTY, { setTheme })} />);
+    const group = screen.getByRole("radiogroup");
+
+    fireEvent.keyDown(group, { key: "ArrowRight" });
+    expect(setTheme).toHaveBeenLastCalledWith("nord");
+    expect(document.activeElement).toBe(
+      radios().find((node) => node.dataset.themeId === "nord"),
+    );
+
+    // The spy does not advance the store, so this step still starts at midnight.
+    fireEvent.keyDown(group, { key: "ArrowUp" });
+    expect(setTheme).toHaveBeenLastCalledWith("system");
+  });
+
+  it("wraps at both ends and jumps with Home and End", () => {
+    const setTheme = vi.fn();
+    const first = { ...WITH_THIRD_PARTY, preference: "light" };
+    const { rerender } = render(
+      <ThemePickerRow {...makeProps(first, { setTheme })} />,
+    );
+    fireEvent.keyDown(screen.getByRole("radiogroup"), { key: "ArrowLeft" });
+    expect(setTheme).toHaveBeenLastCalledWith("minimal");
+
+    const last = { ...WITH_THIRD_PARTY, preference: "minimal" };
+    rerender(<ThemePickerRow {...makeProps(last, { setTheme })} />);
+    fireEvent.keyDown(screen.getByRole("radiogroup"), { key: "ArrowDown" });
+    expect(setTheme).toHaveBeenLastCalledWith("light");
+
+    fireEvent.keyDown(screen.getByRole("radiogroup"), { key: "End" });
+    expect(setTheme).toHaveBeenLastCalledWith("minimal");
+    fireEvent.keyDown(screen.getByRole("radiogroup"), { key: "Home" });
+    expect(setTheme).toHaveBeenLastCalledWith("light");
+  });
+
+  it("ignores keys that do not drive the radiogroup", () => {
+    const setTheme = vi.fn();
+    render(<ThemePickerRow {...makeProps(WITH_THIRD_PARTY, { setTheme })} />);
+
+    fireEvent.keyDown(screen.getByRole("radiogroup"), { key: "a" });
+
+    expect(setTheme).not.toHaveBeenCalled();
   });
 });

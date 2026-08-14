@@ -1,4 +1,4 @@
-import { registerThemes } from "@deepseek-harness-themes/core";
+import { registerThemes, themes } from "@deepseek-harness-themes/core";
 import { createPicker } from "./picker.ts";
 import type {
   PickerSettingsScope,
@@ -12,9 +12,31 @@ import { en, zh } from "./locales.ts";
 import { THEMES_NAMESPACE } from "./preference.ts";
 import type { ThemePreferenceSettings } from "./preference.ts";
 import { ThemePickerRow } from "./ThemePickerRow.tsx";
+import type { ThemeFace } from "./ThemePickerRow.tsx";
 
 /** Locale namespace owning this row's copy. */
 export const SETTINGS_NS = "settings.dsh-themes";
+
+/**
+ * Swatch colours for every shipped theme, read from the catalog this package
+ * already bundles. The host theme snapshot carries no token payload, so the
+ * picker gets its preview colours from here rather than widening that
+ * contract. Themes absent from this table (registered by another plugin)
+ * render without a swatch and under a humanized id.
+ */
+export const THEME_FACES: Readonly<Record<string, ThemeFace>> = Object.freeze(
+  Object.fromEntries(
+    themes.map((theme) => [
+      theme.id,
+      // Both tokens are in REQUIRED_TOKENS, which `pnpm test` enforces for
+      // every shipped theme, so neither lookup can miss.
+      Object.freeze({
+        base: theme.tokens["--dsw-alias-bg-base"] as string,
+        accent: theme.tokens["--dsw-alias-brand-primary"] as string,
+      }),
+    ]),
+  ),
+);
 
 /**
  * The browser plugin face the dsh loader mounts. Declared structurally so the
@@ -103,6 +125,7 @@ export function apply(ctx: PickerClientContext): void {
           bound = actions;
           syncStore();
           return {
+            faces: THEME_FACES,
             setTheme: (id: string) => {
               picker.setTheme(id);
             },
