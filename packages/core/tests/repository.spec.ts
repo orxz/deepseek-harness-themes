@@ -248,6 +248,26 @@ describe("continuous integration hardening", () => {
     expect(ignore).toContain("pnpm-lock.yaml");
   });
 
+  it("holds @types/node at the Node major the toolchain pins", () => {
+    const dependabot = readYaml(".github/dependabot.yml") as {
+      updates?: Array<{
+        ignore?: Array<{
+          "dependency-name"?: string;
+          "update-types"?: string[];
+        }>;
+        "package-ecosystem"?: string;
+      }>;
+    };
+    const npm = dependabot.updates?.find(
+      (update) => update["package-ecosystem"] === "npm",
+    );
+
+    expect(npm?.ignore).toContainEqual({
+      "dependency-name": "@types/node",
+      "update-types": ["version-update:semver-major"],
+    });
+  });
+
   it("keeps actions and npm dependencies under weekly review", () => {
     const dependabot = readYaml(".github/dependabot.yml") as {
       updates?: Array<{

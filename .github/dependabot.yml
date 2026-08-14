@@ -18,6 +18,10 @@ updates:
       interval: weekly
     commit-message:
       prefix: chore
+    # The Node major is pinned by .nvmrc and engines; its types move with them.
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       tooling:
         patterns: ["*"]
