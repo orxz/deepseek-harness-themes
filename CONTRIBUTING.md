@@ -29,7 +29,9 @@ Follow [docs/creating-a-theme.md](docs/creating-a-theme.md): one frozen `ThemeDe
 
 ## Releases
 
-Publishing requires the `deepseek-harness-themes` npm organisation to exist and `NPM_TOKEN` to belong to a member with publish rights: the scope is not a username, so npm answers every publish `PUT` with `404 Not Found` until both hold. The release workflow reports its npm identity and scope access before publishing, so a rejected release names which half is missing.
+This repository stores no npm credential. Releases authenticate with npm through GitHub OIDC trusted publishing: the identity of `release.yml` running in this repository is the credential, so there is no token to leak or rotate. Each published package carries a trusted publisher naming this repository and that workflow; a publish that 404s means the package is missing one.
+
+npm cannot configure a trusted publisher for a package that does not exist yet, so the very first version of a new package is published by hand from a maintainer's own npm login. That is a one-time step per package, and it uses a login rather than a stored token.
 
 Changesets keeps `core` and `ui` at the same version because the UI distribution inlines core. Merging package changes into `main` creates or updates the automated version PR. Merging that version PR runs `pnpm gate`, publishes both packages to npm, and creates the corresponding GitHub releases and tags.
 

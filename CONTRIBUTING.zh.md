@@ -28,7 +28,9 @@ pnpm typecheck   # 首次类型检查通过即搭建完成
 
 ## 发布
 
-发布的前提是 npm 组织 `deepseek-harness-themes` 已存在，且 `NPM_TOKEN` 属于其中有发布权限的成员：该 scope 不是用户名，两个条件不同时满足时 npm 会对每一次发布 `PUT` 返回 `404 Not Found`。release workflow 在发布前会输出 npm 身份与 scope 权限，因此失败时日志会指明缺的是哪一半。
+本仓库不保存任何 npm 凭据。发布通过 GitHub OIDC trusted publishing 向 npm 认证：凭据就是「`release.yml` 在本仓库中运行」这一身份本身，因此没有 token 可泄露、也无需轮换。每个已发布的包都配有指向本仓库与该 workflow 的 trusted publisher；发布返回 404 就说明某个包还缺这项配置。
+
+npm 无法为尚不存在的包配置 trusted publisher，所以新包的**首个版本**由维护者用自己的 npm 登录手动发布一次。这是每个包一次性的步骤，用的是登录而非存储的 token。
 
 UI 发布物会内联 core，因此 Changesets 保持 `core` 与 `ui` 版本一致。发布包改动合入 `main` 后，自动创建或更新版本 PR；版本 PR 合并后运行 `pnpm gate`、发布两个 npm 包，并创建对应的 GitHub Release 与标签。
 

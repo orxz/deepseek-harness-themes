@@ -67,9 +67,12 @@ describe("repository automation", () => {
     };
 
     expect(workflow.on?.push?.branches).toEqual(["main"]);
+    // id-token is required to mint the OIDC identity trusted publishing uses;
+    // nothing beyond these three is granted.
     expect(workflow.permissions).toEqual({
       contents: "write",
       "pull-requests": "write",
+      "id-token": "write",
     });
     expect(releaseStep).toMatchObject({
       with: {
@@ -84,7 +87,35 @@ describe("repository automation", () => {
     expect(manifest.scripts?.release).toBe("pnpm gate && changeset publish");
   });
 
-  it("names the failing half when a publish is rejected", () => {
+  it("publishes through OIDC and never through a stored token", () => {
+    const release = readFileSync(
+      new URL(".github/workflows/release.yml", repositoryRoot),
+      "utf8",
+    );
+    const parsed = readYaml(".github/workflows/release.yml") as {
+      permissions?: Record<string, string>;
+    };
+
+    // id-token mints the OIDC identity npm trusts. A long-lived token is the
+    // thing being replaced, so no reference to one may survive here — an empty
+    // authToken line would stop npm falling through to trusted publishing.
+    expect(parsed.permissions).toMatchObject({ "id-token": "write" });
+    expect(release).not.toContain("NPM_TOKEN");
+    expect(release).not.toContain("NODE_AUTH_TOKEN");
+
+    const setupNode = workflowSteps(
+      parsed as {
+        jobs?: Record<string, { steps?: Array<Record<string, unknown>> }>;
+      },
+    ).find(
+      (step) =>
+        typeof step.uses === "string" &&
+        step.uses.startsWith("actions/setup-node@"),
+    );
+    expect(setupNode?.with).not.toHaveProperty("registry-url");
+  });
+
+  it("runs an npm new enough to speak OIDC", () => {
     const release = readYaml(".github/workflows/release.yml") as {
       jobs?: Record<string, { steps?: Array<Record<string, unknown>> }>;
     };
@@ -92,50 +123,27 @@ describe("repository automation", () => {
     const run = (step: Record<string, unknown>): string =>
       typeof step.run === "string" ? step.run : "";
 
-    // A publish PUT 404s both when the token is rejected and when the scope is
-    // not ours, so the workflow has to tell those two apart on its own.
-    expect(steps.some((step) => run(step).includes("npm whoami"))).toBe(true);
+    // Trusted publishing needs npm >= 11.5.1; the npm bundled with Node is older.
     expect(
-      steps.some((step) =>
-        run(step).includes("npm access list packages @dsh-themes"),
-      ),
+      steps.some((step) => run(step).includes("npm install -g npm@latest")),
     ).toBe(true);
-    // The token must land as a literal in the npmrc npm actually reads: the
-    // `${NODE_AUTH_TOKEN}` placeholder setup-node writes resolves to an empty
-    // string in any step that does not also export it.
-    expect(
-      steps.some((step) => run(step).includes("NPM_CONFIG_USERCONFIG")),
-    ).toBe(true);
-    expect(steps.some((step) => run(step).includes("_authToken"))).toBe(true);
-    // An absent secret and a rejected token both surface as 401/404, so the
-    // empty case is failed loudly and separately.
-    expect(
-      steps.some((step) => run(step).includes('if [ -z "$NPM_TOKEN" ]')),
-    ).toBe(true);
-    const preflight = steps.find((step) => run(step).includes("npm whoami"));
-    expect(preflight?.env).toMatchObject({
-      NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}",
-    });
-    expect(
-      steps.some((step) =>
-        run(step).includes("steps.changesets.outputs.published"),
-      ),
-    ).toBe(true);
+    expect(steps.some((step) => run(step).includes("npm --version"))).toBe(
+      true,
+    );
   });
 
-  it("hands the npm token to the release step under both names", () => {
+  it("reports what the release step actually did", () => {
     const release = readYaml(".github/workflows/release.yml") as {
       jobs?: Record<string, { steps?: Array<Record<string, unknown>> }>;
     };
-    const publish = workflowSteps(release).find(
-      (step) => step.uses === "changesets/action@v2",
-    );
 
-    expect(publish?.env).toMatchObject({
-      NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}",
-      NPM_TOKEN: "${{ secrets.NPM_TOKEN }}",
-    });
-    expect(publish?.id).toBe("changesets");
+    expect(
+      workflowSteps(release).some(
+        (step) =>
+          typeof step.run === "string" &&
+          step.run.includes("steps.changesets.outputs.published"),
+      ),
+    ).toBe(true);
   });
 
   it("disables host peer auto-installation and lints build tooling", () => {

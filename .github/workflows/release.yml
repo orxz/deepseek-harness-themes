@@ -11,6 +11,9 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  # Mints the OIDC identity npm trusted publishing verifies. This repository
+  # stores no npm credential; the identity of this workflow is the credential.
+  id-token: write
 
 jobs:
   release:
@@ -18,44 +21,20 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v6
+      # No registry-url on purpose: it writes an npmrc whose authToken expands
+      # from an env var, and an empty one stops npm falling through to OIDC.
       - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-          registry-url: https://registry.npmjs.org
           cache: pnpm
+
+      # Trusted publishing needs npm >= 11.5.1; the npm bundled with Node is older.
+      - name: Use an npm that speaks OIDC
+        run: |
+          npm install -g npm@latest
+          echo "npm $(npm --version), node $(node --version)"
+
       - run: pnpm install --frozen-lockfile
-
-      # actions/setup-node writes `_authToken=${NODE_AUTH_TOKEN}`, a reference
-      # resolved when npm reads the file — it is empty in any step that does not
-      # also export that variable. Write the literal token into the same npmrc
-      # instead, so every later step authenticates the same way.
-      - name: Authenticate with npm
-        run: |
-          if [ -z "$NPM_TOKEN" ]; then
-            echo "::error title=npm auth::The NPM_TOKEN secret is empty or not set on this repository."
-            exit 1
-          fi
-          npmrc="${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> "$npmrc"
-          echo "wrote npm credentials to $npmrc"
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # A publish PUT returns 404 both when the token is rejected and when the
-      # scope is not ours. Name which half is missing before the release step
-      # buries it in a generic "Not found".
-      - name: Check npm identity and scope access
-        run: |
-          if identity=$(npm whoami 2>&1); then
-            echo "npm identity: $identity"
-          else
-            echo "::warning title=npm auth::npm whoami failed, so publishing will 404: $identity"
-          fi
-          if ! npm access list packages @dsh-themes 2>&1; then
-            echo "::warning title=npm scope::@dsh-themes is not writable by this token. Add the token's account to the organisation with publish rights; every publish PUT 404s until then."
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create release pull request or publish
         id: changesets
@@ -65,9 +44,6 @@ jobs:
           version-script: pnpm version:packages
           commit-message: "chore: version packages"
           pr-title: "chore: version packages"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Report release outcome
         if: always()
@@ -75,3 +51,7 @@ jobs:
           echo "published:         ${{ steps.changesets.outputs.published }}"
           echo "publishedPackages: ${{ steps.changesets.outputs.publishedPackages }}"
           echo "pullRequestNumber: ${{ steps.changesets.outputs.pullRequestNumber }}"
+          echo
+          echo "A 404 on publish means this workflow is not yet a trusted publisher."
+          echo "Configure one per package at npmjs.com -> package -> Settings -> Trusted Publisher,"
+          echo "naming repository orxz/deepseek-harness-themes and workflow release.yml."
