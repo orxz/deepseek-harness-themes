@@ -63,7 +63,7 @@ importers:
       '@deepseek-ai/schemastery':
         specifier: 3.18.1
         version: 3.18.1
-      '@dsh-themes/core':
+      '@dshthemes/core':
         specifier: workspace:^
         version: link:../core
       '@testing-library/dom':

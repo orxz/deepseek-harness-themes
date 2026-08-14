@@ -23,6 +23,6 @@ describe("bundle manifest", () => {
     const patch = readPackageFile("cordis.patch.yml");
 
     expect(patch).toContain("id: dsh-themes-core");
-    expect(patch).toContain('name: "@dsh-themes/core"');
+    expect(patch).toContain('name: "@dshthemes/core"');
   });
 });

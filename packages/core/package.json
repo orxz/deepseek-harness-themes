@@ -1,5 +1,5 @@
 {
-  "name": "@dsh-themes/core",
+  "name": "@dshthemes/core",
   "version": "0.1.0",
   "description": "Theme definitions and registration helpers for deepseek-harness themes",
   "type": "module",

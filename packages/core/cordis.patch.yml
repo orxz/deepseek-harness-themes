@@ -1,6 +1,6 @@
-# Bundle layer for @dsh-themes/core: registers the zero-UI
+# Bundle layer for @dshthemes/core: registers the zero-UI
 # client entry that mounts all shipped themes. Installed by `dsh plugin add`;
 # profile compositions may still insert this row manually instead.
 - insert:
     - id: dsh-themes-core
-      name: "@dsh-themes/core"
+      name: "@dshthemes/core"

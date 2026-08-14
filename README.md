@@ -1,8 +1,8 @@
 # deepseek-harness-themes
 
 [![ci](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml/badge.svg)](https://github.com/orxz/deepseek-harness-themes/actions/workflows/ci.yml)
-[![core](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fcore?label=core)](https://www.npmjs.com/package/@dsh-themes/core)
-[![ui](https://img.shields.io/npm/v/%40deepseek-harness-themes%2Fui?label=ui)](https://www.npmjs.com/package/@dsh-themes/ui)
+[![core](https://img.shields.io/npm/v/%40dshthemes%2Fcore?label=core)](https://www.npmjs.com/package/@dshthemes/core)
+[![ui](https://img.shields.io/npm/v/%40dshthemes%2Fui?label=ui)](https://www.npmjs.com/package/@dshthemes/ui)
 
 A collection of UI themes for [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness).
 
@@ -12,10 +12,10 @@ Community-maintained theme collection built on the official theme extension poin
 
 ## Packages
 
-| Package                                       | Role                                                                                                               |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [`@dsh-themes/core`](packages/core/README.md) | Six `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI                    |
-| [`@dsh-themes/ui`](packages/ui/README.md)     | Client plugin: registers all themes, adds a Theme picker row to Settings → General, persists third-party selection |
+| Package                                      | Role                                                                                                               |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [`@dshthemes/core`](packages/core/README.md) | Six `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI                    |
+| [`@dshthemes/ui`](packages/ui/README.md)     | Client plugin: registers all themes, adds a Theme picker row to Settings → General, persists third-party selection |
 
 ## Themes
 
@@ -33,13 +33,13 @@ Community-maintained theme collection built on the official theme extension poin
 One command installs the dependency, adds the layer to the profile, and mounts the feature:
 
 ```sh
-dsh plugin --profile <profile> add @dsh-themes/ui
+dsh plugin --profile <profile> add @dshthemes/ui
 ```
 
 Remove it just as easily:
 
 ```sh
-dsh plugin --profile <profile> remove @dsh-themes/ui
+dsh plugin --profile <profile> remove @dshthemes/ui
 ```
 
 See [docs/installation.md](docs/installation.md) for the core-only shape, the hand-written patch alternative, and local development.

@@ -25,7 +25,7 @@ describe("repository automation", () => {
     expect(config).toMatchObject({
       access: "public",
       baseBranch: "main",
-      fixed: [["@dsh-themes/core", "@dsh-themes/ui"]],
+      fixed: [["@dshthemes/core", "@dshthemes/ui"]],
       updateInternalDependencies: "patch",
     });
   });
@@ -168,8 +168,8 @@ describe("repository automation", () => {
 
 describe("published package metadata", () => {
   const packages = [
-    ["core", "@dsh-themes/core"],
-    ["ui", "@dsh-themes/ui"],
+    ["core", "@dshthemes/core"],
+    ["ui", "@dshthemes/ui"],
   ] as const;
 
   it.each(packages)(
@@ -391,12 +391,8 @@ describe("community health files", () => {
       const content = readText(readme);
 
       expect(content, readme).toContain("workflows/ci.yml/badge.svg");
-      expect(content, readme).toContain(
-        "npm/v/%40deepseek-harness-themes%2Fcore",
-      );
-      expect(content, readme).toContain(
-        "npm/v/%40deepseek-harness-themes%2Fui",
-      );
+      expect(content, readme).toContain("npm/v/%40dshthemes%2Fcore");
+      expect(content, readme).toContain("npm/v/%40dshthemes%2Fui");
     }
   });
 

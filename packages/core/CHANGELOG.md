@@ -1,4 +1,4 @@
-# @dsh-themes/core
+# @dshthemes/core
 
 ## 0.1.0
 

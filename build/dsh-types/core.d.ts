@@ -1,5 +1,5 @@
 /**
- * Build-time declaration shim for `@dsh-themes/core`, consumed
+ * Build-time declaration shim for `@dshthemes/core`, consumed
  * by the ui package's client-declaration emission (tsconfig paths). The
  * runtime bundle inlines the real core library; this file only names the
  * surface the picker imports, mirroring packages/core/src/index.ts.

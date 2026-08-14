@@ -1,6 +1,6 @@
-# `@dsh-themes/ui`
+# `@dshthemes/ui`
 
-面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的主题选择器插件：注册全部 [`@dsh-themes/core`](../core/README.md) 主题、在设置页 General 区添加主题行、持久化第三方主题选择。
+面向 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) 的主题选择器插件：注册全部 [`@dshthemes/core`](../core/README.md) 主题、在设置页 General 区添加主题行、持久化第三方主题选择。
 
 ## 功能
 
@@ -27,7 +27,7 @@ dsh-themes:
 一条命令完成依赖安装、profile 层添加与功能挂载（见 [docs/installation.md](../../docs/installation.md)）：
 
 ```sh
-dsh plugin --profile <profile> add @dsh-themes/ui
+dsh plugin --profile <profile> add @dshthemes/ui
 ```
 
 本包随带 bundle manifest，`dsh plugin` 会将其自动追加进 `dsh.profile.bundles`。偏好手写层的 profile 也可以直接插入该行：
@@ -35,7 +35,7 @@ dsh plugin --profile <profile> add @dsh-themes/ui
 ```yaml
 - insert:
     - id: dsh-themes
-      name: "@dsh-themes/ui"
+      name: "@dshthemes/ui"
 ```
 
 浏览器花名册会自动扫描 `dsh.client` 插件，除 patch 条目外无需宿主侧配置。
