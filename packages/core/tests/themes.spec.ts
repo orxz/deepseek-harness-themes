@@ -26,6 +26,7 @@ describe("theme registry", () => {
       "tokyo-night",
       "github-dark",
       "solarized",
+      "gruvbox",
     ]);
   });
 

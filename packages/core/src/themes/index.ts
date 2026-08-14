@@ -3,6 +3,7 @@ import { catppuccin } from "./catppuccin.ts";
 import { deepseek } from "./deepseek.ts";
 import { dracula } from "./dracula.ts";
 import { githubDark } from "./github-dark.ts";
+import { gruvbox } from "./gruvbox.ts";
 import { oled } from "./oled.ts";
 import { solarized } from "./solarized.ts";
 import { tokyoNight } from "./tokyo-night.ts";
@@ -12,6 +13,7 @@ export {
   deepseek,
   dracula,
   githubDark,
+  gruvbox,
   oled,
   solarized,
   tokyoNight,
@@ -26,4 +28,5 @@ export const themes: readonly ThemeDefinition[] = Object.freeze([
   tokyoNight,
   githubDark,
   solarized,
+  gruvbox,
 ]);
