@@ -11,7 +11,8 @@ export type PickerKey =
   | "theme.tokyo-night"
   | "theme.github-dark"
   | "theme.solarized"
-  | "theme.gruvbox";
+  | "theme.gruvbox"
+  | "theme.nord";
 
 export const en: Record<PickerKey, string> = {
   "picker.title": "Theme",
@@ -26,6 +27,7 @@ export const en: Record<PickerKey, string> = {
   "theme.github-dark": "GitHub Dark",
   "theme.solarized": "Solarized",
   "theme.gruvbox": "Gruvbox",
+  "theme.nord": "Nord",
 };
 
 export const zh: Record<PickerKey, string> = {
@@ -41,4 +43,5 @@ export const zh: Record<PickerKey, string> = {
   "theme.github-dark": "GitHub 深色",
   "theme.solarized": "Solarized",
   "theme.gruvbox": "Gruvbox",
+  "theme.nord": "Nord",
 };

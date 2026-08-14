@@ -4,6 +4,7 @@ import { deepseek } from "./deepseek.ts";
 import { dracula } from "./dracula.ts";
 import { githubDark } from "./github-dark.ts";
 import { gruvbox } from "./gruvbox.ts";
+import { nord } from "./nord.ts";
 import { oled } from "./oled.ts";
 import { solarized } from "./solarized.ts";
 import { tokyoNight } from "./tokyo-night.ts";
@@ -14,6 +15,7 @@ export {
   dracula,
   githubDark,
   gruvbox,
+  nord,
   oled,
   solarized,
   tokyoNight,
@@ -29,4 +31,5 @@ export const themes: readonly ThemeDefinition[] = Object.freeze([
   githubDark,
   solarized,
   gruvbox,
+  nord,
 ]);

@@ -27,6 +27,7 @@ describe("theme registry", () => {
       "github-dark",
       "solarized",
       "gruvbox",
+      "nord",
     ]);
   });
 
