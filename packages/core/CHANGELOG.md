@@ -1,5 +1,12 @@
 # @dshthemes/core
 
+## 0.2.0
+
+### Minor Changes
+
+- 6a96380: Adds five themes to the catalog: Solarized, Gruvbox, Nord, Synthwave '84, and
+  Cobalt2. The picker now offers 11 themes spanning 7 base-hue families.
+
 ## 0.1.2
 
 ### Patch Changes
