@@ -61,11 +61,11 @@ deviation in the file's JSDoc (Dracula precedent).
 
 - Identity: `--dsw-alias-bg-base` `#002b36` (base03), brand `#b58900`
   (solarized yellow — the family's signature accent).
-- Surfaces: base03/base02 `#073642` ladder (layers), `#586e75`–`#657b83` for
+- Surfaces: base03/base02 `#073642` ladder (layers), base0 `#839496`
   tertiary text.
-- Known risk: base01 `#586e75` on base03 measures ≈4.3:1, just under the 4.5:1
-  text bar — tertiary/caption tokens take base00 `#657b83` (≈5.3:1) instead;
-  JSDoc records the substitution.
+- Known risk: the canonical base00/base01 grays reach only ≈2.9:1 on the
+  base02-family layer surfaces — tertiary/caption tokens take base0
+  `#839496` instead; JSDoc records the substitution.
 
 ### gruvbox — Gruvbox Dark
 
