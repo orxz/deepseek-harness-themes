@@ -5,11 +5,13 @@ import type { ThemeDefinition } from "../types.ts";
  * state colors.
  *
  * Tertiary/caption take frost nord9 `#81a1c1`: nord3 `#4c566a` reaches only
- * ~1.7:1 on the nord0–nord2 ladder, so nord3 is confined to layer-3/overlay/
- * scrollbar tracks and never sits under text. Borders and interactions use
- * translucent nord6 overlays. Upstream paints code blocks and the sidebar
- * the same nord0 as the base; depth comes from nord1/nord2 raised surfaces.
- * Scrollbar hover `#5e6b82` is nord3 lightened.
+ * ~1.7:1 on the nord0–nord2 ladder, so nord3 is confined to layer-3 and
+ * scrollbar tracks and never sits under text; overlay `#566073` and scrollbar
+ * hover `#5e6b82` are nord3 lightened. Borders and interactions use
+ * translucent nord6 overlays. Upstream paints the sidebar the same nord0 as
+ * the base; code blocks take `#272e38`, one step darker than nord0, to stay
+ * distinct from the base surface. Depth comes from nord1/nord2 raised
+ * surfaces.
  */
 export const nord: ThemeDefinition = Object.freeze({
   id: "nord",

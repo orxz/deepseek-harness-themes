@@ -5,7 +5,8 @@ import type { ThemeDefinition } from "../types.ts";
  * `#193549` base, line-highlight/indent-guide ladder, terminal/panel darks.
  * Business blue `#0088ff` holds ≈3.6:1 on the base, above the 3:1 accent bar;
  * text colors are upstream white/`#e1efff`/`#ccc`/`#aaa`. Button hover
- * variants are lightened.
+ * variants are lightened. Overlay `#496d84` is interpolated one step above
+ * layer-3 `#406179` so popups separate from layer-3 content.
  */
 export const cobalt2: ThemeDefinition = Object.freeze({
   id: "cobalt2",
