@@ -10,3 +10,4 @@ dist/
 qoder/
 *.tgz
 .DS_Store
+AGENTS.local.md
