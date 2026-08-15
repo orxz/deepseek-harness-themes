@@ -1,2 +1,5 @@
 # pnpm owns this file. Reformatting it only fights the next install.
 pnpm-lock.yaml
+
+# Local agent workspaces are git-ignored scratch, not shipped source.
+.superpowers/

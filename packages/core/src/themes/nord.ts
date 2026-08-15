@@ -5,7 +5,7 @@ import type { ThemeDefinition } from "../types.ts";
  * state colors.
  *
  * Tertiary/caption take frost nord9 `#81a1c1`: nord3 `#4c566a` reaches only
- * ~2:1 on the nord0–nord2 ladder, so nord3 is confined to layer-3/overlay/
+ * ~1.7:1 on the nord0–nord2 ladder, so nord3 is confined to layer-3/overlay/
  * scrollbar tracks and never sits under text. Borders and interactions use
  * translucent nord6 overlays. Upstream paints code blocks and the sidebar
  * the same nord0 as the base; depth comes from nord1/nord2 raised surfaces.

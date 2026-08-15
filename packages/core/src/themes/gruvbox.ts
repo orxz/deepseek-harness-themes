@@ -2,9 +2,11 @@ import type { ThemeDefinition } from "../types.ts";
 
 /**
  * Gruvbox Dark: retro groove palette — neutral bg0 surfaces, warm orange
- * accent, bright fg text. Every value is from the upstream palette; the
- * ladder is bg0 → bg0_soft → bg1 → bg2 → bg3, with bg0_hard as the darkest
- * surface for code blocks and the sidebar.
+ * accent, bright fg text. The ladder and state primaries are from the
+ * upstream palette (bg0 → bg0_soft → bg1 → bg2 → bg3, with bg0_hard as the
+ * darkest surface for code blocks and the sidebar); button and
+ * state-secondary hovers and tertiary state fills are lightened variants of
+ * their palette entries.
  */
 export const gruvbox: ThemeDefinition = Object.freeze({
   id: "gruvbox",
