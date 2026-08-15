@@ -1,6 +1,6 @@
 {
   "name": "@dshthemes/core",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Theme definitions and registration helpers for deepseek-harness themes",
   "type": "module",
   "main": "lib/index.js",
