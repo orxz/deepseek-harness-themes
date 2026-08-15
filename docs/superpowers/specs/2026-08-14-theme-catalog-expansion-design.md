@@ -86,11 +86,12 @@ deviation in the file's JSDoc (Dracula precedent).
 - Base hue sits 4° from github-dark's; separation comes from higher surface
   lightness (L 22 vs L 7) and the frost accent palette.
 - Surfaces: nord0→nord2 `#3b4252`/`#434c5e` ladder.
-- Known risk: nord3 `#4c566a` on nord0 is ≈2:1 — unusable for any text or
+- Known risk: nord3 `#4c566a` on nord0 is ~1.7:1 — unusable for any text or
   border token; tertiary text takes nord9 `#81a1c1`, borders take
   translucent nord6 `#eceff4` overlays (Dracula pattern); JSDoc records the
   substitution.
-- States: `#bf616a` red, `#a3be8c` green, `#ebcb8b` yellow, `#b48ead` purple.
+- States: `#5e81ac` business blue, `#bf616a` red, `#a3be8c` green,
+  `#ebcb8b` yellow.
 
 ### synthwave-84 — Synthwave '84
 
@@ -108,12 +109,12 @@ deviation in the file's JSDoc (Dracula precedent).
 
 - Identity: `--dsw-alias-bg-base` `#193549`, brand `#ffc600` (signature
   yellow, ≈9:1).
-- Surfaces: `#122d42` (sidebar/login) → `#193549` → `#1f4662` (selected)
-  ladder; code blocks `#122d42`.
-- Known risk: signature link blue `#0088ff` on `#193549` is ≈3.4:1 — fine for
-  fills/borders, fails the text bar; text-bearing business tokens take a
-  lightened `#3d9eff`-family entry; JSDoc records the substitution.
-- States: `#ff628c` red, `#00c8d2` cyan, `#ff9c00` orange, `#9effff` green.
+- Surfaces: `#15232d` (sidebar) → `#193549` → `#1f4662` (selected) ladder;
+  code blocks and the login input `#122738`.
+- Known risk: signature link blue `#0088ff` on `#193549` is ≈3.6:1 — above
+  the 3:1 accent bar, so business fills keep it verbatim; text colors are
+  upstream white/`#e1efff`/`#ccc`/`#aaa`.
+- States: `#ff628c` red, `#3ad900` green, `#ff9d00` orange.
 
 ## File Changes
 

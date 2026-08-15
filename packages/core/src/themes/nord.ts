@@ -11,7 +11,8 @@ import type { ThemeDefinition } from "../types.ts";
  * translucent nord6 overlays. Upstream paints the sidebar the same nord0 as
  * the base; code blocks take `#272e38`, one step darker than nord0, to stay
  * distinct from the base surface. Depth comes from nord1/nord2 raised
- * surfaces.
+ * surfaces. Button and state-secondary hovers are lightened variants of
+ * their palette entries.
  */
 export const nord: ThemeDefinition = Object.freeze({
   id: "nord",
