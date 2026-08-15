@@ -12,6 +12,7 @@ import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
+import { themes } from "../packages/core/src/index.ts";
 import { PLATFORM_MODULES, SHELL_OWN_MODULES } from "./client-bundle.ts";
 
 const PACKAGES = ["@dshthemes/core", "@dshthemes/ui"] as const;
@@ -252,8 +253,10 @@ function verifyConsumerImports(consumerDirectory: string): void {
       }
     }
     const core = await import("@dshthemes/core");
-    if (!Array.isArray(core.themes) || core.themes.length !== 11) {
-      throw new Error("installed core package did not expose eleven themes");
+    if (!Array.isArray(core.themes) || core.themes.length !== ${themes.length}) {
+      throw new Error(
+        "installed core package did not expose ${themes.length} themes",
+      );
     }
   `;
   run(
