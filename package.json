@@ -25,14 +25,14 @@
     "release": "pnpm gate && changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "^3.0.0",
+    "@changesets/cli": "^3.0.2",
     "@types/node": "22.20.1",
     "@vitest/coverage-istanbul": "3.2.7",
-    "lefthook": "^2.1.10",
+    "lefthook": "^2.1.12",
     "lightningcss": "^1.33.0",
-    "oxlint": "^1.78.0",
+    "oxlint": "^1.82.0",
     "prettier": "^3.9.6",
-    "tsdown": "^0.22.14",
+    "tsdown": "^0.23.0",
     "typescript": "^5.9.2",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^3.2.4",
