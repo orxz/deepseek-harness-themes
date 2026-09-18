@@ -50,7 +50,7 @@
     "plugin"
   ],
   "peerDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/cordis": "^4.0.2",
     "@deepseek-ai/dsh-client-runtime": "^0.0.1-rc.1",
     "@deepseek-ai/schemastery": "^3.18.1",
     "@dshthemes/core": "workspace:^",
@@ -82,17 +82,17 @@
     "build": "tsdown && tsc -p tsconfig.client.json"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1",
-    "@deepseek-ai/schemastery": "3.18.1",
+    "@deepseek-ai/cordis": "^4.0.2",
+    "@deepseek-ai/schemastery": "3.18.2",
     "@dshthemes/core": "workspace:^",
-    "@testing-library/dom": "10.4.1",
-    "@testing-library/react": "^16.3.2",
-    "@tsdown/css": "^0.22.14",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.4",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@tsdown/css": "^0.23.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
     "jsdom": "^30.0.1",
-    "react": "^19.2.8",
-    "react-dom": "19.2.8"
+    "react": "^19.3.0",
+    "react-dom": "19.3.0"
   },
   "dependencies": {
     "clsx": "2.1.1"
