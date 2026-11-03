@@ -105,3 +105,7 @@ dsh-themes:
 ```
 
 宿主内置 schema（`ui-theme.preference`）只接受 `light`/`dark`/`system`，永不被第三方 id 写入。
+
+## Cerber 配色
+
+Cerber Graphite 使用冷石墨表面（`#171c24`、`#202731`、`#293340`），主操作使用铜色 `#e5aa79`。文本颜色为 `#eaf0f5`、`#bbc8d5`、`#91a6ba`；代码背景为 `#12171e`。Cerber Daylight 使用浅矿物表面（`#f2f5f7`、`#ffffff`、`#e5ecf0`），主色为深蓝 `#235b78`。文本颜色为 `#172d3b`、`#3d5363`、`#526d7e`；代码背景为 `#eaf0f3`。两者均覆盖全部推荐令牌并满足目录对比度要求。主题通过颜色和表面层次形成视觉识别，保留宿主字体与交互行为。

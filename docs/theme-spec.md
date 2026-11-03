@@ -113,3 +113,7 @@ dsh-themes:
 ```
 
 The host's built-in schema (`ui-theme.preference`) only accepts `light`/`dark`/`system` and is never written by third-party ids.
+
+## Cerber palettes
+
+Cerber Graphite uses cool graphite surfaces (`#171c24`, `#202731`, `#293340`) with copper `#e5aa79` for primary actions. Labels use `#eaf0f5`, `#bbc8d5`, and `#91a6ba`; recessed code uses `#12171e`. Cerber Daylight uses pale mineral surfaces (`#f2f5f7`, `#ffffff`, `#e5ecf0`) with petrol `#235b78`. Labels use `#172d3b`, `#3d5363`, and `#526d7e`; code uses `#eaf0f3`. Both cover every recommended token and satisfy the catalog contrast bars. Their identity is color and surface depth; host typography and interaction behavior are preserved.

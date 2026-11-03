@@ -16,7 +16,7 @@
 
 | 包                                              | 职责                                                                                 |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [`@dshthemes/core`](packages/core/README.zh.md) | 十一个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
+| [`@dshthemes/core`](packages/core/README.zh.md) | 十三个 `ThemeDefinition`、`REQUIRED_TOKENS` 契约与 `registerThemes(registry)`；零 UI |
 | [`@dshthemes/ui`](packages/ui/README.zh.md)     | 客户端插件：注册全部主题、在设置页 General 区添加主题选择行、持久化第三方选择        |
 
 ## 主题
@@ -36,6 +36,9 @@
 | Nord          | 深色——北极冰蓝 + 霜蓝点缀         | <img src="previews/nord.svg" alt="Nord 主题预览" width="220">                  |
 | Synthwave '84 | 深色——深紫底上的霓虹粉与青        | <img src="previews/synthwave-84.svg" alt="Synthwave '84 主题预览" width="220"> |
 | Cobalt2       | 深色——钴蓝底 + 标志性黄色         | <img src="previews/cobalt2.svg" alt="Cobalt2 主题预览" width="220">            |
+
+| Cerber Graphite | 深色——冷石墨与铜色信号 | <img src="previews/cerber-graphite.svg" alt="Cerber Graphite" width="220"> |
+| Cerber Daylight | 浅色——浅矿物色与深蓝墨色 | <img src="previews/cerber-daylight.svg" alt="Cerber Daylight" width="220"> |
 
 ## 安装
 

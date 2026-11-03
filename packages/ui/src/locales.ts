@@ -14,7 +14,9 @@ export type PickerKey =
   | "theme.gruvbox"
   | "theme.nord"
   | "theme.synthwave-84"
-  | "theme.cobalt2";
+  | "theme.cobalt2"
+  | "theme.cerber-graphite"
+  | "theme.cerber-daylight";
 
 export const en: Record<PickerKey, string> = {
   "picker.title": "Theme",
@@ -32,6 +34,8 @@ export const en: Record<PickerKey, string> = {
   "theme.nord": "Nord",
   "theme.synthwave-84": "Synthwave '84",
   "theme.cobalt2": "Cobalt2",
+  "theme.cerber-graphite": "Cerber Graphite",
+  "theme.cerber-daylight": "Cerber Daylight",
 };
 
 export const zh: Record<PickerKey, string> = {
@@ -50,4 +54,6 @@ export const zh: Record<PickerKey, string> = {
   "theme.nord": "Nord",
   "theme.synthwave-84": "Synthwave '84",
   "theme.cobalt2": "Cobalt2",
+  "theme.cerber-graphite": "Cerber Graphite",
+  "theme.cerber-daylight": "Cerber Daylight",
 };

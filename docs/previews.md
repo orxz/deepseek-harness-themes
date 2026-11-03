@@ -97,3 +97,19 @@ Dark — cobalt blue with Wes Bos's signature yellow. Base `#193549`, brand `#ff
 ## Adding one
 
 A new theme's preview is generated, never drawn: [creating a theme](creating-a-theme.md) covers the step. The two colours quoted above are `--dsw-alias-bg-base` and `--dsw-alias-brand-primary`, the same pair the settings-row swatch paints with.
+
+## Cerber Graphite
+
+Dark — cool graphite and copper signal. Base `#171c24`, brand `#e5aa79`.
+
+![Cerber Graphite](../previews/cerber-graphite.svg)
+
+![Cerber Graphite applied in the harness](../screenshots/cerber-graphite.png)
+
+## Cerber Daylight
+
+Light — pale mineral and petrol ink. Base `#f2f5f7`, brand `#235b78`.
+
+![Cerber Daylight](../previews/cerber-daylight.svg)
+
+![Cerber Daylight applied in the harness](../screenshots/cerber-daylight.png)

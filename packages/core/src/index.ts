@@ -3,6 +3,8 @@ import { themes } from "./themes/index.ts";
 
 export { themes };
 export {
+  cerberGraphite,
+  cerberDaylight,
   catppuccin,
   cobalt2,
   deepseek,
