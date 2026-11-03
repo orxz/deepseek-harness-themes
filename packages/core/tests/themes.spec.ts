@@ -30,6 +30,8 @@ describe("theme registry", () => {
       "nord",
       "synthwave-84",
       "cobalt2",
+      "cerber-graphite",
+      "cerber-daylight",
     ]);
   });
 

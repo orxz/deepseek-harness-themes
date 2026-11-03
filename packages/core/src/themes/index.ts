@@ -11,7 +11,12 @@ import { solarized } from "./solarized.ts";
 import { synthwave84 } from "./synthwave-84.ts";
 import { tokyoNight } from "./tokyo-night.ts";
 
+import { cerberGraphite } from "./cerber-graphite.ts";
+import { cerberDaylight } from "./cerber-daylight.ts";
+
 export {
+  cerberGraphite,
+  cerberDaylight,
   catppuccin,
   cobalt2,
   deepseek,
@@ -38,4 +43,6 @@ export const themes: readonly ThemeDefinition[] = Object.freeze([
   nord,
   synthwave84,
   cobalt2,
+  cerberGraphite,
+  cerberDaylight,
 ]);

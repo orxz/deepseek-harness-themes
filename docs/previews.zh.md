@@ -97,3 +97,19 @@
 ## 新增主题
 
 新主题的预览是生成的，不靠手绘：步骤见[创建主题](creating-a-theme.zh.md)。上面引用的两个颜色是 `--dsw-alias-bg-base` 与 `--dsw-alias-brand-primary`，与设置行色卡取的是同一对。
+
+## Cerber Graphite
+
+深色——冷石墨与铜色信号。基础色 `#171c24`，主色 `#e5aa79`.
+
+![Cerber Graphite](../previews/cerber-graphite.svg)
+
+![Cerber Graphite 在 Harness 中的效果](../screenshots/cerber-graphite.png)
+
+## Cerber Daylight
+
+浅色——浅矿物色与深蓝墨色。基础色 `#f2f5f7`，主色 `#235b78`.
+
+![Cerber Daylight](../previews/cerber-daylight.svg)
+
+![Cerber Daylight 在 Harness 中的效果](../screenshots/cerber-daylight.png)

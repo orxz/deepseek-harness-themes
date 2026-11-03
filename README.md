@@ -16,7 +16,7 @@ Community-maintained theme collection built on the official theme extension poin
 
 | Package                                      | Role                                                                                                               |
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [`@dshthemes/core`](packages/core/README.md) | Eleven `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI                 |
+| [`@dshthemes/core`](packages/core/README.md) | Thirteen `ThemeDefinition`s, the `REQUIRED_TOKENS` contract, and `registerThemes(registry)`; zero UI               |
 | [`@dshthemes/ui`](packages/ui/README.md)     | Client plugin: registers all themes, adds a Theme picker row to Settings → General, persists third-party selection |
 
 ## Themes
@@ -36,6 +36,9 @@ Every preview is generated from that theme's own tokens; the full gallery is [do
 | Nord          | dark — arctic north-blues, frost       | <img src="previews/nord.svg" alt="Nord theme preview" width="220">                  |
 | Synthwave '84 | dark — neon pink/cyan on deep violet   | <img src="previews/synthwave-84.svg" alt="Synthwave '84 theme preview" width="220"> |
 | Cobalt2       | dark — cobalt blue, signature yellow   | <img src="previews/cobalt2.svg" alt="Cobalt2 theme preview" width="220">            |
+
+| Cerber Graphite | dark — cool graphite, copper signal | <img src="previews/cerber-graphite.svg" alt="Cerber Graphite" width="220"> |
+| Cerber Daylight | light — pale mineral, petrol ink | <img src="previews/cerber-daylight.svg" alt="Cerber Daylight" width="220"> |
 
 ## Install
 
